@@ -35,15 +35,15 @@ export default function Home() {
       </Head>
 
       <div>
-        {/* <Header /> */}
+        <Header />
         {/* <AboutSection /> */}
         {/* <QFSCard /> */}
         {/* <FlareNetworkSection /> */}
         {/* <VideoArea /> */}
         {/* <HowItWorksSection /> */}
-        <FAQSection />
-        <CounterSection />
-        <TouchSection />
+        {/* <FAQSection /> */}
+        {/* <CounterSection /> */}
+        {/* <TouchSection /> */}
         {/* <TestimonialsSection /> */}
         {/* <RecentNewsSection /> */}
         {/* <Footer /> */}
