@@ -1,4 +1,3 @@
-// Example: components/HowItWorksSection.jsx
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -6,9 +5,9 @@ import { FaCheck } from "react-icons/fa";
 
 export default function HowItWorksSection() {
   return (
-    <section className="py-24 bg-white" id="hiw">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
+    <section className="py-16 md:py-24 bg-white" id="hiw">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-16">
           {/* Content */}
           <motion.div
             className="w-full lg:w-1/2"
@@ -18,7 +17,7 @@ export default function HowItWorksSection() {
             viewport={{ once: true }}
           >
             <div className="mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
                 How It Works!
               </h2>
               <p className="text-gray-700 text-base md:text-lg leading-relaxed">
@@ -33,7 +32,7 @@ export default function HowItWorksSection() {
               <li className="flex items-start gap-4">
                 <FaCheck className="text-blue-600 mt-1" />
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900">Sign Up</h3>
+                  <h3 className="text-lg md:text-xl font-semibold text-gray-900">Sign Up</h3>
                   <p className="text-gray-600">
                     Register a free account, and take your first step to securing your asset.
                   </p>
@@ -42,7 +41,7 @@ export default function HowItWorksSection() {
               <li className="flex items-start gap-4">
                 <FaCheck className="text-blue-600 mt-1" />
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900">Secure Your Asset</h3>
+                  <h3 className="text-lg md:text-xl font-semibold text-gray-900">Secure Your Asset</h3>
                   <p className="text-gray-600">
                     Connect your Wallet to the vault, to secure your asset.
                   </p>
@@ -51,7 +50,7 @@ export default function HowItWorksSection() {
               <li className="flex items-start gap-4">
                 <FaCheck className="text-blue-600 mt-1" />
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900">Loans &amp; Mortgages</h3>
+                  <h3 className="text-lg md:text-xl font-semibold text-gray-900">Loans &amp; Mortgages</h3>
                   <p className="text-gray-600">
                     QUANTUM FINANCIAL SYSTEM guide you to make the right loan and mortgage choices that are absolutely suiting to you.
                   </p>
@@ -62,26 +61,25 @@ export default function HowItWorksSection() {
               href="https://authorizedqfsledger.com/wallet/app/index.php"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold px-8 py-3 rounded transition shadow common-btn two"
+              className="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold px-8 py-3 rounded transition shadow"
             >
               Learn More
-              <span className="ml-2"></span>
             </Link>
           </motion.div>
           {/* Image */}
           <motion.div
-            className="w-full lg:w-1/2 flex justify-center"
+            className="w-full lg:w-1/2 flex justify-center mb-8 lg:mb-0"
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, type: "spring" }}
             viewport={{ once: true }}
           >
-            <div className="works-img">
-              {/* <img src="/assets/img/works-shape1.png" alt="Shape" className="mb-4" /> */}
+            <div className="w-full max-w-xs sm:max-w-md lg:max-w-lg">
               <img
                 src="/assets/xrp-banner.png"
                 alt="Works"
-                className=" shadow-lg max-w-xm w-full mr-2"
+                className="shadow-lg rounded-xl w-full h-auto"
+                loading="lazy"
               />
             </div>
           </motion.div>

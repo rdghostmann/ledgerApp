@@ -22,36 +22,37 @@ const videos = [
 
 export default function FlareNetworkSection() {
   return (
-    <section className="pt-24 pb-16 bg-white" id="tfn">
-      <div className="container mx-auto px-4">
-        <div className="mb-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">The Flare Network</h2>
+    <section className="pt-16 pb-10 bg-white" id="tfn">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="mb-10 text-center">
+          <h2 className="text-2xl md:text-4xl font-bold text-gray-900">The Flare Network</h2>
         </div>
-        <div className="flex flex-wrap gap-8 justify-center">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap gap-6 sm:gap-8 justify-center items-center">
           {videos.map((video, idx) => (
             <motion.div
               key={video.title}
-              className="flex flex-col items-center bg-gray-50 rounded-xl shadow-lg p-4 w-full sm:w-[350px] max-w-xs"
+              className="flex flex-col items-center bg-gray-50 rounded-xl shadow-lg p-4 w-full max-w-xs sm:w-[320px]"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, type: "spring", delay: idx * 0.15 }}
               viewport={{ once: true }}
             >
-              <h4 className="text-lg font-semibold mb-3 text-center">{video.title}</h4>
-              <iframe
-                width="320"
-                height="320"
-                src={video.src}
-                title={video.ytTitle}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="rounded-lg"
-              ></iframe>
+              <h4 className="text-base md:text-lg font-semibold mb-3 text-center">{video.title}</h4>
+              <div className="w-full aspect-video mb-2">
+                <iframe
+                  src={video.src}
+                  title={video.ytTitle}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="rounded-lg w-full h-full min-h-[180px] max-h-[220px]"
+                  style={{ background: "#000" }}
+                ></iframe>
+              </div>
             </motion.div>
           ))}
           <motion.div
-            className="flex flex-col items-center bg-gray-50 rounded-xl shadow-lg p-4 w-full sm:w-[300px] max-w-xs"
+            className="flex flex-col items-center bg-gray-50 rounded-xl shadow-lg p-4 w-full max-w-xs sm:w-[300px]"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, type: "spring", delay: videos.length * 0.15 }}
@@ -63,15 +64,15 @@ export default function FlareNetworkSection() {
               rel="noopener noreferrer"
               className="flex flex-col items-center group"
             >
-              <h4 className="text-lg font-semibold mb-3 text-center">
+              <h4 className="text-base md:text-lg font-semibold mb-3 text-center">
                 Follow Us on YOUTUBE{" "}
                 <span className="text-orange-500">XRPQFSTeam1</span>
               </h4>
               <img
                 src="/assets/channel.png"
                 alt="YouTube Channel"
-                href="https://www.youtube.com/channel/UCHACcQVpw_p0n03zZdSt4fg/videos"
-                className="rounded-lg w-68 h-68 object-cover border-2 border-orange-400 group-hover:scale-105 transition"
+                className="rounded-lg w-40 h-40 object-cover border-2 border-orange-400 group-hover:scale-105 transition"
+                loading="lazy"
               />
             </Link>
           </motion.div>

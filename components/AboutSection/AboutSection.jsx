@@ -37,7 +37,7 @@ export default function AboutSection() {
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 About QUANTUM FINANCIAL SYSTEM
               </h2>
-              <p className="text-gray-700 mb-6">
+              <p className="text-gray-700 mb-6 text-justify">
                 Little is it known that this new system has been designed in preparation for the takeover of the Central Bank Monetary Debt System to end the financial slavery and control over the populace. The Alliance gave President Trump the magic wand of taking over the old banking system without changing it.
                 <br /><br />
                 Humanity does not have the technology to fight the Deep State’s financial system. Extraterrestrials came to the rescue with alien or even other-dimensional technologies to accomplish this task. In Quantum Computers, intelligence is embedded without 3D proprieties. No 3D creation is able to replace the power of a living being. To this end, artificial intelligence (AI) was designed to replace conscious beings.

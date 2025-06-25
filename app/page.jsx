@@ -34,19 +34,19 @@ export default function Home() {
         />
       </Head>
 
-      <div>
+      <div className="w-full bg-white text-gray-900">
         <Header />
-        {/* <AboutSection /> */}
-        {/* <QFSCard /> */}
-        {/* <FlareNetworkSection /> */}
-        {/* <VideoArea /> */}
-        {/* <HowItWorksSection /> */}
-        {/* <FAQSection /> */}
-        {/* <CounterSection /> */}
-        {/* <TouchSection /> */}
-        {/* <TestimonialsSection /> */}
-        {/* <RecentNewsSection /> */}
-        {/* <Footer /> */}
+        <AboutSection />
+        <QFSCard />
+        <FlareNetworkSection />
+        <VideoArea />
+        <HowItWorksSection />
+        <FAQSection />
+        <CounterSection />
+        <TouchSection />
+        <TestimonialsSection />
+        <RecentNewsSection />
+        <Footer />
       </div>
     </>
   );
