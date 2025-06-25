@@ -35,18 +35,18 @@ export default function Home() {
       </Head>
 
       <div>
-        <Header />
-        <AboutSection />
-        <QFSCard />
-        <FlareNetworkSection />
-        <VideoArea />
-        <HowItWorksSection />
+        {/* <Header /> */}
+        {/* <AboutSection /> */}
+        {/* <QFSCard /> */}
+        {/* <FlareNetworkSection /> */}
+        {/* <VideoArea /> */}
+        {/* <HowItWorksSection /> */}
         <FAQSection />
         <CounterSection />
         <TouchSection />
-        <TestimonialsSection />
-        <RecentNewsSection />
-        <Footer />
+        {/* <TestimonialsSection /> */}
+        {/* <RecentNewsSection /> */}
+        {/* <Footer /> */}
       </div>
     </>
   );
