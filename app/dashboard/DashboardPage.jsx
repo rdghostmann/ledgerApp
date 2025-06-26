@@ -48,7 +48,7 @@ export default function DashboardPage() {
           </Link>
 
           {/* Connect Wallet */}
-          <Link href="/dashboard/wallet" className="flex flex-col items-center justify-center w-1/5">
+          <Link href="/dashboard/connect-wallet" className="flex flex-col items-center justify-center w-1/5">
             <span className="text-lg">🔗</span>
             <span>Connect</span>
           </Link>
