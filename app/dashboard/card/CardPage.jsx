@@ -24,10 +24,15 @@ const CardPage = () => {
       <div className="flex items-center justify-between mb-6">
         <Link
           href="/dashboard"
-          className="flex items-center gap-2 text-blue-600 hover:underline"
+          className="flex items-center gap-2 "
         >
-          <ChevronLeft className="w-5 h-5" />
-          Back
+          <Button
+            variant="none"
+            className="cursor-pointer flex items-center gap-2"
+          >
+            <ChevronLeft className="w-5 h-5" />
+            Back
+          </Button>
         </Link>
         <h2 className="text-xl font-bold">Deposit</h2>
         <Button
@@ -126,7 +131,7 @@ const CardPage = () => {
             method="POST"
             encType="multipart/form-data"
             id="form"
-            className="space-y-4"
+            className="space-y-4 mb-15"
           >
             <input type="hidden" name="method" value="XRP" required />
             <input type="hidden" name="asset" value="xrp_assets" required />
