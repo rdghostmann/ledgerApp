@@ -38,11 +38,11 @@ export default function Page() {
 
   return (
     <div className="max-w-6xl mx-auto px-4">
-      <NavHeader />
 
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-violet-100 py-8">
-        <h1 className="text-2xl font-bold mb-4">Stake Page</h1>
-        <p className="text-lg mb-8">Swap your coins securely and instantly.</p>
+      <NavHeader />
+      <div className="flex flex-col items-center h-screen bg-gradient-to-br from-blue-50 to-violet-100 pt-10 pb-8">
+        {/* <h1 className="text-2xl font-bold mb-4">Stake Page</h1> */}
+        {/* <p className="text-lg mb-8">Swap your coins securely and instantly.</p> */}
         <Card className="w-full max-w-lg shadow-xl rounded-2xl">
           <CardHeader>
             <div className="flex items-center justify-between">
