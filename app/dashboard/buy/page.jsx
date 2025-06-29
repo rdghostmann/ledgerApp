@@ -4,8 +4,7 @@ import NavHeader from "../components/NavHeader/NavHeader";
 
 export default function Page() {
   return (
-    <div className="max-w-6xl mx-auto px-4 flex flex-col items-center justify-center min-h-screen bg-gray-50 py-8">
-
+    <div className="container mx-auto px-4 flex flex-col items-center justify-center bg-gray-50 pb-8">
       <NavHeader />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl">
