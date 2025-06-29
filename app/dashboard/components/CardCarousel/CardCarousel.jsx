@@ -23,11 +23,11 @@ const cards = [
 
 const CardCarousel = () => {
   return (
-    <div className="w-full max-10/12 mx-auto">
+    <div className="w-full max-8/12 mx-auto">
       <Splide
         options={{
           type: "loop",
-          perPage: 1,
+          perPage: 3,
           gap: "1rem",
           autoplay: true,
           interval: 3000,

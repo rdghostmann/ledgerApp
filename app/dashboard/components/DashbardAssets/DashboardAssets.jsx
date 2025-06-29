@@ -3,7 +3,7 @@ import React from 'react'
 
 const DashboardAssets = ({assets}) => {
   return (
-   <div className="bg-white rounded-lg shadow p-4">
+   <div className="bg-white rounded-lg shadow px-4">
              <h2 className="text-lg font-semibold mb-4">Assets</h2>
              <ul>
                {assets.map((asset, i) => (

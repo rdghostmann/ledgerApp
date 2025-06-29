@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import NavHeader from "../components/NavHeader/NavHeader";
 
 export default function Page() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 py-8">
-      <h1 className="text-2xl font-bold mb-4">Buy Page</h1>
-      <p className="text-lg mb-8">This is the Buy page content.</p>
+    <div className="max-w-6xl mx-auto px-4 flex flex-col items-center justify-center min-h-screen bg-gray-50 py-8">
+
+      <NavHeader />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl">
         <Link

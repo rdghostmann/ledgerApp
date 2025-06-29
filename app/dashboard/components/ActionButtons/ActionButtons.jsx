@@ -4,16 +4,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaArrowUpRightFromSquare, FaCoins } from "react-icons/fa6";
 import { LuSquareArrowDownLeft } from "react-icons/lu";
 import { FaShoppingCart } from "react-icons/fa";
+import { ArrowDownToLine, Coins, Send, WalletCards } from "lucide-react";
 
 
 // import { FaArrowUpRight, FaArrowDownLeft, FaShoppingCart, FaCoins } from "react-icons/fa";
 
 
 const actions = [
-    { label: "Send", modal: "send", icon: <FaArrowUpRightFromSquare className="text-blue-600 text-lg" /> },
-    { label: "Receive", modal: "receive", icon: <LuSquareArrowDownLeft className="text-green-600 text-lg" /> },
-    { label: "Buy", modal: null, icon: <FaShoppingCart className="text-yellow-600 text-lg" /> },
-    { label: "Stake", modal: "stake", icon: <FaCoins className="text-purple-600 text-lg" /> },
+    // { label: "Send", modal: "send", icon: <FaArrowUpRightFromSquare className="text-blue-600 text-lg" /> },
+    { label: "Send", modal: "send", icon: <Send className="text-blue-600 text-lg" /> },
+    // { label: "Receive", modal: "receive", icon: <LuSquareArrowDownLeft className="text-green-600 text-lg" /> },
+    { label: "Receive", modal: "receive", icon: <ArrowDownToLine className="text-green-600 text-lg" /> },
+    // { label: "Buy", modal: null, icon: <FaShoppingCart className="text-yellow-600 text-lg" /> },
+    { label: "Buy", modal: null, icon: <WalletCards className="text-yellow-600 text-lg" /> },
+    // { label: "Stake", modal: "stake", icon: <FaCoins className="text-purple-600 text-lg" /> },
+    { label: "Stake", modal: "stake", icon: <Coins className="text-purple-600 text-lg" /> },
 ];
 
 const cryptoOptions = [
@@ -220,7 +225,7 @@ const ActionButtons = () => {
 
     return (
         <>
-            <div className="flex flex-wrap justify-center gap-6 py-4">
+            <div className="flex flex-wrap justify-center gap-6 my-4 py-2 px-4">
                 {actions.map(({ label, modal: modalType, icon }) => (
                     <button
                         key={label}
@@ -228,7 +233,7 @@ const ActionButtons = () => {
                         onClick={() => modalType && setModal(modalType)}
                     >
                         <span className="text-3xl">{icon}</span>
-                        <span>{label}</span>
+                        <span className="text-sm">{label}</span>
                     </button>
                 ))}
             </div>

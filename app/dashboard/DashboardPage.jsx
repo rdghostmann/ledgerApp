@@ -36,41 +36,7 @@ export default function DashboardPage() {
         {/* <AssetServer /> */}
         <CoinGeckoWidget />
       </div>
-
-      {/* Bottom Nav */}
-      <footer className="fixed bottom-0 left-0 w-full bg-white border-t shadow-lg z-50">
-        <div className="relative max-w-4xl mx-auto flex justify-between items-center px-4 py-2 text-xs text-gray-700">
-
-          {/* Card */}
-          <Link href="/dashboard/card" className="flex flex-col items-center justify-center w-1/5">
-            <span className="text-lg">💳</span>
-            <span>Card</span>
-          </Link>
-
-          {/* Connect Wallet */}
-          <Link href="/dashboard/connect-wallet" className="flex flex-col items-center justify-center w-1/5">
-            <span className="text-lg">🔗</span>
-            <span>Connect</span>
-          </Link>
-
-          {/* Floating Home Button */}
-          <Link href="/dashboard/" className="absolute left-1/2 -top-6 transform -translate-x-1/2 bg-blue-600 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg border-4 border-white">
-            <span className="text-2xl">🏠</span>
-          </Link>
-
-          {/* Transactions */}
-          <Link href="/dashboard/transactions" className="flex flex-col items-center justify-center w-1/5">
-            <span className="text-lg">📄</span>
-            <span>Transactions</span>
-          </Link>
-
-          {/* Swap Coin */}
-          <Link href="/dashboard/swap-coin" className="flex flex-col items-center justify-center w-1/5">
-            <span className="text-lg">🔁</span>
-            <span>Swap</span>
-          </Link>
-        </div>
-      </footer>
+    
 
     </div>
   );

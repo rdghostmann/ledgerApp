@@ -31,7 +31,7 @@ const NavHeader = () => {
   }
 
   return (
-    <div className="flex items-center justify-between mb-6">
+    <div className="w-full px-4 py-4 flex items-center justify-between mb-5">
       <div>
         <p className="text-blue-600 text-xs mb-1">{formattedDate}</p>
         <h1 className="text-2xl font-bold">Welcome!</h1>
@@ -40,12 +40,12 @@ const NavHeader = () => {
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
-            className="ml-4 cursor-pointer rounded-full bg-gradient-to-r from-blue-500 to-blue-700 shadow-lg p-1 focus:outline-none"
+            className="ml-4 cursor-pointer rounded-full bg-gradient-to-r from-blue-500 to-blue-700 shadow-lg focus:outline-none"
             size="icon"
             aria-label="Open user menu"
           >
             <img
-              src="/images/pictures/25s.png"
+              src="/assets/25s.png"
               width={45}
               className="rounded-md"
               alt="Profile"
