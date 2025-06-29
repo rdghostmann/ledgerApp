@@ -5,8 +5,9 @@ import { FaCheck } from "react-icons/fa";
 
 export default function HowItWorksSection() {
   return (
-    <section className="py-16 md:py-24 bg-white" id="hiw">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="w-full pt-12 pb-10 bg-gray-50 mt-8" id="hiw">
+
+      <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-16">
           {/* Content */}
           <motion.div

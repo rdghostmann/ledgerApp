@@ -66,7 +66,7 @@ export default function CounterSection() {
   }, [inView, controls]);
 
   return (
-    <section ref={ref} className="py-24 relative overflow-hidden">
+    <section ref={ref} className="w-full py-24 relative overflow-hidden">
       {/* ✅ ONE decorative shape centered behind content */}
       <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-0 opacity-20">
         <Image
@@ -79,13 +79,13 @@ export default function CounterSection() {
 
       {/* Content container */}
       <div className="relative z-10 container mx-auto px-4">
-        <div className="flex flex-wrap justify-center gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 justify-center">
           {counters.map((counter, idx) => {
             const count = useCountUp(counter.value, 2.5, startCounting);
             return (
               <motion.div
                 key={counter.label}
-                className="flex flex-col items-center bg-gray-50 rounded-xl shadow-md p-6 w-full sm:w-64"
+                className="flex flex-col items-center bg-gray-50 rounded-xl shadow-md p-6"
                 initial={{ opacity: 0, y: 40 }}
                 animate={controls}
                 transition={{ duration: 0.8, delay: idx * 0.2 }}

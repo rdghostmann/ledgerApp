@@ -5,8 +5,8 @@ import Image from "next/image";
 
 export default function QFSCard() {
   return (
-    <section className="pt-12 pb-10 bg-gray-50 mt-8">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="w-full pt-12 pb-10 bg-gray-50 mt-8">
+      <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-16">
           {/* Content Section */}
           <motion.div

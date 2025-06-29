@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function AboutSection() {
   return (
-    <section className="pt-20 pb-14 bg-white" id="about">
+    <section className="w-full pt-20 pb-14 bg-white" id="about">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Video Section */}

@@ -22,8 +22,8 @@ const videos = [
 
 export default function FlareNetworkSection() {
   return (
-    <section className="pt-16 pb-10 bg-white" id="tfn">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="w-full pt-16 pb-10 bg-white" id="tfn">
+      <div className="container mx-auto px-4">
         <div className="mb-10 text-center">
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900">The Flare Network</h2>
         </div>

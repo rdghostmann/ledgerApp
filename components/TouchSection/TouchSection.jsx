@@ -5,8 +5,8 @@ import Image from "next/image";
 
 export default function TouchSection() {
   return (
-    <section className="py-0">
-      <div className="flex flex-col lg:flex-row items-stretch min-h-screen">
+    <section className="w-full py-0">
+      <div className="container mx-auto flex flex-col lg:flex-row items-stretch min-h-screen">
         {/* Left Panel - Form & Background Image */}
         <motion.div
           className="lg:w-1/2 w-full bg-[#00185A] text-white relative flex flex-col justify-center items-center p-6 sm:p-10 overflow-hidden"

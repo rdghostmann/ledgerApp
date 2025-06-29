@@ -39,7 +39,7 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section className="bg-[#f8f9fd] py-20 overflow-hidden" id="t">
+    <section className="w-full bg-[#f8f9fd] py-20 overflow-hidden" id="t">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-16 text-[#2a2b77]">What People Say</h2>
 
