@@ -51,15 +51,14 @@ export default function Page() {
                   Swap Coins
                 </span>
               </CardTitle>
-              <Button
+              {/* <Button
                 variant="ghost"
                 size="icon"
                 className="text-red-500 hover:bg-red-50"
                 aria-label="Close"
-              // Add close logic if needed
               >
                 <X />
-              </Button>
+              </Button> */}
             </div>
           </CardHeader>
           <CardContent>
@@ -101,23 +100,22 @@ export default function Page() {
                   <Label htmlFor="swapto" className="mb-1 block">
                     Swap to
                   </Label>
-                  <select
-                    id="swapto"
-                    name="swapto"
+                  <Select
                     value={swapTo}
-                    onChange={e => setSwapTo(e.target.value)}
-                    className="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500 py-2 px-3"
+                    onValueChange={setSwapTo}
                     required
                   >
-                    <option value="" disabled>
-                      Select coin
-                    </option>
-                    {coins.map(coin => (
-                      <option key={coin.value} value={coin.value}>
-                        {coin.label}
-                      </option>
-                    ))}
-                  </select>
+                    <SelectTrigger className="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500 py-2 px-3">
+                      <SelectValue placeholder="Select coin" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {coins.map((coin) => (
+                        <SelectItem key={coin.value} value={coin.value}>
+                          {coin.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
               <div>
