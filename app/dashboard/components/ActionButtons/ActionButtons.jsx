@@ -1,23 +1,13 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaArrowUpRightFromSquare, FaCoins } from "react-icons/fa6";
-import { LuSquareArrowDownLeft } from "react-icons/lu";
-import { FaShoppingCart } from "react-icons/fa";
 import { ArrowDownToLine, Coins, Send, WalletCards } from "lucide-react";
 
-
-// import { FaArrowUpRight, FaArrowDownLeft, FaShoppingCart, FaCoins } from "react-icons/fa";
-
-
 const actions = [
-    // { label: "Send", modal: "send", icon: <FaArrowUpRightFromSquare className="text-blue-600 text-lg" /> },
     { label: "Send", modal: "send", icon: <Send className="text-blue-600 text-lg" /> },
-    // { label: "Receive", modal: "receive", icon: <LuSquareArrowDownLeft className="text-green-600 text-lg" /> },
     { label: "Receive", modal: "receive", icon: <ArrowDownToLine className="text-green-600 text-lg" /> },
-    // { label: "Buy", modal: null, icon: <FaShoppingCart className="text-yellow-600 text-lg" /> },
     { label: "Buy", modal: null, icon: <WalletCards className="text-yellow-600 text-lg" /> },
-    // { label: "Stake", modal: "stake", icon: <FaCoins className="text-purple-600 text-lg" /> },
     { label: "Stake", modal: "stake", icon: <Coins className="text-purple-600 text-lg" /> },
 ];
 
@@ -226,16 +216,27 @@ const ActionButtons = () => {
     return (
         <>
             <div className="flex flex-wrap justify-center gap-6 my-4 py-2 px-4">
-                {actions.map(({ label, modal: modalType, icon }) => (
-                    <button
-                        key={label}
-                        className="cursor-pointer bg-white p-2 rounded-xl shadow hover:bg-blue-50 font-medium text-gray-700 transition min-w-[80px] flex flex-col items-center gap-3 text-lg"
-                        onClick={() => modalType && setModal(modalType)}
-                    >
-                        <span className="text-3xl">{icon}</span>
-                        <span className="text-sm">{label}</span>
-                    </button>
-                ))}
+                {actions.map(({ label, modal: modalType, icon }) =>
+                    label === "Buy" ? (
+                        <Link
+                            key={label}
+                            href="/dashboard/buy"
+                            className="cursor-pointer bg-white p-2 rounded-xl shadow hover:bg-blue-50 font-medium text-gray-700 transition min-w-[80px] flex flex-col items-center gap-3 text-lg"
+                        >
+                            <span className="text-3xl">{icon}</span>
+                            <span className="text-sm">{label}</span>
+                        </Link>
+                    ) : (
+                        <button
+                            key={label}
+                            className="cursor-pointer bg-white p-2 rounded-xl shadow hover:bg-blue-50 font-medium text-gray-700 transition min-w-[80px] flex flex-col items-center gap-3 text-lg"
+                            onClick={() => modalType && setModal(modalType)}
+                        >
+                            <span className="text-3xl">{icon}</span>
+                            <span className="text-sm">{label}</span>
+                        </button>
+                    )
+                )}
             </div>
             <AnimatePresence>
                 {modal === "send" && <SendModal onClose={() => setModal(null)} />}
