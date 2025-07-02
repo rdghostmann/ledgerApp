@@ -41,11 +41,11 @@ export default function Home() {
         <FlareNetworkSection />
         <VideoArea />
         <HowItWorksSection />
-        <FAQSection />
-        <CounterSection />
-        <TouchSection />
-        <TestimonialsSection />
-        <RecentNewsSection />
+        {/* <FAQSection /> */}
+        {/* <CounterSection /> */}
+        {/* <TouchSection /> */}
+        {/* <TestimonialsSection /> */}
+        {/* <RecentNewsSection /> */}
         <Footer />
       </div>
     </>

@@ -8,12 +8,12 @@ import Image from "next/image";
 const counters = [
   {
     icon: "/assets/img/counter-shape3.png",
-    value: 8698958943561,
+    value: 869895,
     label: "Secured Assets",
   },
   {
     icon: "/assets/img/counter-shape4.png",
-    value: 87764312,
+    value: 87762,
     label: "Satisfied Users",
   },
   {
@@ -23,7 +23,7 @@ const counters = [
   },
   {
     icon: "/assets/img/counter-shape4.png",
-    value: 88764316,
+    value: 887616,
     label: "Registered Users",
   },
 ];
@@ -79,7 +79,7 @@ export default function CounterSection() {
 
       {/* Content container */}
       <div className="relative z-10 container mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 items-center justify-center">
           {counters.map((counter, idx) => {
             const count = useCountUp(counter.value, 2.5, startCounting);
             return (
@@ -97,10 +97,10 @@ export default function CounterSection() {
                   height={48}
                   className="mb-4"
                 />
-                <h3 className="text-3xl font-extrabold text-indigo-700 mb-1 select-none">
+                <h3 className="text-2xl font-extrabold text-indigo-700 mb-1 select-none">
                   {count}
                 </h3>
-                <p className="text-gray-600 font-medium text-center">{counter.label}</p>
+                <p className="text-sm  text-gray-600 font-medium text-center">{counter.label}</p>
               </motion.div>
             );
           })}
