@@ -80,7 +80,7 @@ export const authOptions = {
     }
   },
   pages: {
-    signIn: "/sign-in",
+    signIn: "/login", // should match your login page
     error: "/error",
   },
   secret: process.env.NEXTAUTH_SECRET,
