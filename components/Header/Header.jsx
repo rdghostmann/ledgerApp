@@ -44,7 +44,7 @@ export default function Header() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded shadow transition text-center"
-                  href="https://authorizedqfsledger.com/wallet/app/register.php"
+                  href="/login"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -52,7 +52,7 @@ export default function Header() {
                 </Link>
                 <Link
                   className="bg-gray-700 hover:bg-gray-800 text-white font-semibold px-6 py-2 rounded shadow transition text-center"
-                  href="https://authorizedqfsledger.com/wallet/app/index.php"
+                  href="/login"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -71,7 +71,7 @@ export default function Header() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded shadow transition text-center"
-                  href="https://authorizedqfsledger.com/wallet/app/register.php"
+                  href="/login"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -79,7 +79,7 @@ export default function Header() {
                 </Link>
                 <Link
                   className="bg-gray-700 hover:bg-gray-800 text-white font-semibold px-6 py-2 rounded shadow transition text-center"
-                  href="https://authorizedqfsledger.com/wallet/app/index.php"
+                  href="/login"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

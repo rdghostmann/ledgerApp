@@ -32,7 +32,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="https://authorizedqfsledger.com/wallet/app/register.php"
+                  href="/register.php"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-400 transition"
@@ -42,7 +42,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="https://authorizedqfsledger.com/wallet/app/index.php"
+                  href="/index.php"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-400 transition"
