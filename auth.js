@@ -3,6 +3,8 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/models/User";
 import bcrypt from "bcrypt";
+import { v4 as uuidv4 } from 'uuid';
+
 import { connectToDB } from "./lib/connectDB";
 
 
