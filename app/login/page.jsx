@@ -1,16 +1,25 @@
 "use client";
 import { useState } from "react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // mock login
-    if (email && password) {
+    setError("");
+    const res = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
+    if (res?.error) {
+      setError("Invalid email or password");
+    } else {
       router.push("/dashboard");
     }
   };
@@ -22,7 +31,6 @@ export default function LoginPage() {
           <img src="/logo.png" alt="Logo" className="mx-auto h-12" />
           <h2 className="mt-2 text-lg font-medium text-gray-700">Login to your Account</h2>
         </div>
-
         <form onSubmit={handleLogin}>
           <div className="space-y-4">
             <input
@@ -48,10 +56,11 @@ export default function LoginPage() {
             <button type="submit" className="w-full py-2 bg-black text-white font-bold rounded hover:bg-gray-800">
               SIGN IN
             </button>
+            {error && <div className="text-red-600 text-sm">{error}</div>}
           </div>
           <div className="text-sm mt-4 flex justify-between text-blue-600">
             <a href="#">Forgot Password?</a>
-            <a href="#">Create Account</a>
+            <a href="/register">Create Account</a>
           </div>
         </form>
       </div>

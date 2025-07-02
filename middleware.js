@@ -11,7 +11,7 @@ export async function middleware(req) {
   const { pathname } = req.nextUrl
 
   // List of public routes
-  const publicPaths = ["/", "/login", "/register", "/onboarding"]
+  const publicPaths = ["/", "/login", "/register"]
   const isPublic = publicPaths.includes(pathname)
 
   // Allow public pages without check
@@ -26,9 +26,9 @@ export async function middleware(req) {
   const role = token?.role
 
   // 🔒 If inactive, force to /pending
-  if (status === "inactive" && pathname !== "/pending") {
-    return NextResponse.redirect(new URL("/pending", req.url))
-  }
+  // if (status === "inactive" && pathname !== "/pending") {
+  //   return NextResponse.redirect(new URL("/pending", req.url))
+  // }
 
   // 🔐 Role-based protection
   if (pathname.startsWith("/admin") && role !== "admin") {
