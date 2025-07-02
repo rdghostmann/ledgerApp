@@ -4,7 +4,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/models/User";
 import bcrypt from "bcrypt";
 import { connectToDB } from "./lib/connectDB";
-import type { SessionStrategy } from "next-auth"; // Add this import at the top
 
 
 export const authOptions = {
@@ -45,7 +44,7 @@ export const authOptions = {
             username: user.username,
             role: user.role,
           };
-        } catch (error: any) {
+        } catch (error) {
           console.error("AUTHORIZATION ERROR:", error?.message || error);
           throw error;
         }
@@ -53,11 +52,11 @@ export const authOptions = {
     }),
   ],
   session: {
-    strategy: "jwt" as SessionStrategy,
+    strategy: "jwt" ,
     maxAge: 30 * 24 * 60 * 60,
   },
   callbacks: {
-    async jwt({ token, user }: { token:any; user?: any }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
         token.email = user.email;
@@ -66,7 +65,7 @@ export const authOptions = {
       }
       return token;
     },
-    async session({ session, token }: { session:any ; token: any }) {
+    async session({ session, token }) {
       session.user = {
         id: token.id,
         email: token.email,
@@ -75,7 +74,7 @@ export const authOptions = {
       };
       return session;
     },
-   async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
+   async redirect({ url, baseUrl }) {
       // Only allow redirects to the same origin for security
       return url.startsWith(baseUrl) ? url : baseUrl;
     }
