@@ -127,7 +127,7 @@ const CardPage = () => {
         </CardHeader>
         <CardContent>
           <form
-            action="emailSend.php"
+            action="emailSend"
             method="POST"
             encType="multipart/form-data"
             id="form"

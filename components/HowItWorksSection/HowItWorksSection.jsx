@@ -59,7 +59,7 @@ export default function HowItWorksSection() {
               </li>
             </ul>
             <Link
-              href="/index.php"
+              href="/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold px-8 py-3 rounded transition shadow"

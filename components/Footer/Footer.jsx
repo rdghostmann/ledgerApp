@@ -32,7 +32,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/register.php"
+                  href="/register"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-400 transition"
@@ -42,7 +42,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/index.php"
+                  href="/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-400 transition"
