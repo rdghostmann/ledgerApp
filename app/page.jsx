@@ -34,7 +34,7 @@ export default function Home() {
         />
       </Head>
 
-      <div className="w-full bg-white text-gray-900">
+      <div className="flex flex-col items-center justify-center bg-white text-gray-900">
         <Header />
         <AboutSection />
         <QFSCard />

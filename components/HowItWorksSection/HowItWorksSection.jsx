@@ -77,7 +77,7 @@ export default function HowItWorksSection() {
           >
             <div className="w-full max-w-xs sm:max-w-md lg:max-w-lg">
               <img
-                src="/assets/xrp-banner.png"
+                src="/xrp-banner.png"
                 alt="Works"
                 className="shadow-lg rounded-xl w-full h-auto"
                 loading="lazy"
