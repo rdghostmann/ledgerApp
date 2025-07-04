@@ -23,6 +23,8 @@ const MobileTabs = () => {
           <img src="/icons/home.png" alt="Home" className="w-8 h-8" />
         </Link>
 
+        
+
         {/* Transactions */}
         <Link href="/dashboard/transactions" className="flex flex-col items-center justify-center w-1/5">
           <img src="/icons/transaction.png" alt="Transactions" className="w-6 h-6 mb-1" />

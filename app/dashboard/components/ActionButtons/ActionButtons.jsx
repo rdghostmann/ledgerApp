@@ -2,12 +2,13 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowDownToLine, Coins, Send, WalletCards } from "lucide-react";
+import { ArrowDownToLine, Coins, Send, WalletCards, PiggyBank, Briefcase } from "lucide-react"; // Import the 401k icon
 
 const actions = [
     { label: "Send", modal: "send", icon: <Send className="text-blue-600 text-lg" /> },
     { label: "Receive", modal: "receive", icon: <ArrowDownToLine className="text-green-600 text-lg" /> },
     { label: "Buy", modal: null, icon: <WalletCards className="text-yellow-600 text-lg" /> },
+    { label: "Savings", modal: null, icon: <Briefcase className="text-orange-600 text-lg" /> }, // 401k section
     { label: "Stake", modal: "stake", icon: <Coins className="text-purple-600 text-lg" /> },
 ];
 
@@ -221,6 +222,15 @@ const ActionButtons = () => {
                         <Link
                             key={label}
                             href="/dashboard/buy"
+                            className="cursor-pointer bg-white p-2 rounded-xl shadow hover:bg-blue-50 font-medium text-gray-700 transition min-w-[80px] flex flex-col items-center gap-3 text-lg"
+                        >
+                            <span className="text-3xl">{icon}</span>
+                            <span className="text-sm">{label}</span>
+                        </Link>
+                    ) : label === "401k" ? (
+                        <Link
+                            key={label}
+                            href="/dashboard/retirement401k"
                             className="cursor-pointer bg-white p-2 rounded-xl shadow hover:bg-blue-50 font-medium text-gray-700 transition min-w-[80px] flex flex-col items-center gap-3 text-lg"
                         >
                             <span className="text-3xl">{icon}</span>
