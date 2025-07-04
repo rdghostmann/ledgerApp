@@ -43,7 +43,7 @@ const ConnectWallet = () => {
     setTimeout(() => {
       setConnecting(false);
       setConnectionFailed(true);
-    }, 10000);
+    }, 10000); //10 seconds
   };
 
   const handleCloseModal = () => {
