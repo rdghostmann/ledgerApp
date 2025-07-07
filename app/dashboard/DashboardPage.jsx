@@ -5,6 +5,7 @@ import ActionButtons from "./components/ActionButtons/ActionButtons";
 import CoinGeckoWidget from "./components/CoinGeckoWidget/CoinGeckoWidget";
 import NavHeader from "./components/NavHeader/NavHeader";
 import CardCarousel from "./components/CardCarousel/CardCarousel";
+import AssetSection from "./components/AssestSection/AssetsSectionn";
 
 
 
@@ -34,6 +35,7 @@ export default function DashboardPage() {
         {/* Dashboard Assets */}
         {/* <DashboardAssets /> */}
         {/* <AssetServer /> */}
+        <AssetSection />
         <CoinGeckoWidget />
       </div>
     

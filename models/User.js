@@ -1,4 +1,4 @@
-// User Model
+// models/User.js
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
@@ -10,41 +10,42 @@ const UserSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
+      trim: true,
     },
     firstName: {
       type: String,
-      required: false,
+      default: "",
     },
     lastName: {
       type: String,
-      required: false,
+      default: "",
     },
     email: {
       type: String,
       unique: true,
       required: [true, "Email is required"],
       match: [
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-        "Email is invalid",
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        "Please enter a valid email address",
       ],
     },
     password: {
       type: String,
-      required: [true, 'Password is required'],
-      minlength: [6, 'Password must be at least 6 characters'],
-      select: false // Don't return password by default
+      required: [true, "Password is required"],
+      minlength: [6, "Password must be at least 6 characters"],
+      select: false,
     },
     avatar: {
       type: String,
-      default: null,
+      default: "",
     },
     balance: {
       type: Number,
-      default: null,
+      default: 0,
     },
     joinDate: {
       type: Date,
-      default: null,
+      default: Date.now,
     },
     lastLogin: {
       type: Date,
@@ -52,23 +53,24 @@ const UserSchema = new mongoose.Schema(
     },
     accountType: {
       type: String,
-      default: null,
+      enum: ["personal", "business"],
+      default: "personal",
     },
     phone: {
       type: String,
-      default: null,
+      default: "",
     },
     country: {
       type: String,
-      default: null,
+      default: "",
     },
     state: {
       type: String,
-      default: null,
+      default: "",
     },
     zipCode: {
       type: String,
-      default: null,
+      default: "",
     },
     role: {
       type: String,
@@ -80,13 +82,24 @@ const UserSchema = new mongoose.Schema(
       enum: ["active", "inactive"],
       default: "active",
     },
+    assets: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Asset",
+      },
+    ],
+    transaction: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Transaction",
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-
-// Fix the model export
-const User = mongoose.models?.User || mongoose.model("User", UserSchema);
+// Avoid model overwrite in development
+const User = mongoose.models.User || mongoose.model("User", UserSchema);
 export default User;
