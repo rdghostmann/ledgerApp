@@ -82,18 +82,6 @@ const UserSchema = new mongoose.Schema(
       enum: ["active", "inactive"],
       default: "active",
     },
-    assets: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Asset",
-      },
-    ],
-    transaction: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Transaction",
-      },
-    ],
   },
   {
     timestamps: true,
