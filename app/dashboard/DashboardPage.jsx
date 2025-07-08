@@ -1,11 +1,8 @@
-"use client";
-
-import Link from "next/link";
+// "use client";
 import ActionButtons from "./components/ActionButtons/ActionButtons";
 import CoinGeckoWidget from "./components/CoinGeckoWidget/CoinGeckoWidget";
 import NavHeader from "./components/NavHeader/NavHeader";
 import CardCarousel from "./components/CardCarousel/CardCarousel";
-import AssetSection from "./components/AssestSection/AssetsSectionn";
 
 
 
