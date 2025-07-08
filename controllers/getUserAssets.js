@@ -19,7 +19,6 @@ export default async function getUserAssets() {
     return [];
   }
 
-  // This will now work because userId is set on UserAsset
   const assets = await UserAsset.find({ userId: user._id });
   return assets;
 }
