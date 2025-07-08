@@ -60,14 +60,14 @@ export async function POST(req) {
     // Create default user assets (BTC, ETH, USDT)
     const defaultAssets = ["BTC", "ETH", "USDT", "BNB", "SOL"];
     const userAssets = defaultAssets.map((coin) => ({
-      userId: newUser._id,
+      userId: newUser._id, // <-- important!
       coin,
       amount: 0,
     }));
     await UserAsset.insertMany(userAssets);
 
     return NextResponse.json(
-      { message: "Registration successful"},
+      { message: "Registration successful" },
       { status: 201 }
     );
   } catch (err) {

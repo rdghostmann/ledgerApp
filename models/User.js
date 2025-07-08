@@ -82,6 +82,13 @@ const UserSchema = new mongoose.Schema(
       enum: ["active", "inactive"],
       default: "active",
     },
+    // Add assets field referencing UserAsset model
+    assets: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "UserAsset",
+      },
+    ],
   },
   {
     timestamps: true,

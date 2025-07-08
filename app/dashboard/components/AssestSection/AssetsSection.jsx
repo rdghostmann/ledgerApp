@@ -1,12 +1,16 @@
-// "use client";
+"use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowDownCircle, ArrowUpCircle } from "lucide-react";
+import getUserAssets from "@/controllers/getUserAssets";
 
-export default function AssetSection({ assets = [] }) {
+export default function AssetSection() {
+  const [assets, setAssets] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const coinColors = {
     BTC: "bg-yellow-500",
     ETH: "bg-gray-700",
@@ -33,9 +37,24 @@ export default function AssetSection({ assets = [] }) {
     </Card>
   );
 
+  useEffect(() => {
+    async function fetchAssets() {
+      setLoading(true);
+      try {
+        const data = await getUserAssets();
+        setAssets(data || []);
+      } catch (err) {
+        setAssets([]);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchAssets();
+  }, []);
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
-      {assets.length === 0 ? (
+      {loading || assets.length === 0 ? (
         <>
           {Array.from({ length: 4 }).map((_, index) => (
             <SkeletonCard key={index} />
@@ -57,7 +76,7 @@ export default function AssetSection({ assets = [] }) {
             </CardHeader>
             <CardContent>
               <p className="text-lg font-semibold mb-2">
-                ${Number(asset.balance).toFixed(4)}
+                ${Number(asset.amount ?? 0).toFixed(4)}
               </p>
               <div className="flex gap-2">
                 <Link href={`/dashboard/send/${asset.coin}`}>
