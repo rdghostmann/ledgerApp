@@ -35,7 +35,7 @@ export default function DashboardPage() {
         {/* Dashboard Assets */}
         {/* <DashboardAssets /> */}
         {/* <AssetServer /> */}
-        <AssetSection />
+        {/* <AssetSection /> */}
         <CoinGeckoWidget />
       </div>
     

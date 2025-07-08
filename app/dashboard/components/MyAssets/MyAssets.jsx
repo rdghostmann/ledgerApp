@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/auth";
-import { fetchWalletsByUser, fetchMarketPrices } from "@/lib/actions"; // Import the server actions
+import { fetchWalletsByUser } from "@/lib/actions"; // Import the server actions
 import { cryptoImages } from "@/components/Crypto/Crypto"; // Import the image paths
 import Image from 'next/image';
 
@@ -13,7 +13,7 @@ const MyAssets = async () => {
   const myAssets = await fetchWalletsByUser(userID);
 
   // Fetch market prices
-  const marketPrices = await fetchMarketPrices();
+  // const marketPrices = await fetchMarketPrices();
 
   return (
     <div>
