@@ -37,7 +37,7 @@ export default function AssetSection({ assets = [] }) {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4">
       {assets.length === 0 ? (
         <>
-          {Array.from({ length: 6 }).map((_, index) => (
+          {Array.from({ length: 4 }).map((_, index) => (
             <SkeletonCard key={index} />
           ))}
         </>

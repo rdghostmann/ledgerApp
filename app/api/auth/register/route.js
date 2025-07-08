@@ -58,7 +58,7 @@ export async function POST(req) {
     });
 
     // Create default user assets (BTC, ETH, USDT)
-    const defaultAssets = ["BTC", "ETH", "USDT"];
+    const defaultAssets = ["BTC", "ETH", "USDT", "BNB", "SOL"];
     const userAssets = defaultAssets.map((coin) => ({
       userId: newUser._id,
       coin,

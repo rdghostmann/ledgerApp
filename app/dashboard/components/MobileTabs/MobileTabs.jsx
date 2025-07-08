@@ -1,12 +1,10 @@
-// components/MobileTabs/MobileTabs.jsx
-"use client";
 
 import Link from "next/link";
 import React from "react";
 
 const MobileTabs = () => {
   return (
-    <footer className="fixed bottom-0 left-0 w-full bg-white border-t shadow-lg z-50">
+    <div className="fixed bottom-0 left-0 w-full bg-white border-t shadow-lg z-50">
       <div className="relative max-w-4xl mx-auto flex justify-between items-center px-4 py-2 text-xs text-gray-700">
         <Link href="/dashboard/card" className="flex flex-col items-center justify-center w-1/5">
           <img src="/icons/credit-card.png" alt="Card" className="w-6 h-6 mb-1" />
@@ -35,7 +33,7 @@ const MobileTabs = () => {
           <span>Swap</span>
         </Link>
       </div>
-    </footer>
+    </div>
   );
 };
 
