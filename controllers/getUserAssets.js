@@ -19,6 +19,17 @@ export default async function getUserAssets() {
     return [];
   }
 
-  const assets = await UserAsset.find({ userId: user._id });
+  const rawAssets = await UserAsset.find({ userId: user._id.toString() });
+
+  const assets = rawAssets.map((asset) => ({
+    _id: asset._id.toString(),
+    userId: asset.userId.toString(),
+    coin: asset.coin,
+    amount: asset.amount,
+    createdAt: asset.createdAt?.toISOString(),
+    updatedAt: asset.updatedAt?.toISOString(),
+  }));
+
+  console.log("💾 User assets sanitized and fetched:", assets);
   return assets;
 }
