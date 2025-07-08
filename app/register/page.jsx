@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -23,6 +26,10 @@ export default function RegisterPage() {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleAccountTypeChange = (value) => {
+    setForm({ ...form, accountType: value });
   };
 
   const handleSubmit = async (e) => {
@@ -72,57 +79,126 @@ export default function RegisterPage() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[
-              ["username", "Username"],
-              ["phone", "Phone"],
-              ["firstName", "First Name"],
-              ["lastName", "Last Name"],
-              ["email", "Email"],
-              ["country", "Country"],
-              ["state", "State"],
-              ["zipCode", "Zip Code"],
-            ].map(([name, placeholder]) => (
-              <input
-                key={name}
-                type={name === "email" ? "email" : "text"}
-                name={name}
-                placeholder={placeholder}
-                value={form[name]}
+            <div>
+              <Label className="mb-1" htmlFor="username">Username</Label>
+              <Input
+                id="username"
+                name="username"
+                placeholder="Username"
+                value={form.username}
                 onChange={handleChange}
-                className="input"
-                required={["username", "email", "phone"].includes(name)}
+                required
               />
-            ))}
-
-            <select
-              name="accountType"
-              value={form.accountType}
-              onChange={handleChange}
-              className="input"
-              required
-            >
-              <option value="personal">Personal</option>
-              <option value="business">Business</option>
-            </select>
-
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={form.password}
-              onChange={handleChange}
-              className="input"
-              required
-            />
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              value={form.confirmPassword}
-              onChange={handleChange}
-              className="input"
-              required
-            />
+            </div>
+            <div>
+              <Label className="mb-1" htmlFor="phone">Phone</Label>
+              <Input
+                id="phone"
+                name="phone"
+                placeholder="Phone"
+                value={form.phone}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <Label className="mb-1" htmlFor="firstName">First Name</Label>
+              <Input
+                id="firstName"
+                name="firstName"
+                placeholder="First Name"
+                value={form.firstName}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <Label className="mb-1" htmlFor="lastName">Last Name</Label>
+              <Input
+                id="lastName"
+                name="lastName"
+                placeholder="Last Name"
+                value={form.lastName}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <Label className="mb-1" htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Email"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <Label className="mb-1" htmlFor="country">Country</Label>
+              <Input
+                id="country"
+                name="country"
+                placeholder="Country"
+                value={form.country}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <Label className="mb-1" htmlFor="state">State</Label>
+              <Input
+                id="state"
+                name="state"
+                placeholder="State"
+                value={form.state}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <Label className="mb-1" htmlFor="zipCode">Zip Code</Label>
+              <Input
+                id="zipCode"
+                name="zipCode"
+                placeholder="Zip Code"
+                value={form.zipCode}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="sm:col-span-2">
+              <Label className="mb-1" htmlFor="accountType">Account Type</Label>
+              <Select value={form.accountType} onValueChange={handleAccountTypeChange} required>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select account type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="personal">Personal</SelectItem>
+                  <SelectItem value="business">Business</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label className="mb-1" htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Password"
+                value={form.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <Label className="mb-1" htmlFor="confirmPassword">Confirm Password</Label>
+              <Input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                placeholder="Confirm Password"
+                value={form.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
           </div>
 
           <button
@@ -147,13 +223,6 @@ export default function RegisterPage() {
           </div>
         </form>
       </div>
-
-      {/* Input styles */}
-      <style jsx>{`
-        .input {
-          @apply w-full px-4 py-2 border rounded bg-blue-100 focus:outline-none;
-        }
-      `}</style>
     </div>
   );
 }

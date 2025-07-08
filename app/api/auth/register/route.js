@@ -45,14 +45,14 @@ export async function POST(req) {
     const newUser = await User.create({
       userID: Date.now().toString(),
       username,
-      firstName: firstName || null,
-      lastName: lastName || null,
+      firstName: firstName || "",
+      lastName: lastName || "",
       phone,
       email,
       password: hashedPassword,
-      country: country || null,
-      state: state || null,
-      zipCode: zipCode || null,
+      country: country || "",
+      state: state || "",
+      zipCode: zipCode || "",
       accountType,
       joinDate: new Date(),
     });
@@ -67,11 +67,12 @@ export async function POST(req) {
     await UserAsset.insertMany(userAssets);
 
     return NextResponse.json(
-      { message: "Registration successful", user: newUser._id },
+      { message: "Registration successful"},
       { status: 201 }
     );
   } catch (err) {
     console.error("Registration error:", err);
-    return NextResponse.json({ message: "Registration failed" }, { status: 500 });
+    // More detailed error message for debugging (remove in production)
+    return NextResponse.json({ message: "Registration failed", error: err.message }, { status: 500 });
   }
 }

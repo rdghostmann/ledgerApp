@@ -20,7 +20,7 @@ export const metadata = {
 export default function DashboardRootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased cz-shortcut-listen="true"`}>
         {children}
         <ClientWrapper/> {/* ✅ Safe client-only MobileTabs across all dashboard pages */}
       </body>
