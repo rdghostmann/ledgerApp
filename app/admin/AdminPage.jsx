@@ -116,35 +116,6 @@ const kycQueue = [
   },
 ]
 
-// const recentCustomers = [
-//   {
-//     id: 1,
-//     name: "Emily Johnson",
-//     email: "emily@example.com",
-//     joinDate: "Today",
-//     status: "active",
-//     balance: "$2,450.00",
-//     avatar: "/placeholder.svg?height=40&width=40",
-//   },
-//   {
-//     id: 2,
-//     name: "Robert Smith",
-//     email: "robert@example.com",
-//     joinDate: "Yesterday",
-//     status: "pending",
-//     balance: "$0.00",
-//     avatar: "/placeholder.svg?height=40&width=40",
-//   },
-//   {
-//     id: 3,
-//     name: "Lisa Brown",
-//     email: "lisa@example.com",
-//     joinDate: "2 days ago",
-//     status: "active",
-//     balance: "$5,230.50",
-//     avatar: "/placeholder.svg?height=40&width=40",
-//   },
-// ]
 
 export default function AdminDashboard({ recentActivity, recentCustomers }) {
   return (

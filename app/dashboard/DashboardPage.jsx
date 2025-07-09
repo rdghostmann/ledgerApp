@@ -4,15 +4,25 @@ import NavHeader from "./components/NavHeader/NavHeader";
 import CardCarousel from "./components/CardCarousel/CardCarousel";
 import AssetSection from "./components/AssestSection/AssetsSection";
 import getUserAssets from "@/controllers/getUserAssets";
-import UserAsset from "@/models/UserAsset"
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/auth";
+import User from "@/models/User";
+import { connectToDB } from "@/lib/connectDB";
 
 export default async function DashboardPage() {
+  // Get user session
+  const session = await getServerSession(authOptions);
+  let username = "User";
+
+  if (session?.user?.email) {
+    await connectToDB();
+    const user = await User.findOne({ email: session.user.email });
+    if (user?.username) {
+      username = user.username;
+    }
+  }
+
   const { totalUsd, assets } = await getUserAssets();
-
-  //  const totalBalance = userAssets.reduce((acc, asset) => {
-  //   return acc + (asset.amount ?? 0) * (asset.price ?? 0);
-  // }, 0);
-
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white">
@@ -21,11 +31,10 @@ export default async function DashboardPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 relative z-10">
         {/* Top Navigation */}
-        <NavHeader />
+        <NavHeader username={username} />
 
         {/* Welcome */}
         <div className="mb-8 mt-4">
-
           <p className="text-gray-400 text-sm mt-1">
             Manage your assets, monitor the market, and take control of your finances.
           </p>
@@ -38,7 +47,6 @@ export default async function DashboardPage() {
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
               <CardCarousel totalUsd={totalUsd} />
             </div>
-
 
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
               <h2 className="text-lg font-semibold mb-3">Your Assets</h2>

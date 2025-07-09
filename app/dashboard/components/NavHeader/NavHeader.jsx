@@ -22,7 +22,7 @@ function getOrdinal(n) {
     default: return "th";
   }
 }
-
+ 
 const NavHeader = ({ username }) => {
   const today = new Date();
   const dayNames = [

@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-// Basic map to get slug by coin name
 const coinSlugMap = {
   BTC: "bitcoin",
   ETH: "ethereum",
@@ -18,48 +17,34 @@ const coinSlugMap = {
   SHIB: "shiba-inu",
 };
 
-const fetchCoinPrices = async () => {
-  const ids = Object.values(coinSlugMap).join(",");
-  const res = await fetch(
-    `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`
-  );
-  const data = await res.json();
-
-  const priceMap = {};
-  for (const [coin, slug] of Object.entries(coinSlugMap)) {
-    const info = data[slug];
-    if (info) {
-      priceMap[coin] = {
-        price: info.usd,
-        change: info.usd_24h_change,
-      };
-    }
-  }
-  return priceMap;
-};
-
-export default function AssetSection({ userAssets }) {
+export default function AssetSection({ userAssets = [] }) {
   const [assets, setAssets] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchAssets() {
+    if (!Array.isArray(userAssets)) return;
+
+    const fetchAssets = async () => {
       setLoading(true);
       try {
-        const priceMap = await fetchCoinPrices();
+        const res = await fetch("/api/fetchCoinPrices");
+        const priceMap = await res.json();
+
         const enriched = userAssets.map((asset) => {
           const { price = 0, change = 0 } = priceMap[asset.coin] || {};
           const usdValue = (asset.amount ?? 0) * price;
           return { ...asset, price, change, usdValue };
         });
+
         setAssets(enriched);
-      } catch (err) {
-        console.error("Error fetching assets", err);
+      } catch (error) {
+        console.error("Error fetching assets:", error.message);
         setAssets([]);
       } finally {
         setLoading(false);
       }
-    }
+    };
+
     fetchAssets();
   }, [userAssets]);
 
@@ -76,59 +61,62 @@ export default function AssetSection({ userAssets }) {
       {loading || assets.length === 0 ? (
         Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)
       ) : (
-        <>
-          {assets.map((asset) => {
-            const coin = asset.coin;
-            const network = asset.network || "Mainnet";
-            const change = asset.change ?? 0;
-            const isUp = change >= 0;
-            const baseSlug = coinSlugMap[coin];
-            const icon = `/cryptocoin/${baseSlug}.png`;
+        assets.map((asset) => {
+          const coin = asset.coin;
+          const network = asset.network || "Mainnet";
+          const change = asset.change ?? 0;
+          const isUp = change >= 0;
+          const baseSlug = coinSlugMap[coin];
 
-            return (
-              <Card
-                key={asset._id}
-                className="bg-white/5 border border-white/10 backdrop-blur-md p-5 text-white rounded-2xl shadow-lg transition hover:shadow-xl hover:-translate-y-1"
-              >
-                <CardHeader className="flex items-center justify-between p-0 mb-3">
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={`/cryptocoin/${baseSlug}.svg`}
-                      alt={coin}
-                      onError={(e) => {
-                        e.currentTarget.onerror = null;
-                        e.currentTarget.src = `/cryptocoin/${baseSlug}.png`;
-                      }}
-                      className="w-10 h-10 object-contain rounded-full border border-white/10"
-                    />
-
-                    <div>
-                      <h4 className="text-sm font-semibold">
-                        {coin} <span className="text-[10px] text-blue-300">({network})</span>
-                      </h4>
-                      <p className="text-xs text-blue-300">
-                        {asset.amount?.toFixed(4)} {coin}
-                      </p>
-                    </div>
+          return (
+            <Card
+              key={asset._id}
+              className="bg-white/5 border border-white/10 backdrop-blur-md p-5 text-white rounded-2xl shadow-lg transition hover:shadow-xl hover:-translate-y-1"
+            >
+              <CardHeader className="flex items-center justify-between p-0 mb-3">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={`/cryptocoin/${baseSlug}.svg`}
+                    alt={coin}
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = `/cryptocoin/${baseSlug}.png`;
+                    }}
+                    className="w-10 h-10 object-contain rounded-full border border-white/10"
+                  />
+                  <div>
+                    <h4 className="text-sm font-semibold">
+                      {coin}{" "}
+                      <span className="text-[10px] text-blue-300">
+                        ({network})
+                      </span>
+                    </h4>
+                    <p className="text-xs text-blue-300">
+                      {asset.amount?.toFixed(4)} {coin}
+                    </p>
                   </div>
-                  <div className={`text-sm font-semibold ${isUp ? "text-green-400" : "text-red-400"}`}>
-                    {isUp ? "+" : ""}
-                    {change.toFixed(2)}%
-                  </div>
-                </CardHeader>
-                <CardContent className="p-0 mt-2">
-                  <p className="text-xl font-bold text-blue-100">
-                    ≈ $
-                    {asset.usdValue?.toLocaleString(undefined, {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}
-                  </p>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </>
+                </div>
+                <div
+                  className={`text-sm font-semibold ${
+                    isUp ? "text-green-400" : "text-red-400"
+                  }`}
+                >
+                  {isUp ? "+" : ""}
+                  {change.toFixed(2)}%
+                </div>
+              </CardHeader>
+              <CardContent className="p-0 mt-2">
+                <p className="text-xl font-bold text-blue-100">
+                  ≈ $
+                  {asset.usdValue?.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </p>
+              </CardContent>
+            </Card>
+          );
+        })
       )}
     </div>
   );
