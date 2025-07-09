@@ -24,7 +24,7 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
-              <CardCarousel />
+              <CardCarousel total={totalUsd} />
             </div>
 
         <div className="bg-white/5 backdrop-blur-md border border-white/10 my-3 p-5 rounded-2xl shadow-lg">
