@@ -82,7 +82,12 @@ const UserSchema = new mongoose.Schema(
       enum: ["active", "inactive"],
       default: "active",
     },
-    // Add assets field referencing UserAsset model
+    wallets: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Wallet'
+      }
+    ],
     assets: [
       {
         type: mongoose.Schema.Types.ObjectId,

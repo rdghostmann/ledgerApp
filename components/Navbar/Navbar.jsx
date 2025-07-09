@@ -83,11 +83,11 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 bg-black/80 backdrop-blur-lg z-40 transform transition-transform duration-300 md:hidden ${
+        className={`fixed top-0 right-0 h-full w-64 bg-black z-40 transform transition-transform duration-300 md:hidden ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex flex-col h-full px-6 py-6">
+        <div className="bg-black flex flex-col h-full px-6 py-6">
           <div className="flex items-center justify-between mb-6">
             <span className="text-xl font-bold">Menu</span>
             <button onClick={() => setOpen(false)} className="text-2xl text-white">

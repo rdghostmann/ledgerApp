@@ -7,7 +7,7 @@ import getUserAssets from "@/controllers/getUserAssets";
 import UserAsset from "@/models/UserAsset"
 
 export default async function DashboardPage() {
-const { totalUsd, assets } = await getUserAssets();
+  const { totalUsd, assets } = await getUserAssets();
 
   //  const totalBalance = userAssets.reduce((acc, asset) => {
   //   return acc + (asset.amount ?? 0) * (asset.price ?? 0);
@@ -25,7 +25,7 @@ const { totalUsd, assets } = await getUserAssets();
 
         {/* Welcome */}
         <div className="mb-8 mt-4">
-          
+
           <p className="text-gray-400 text-sm mt-1">
             Manage your assets, monitor the market, and take control of your finances.
           </p>
@@ -36,11 +36,9 @@ const { totalUsd, assets } = await getUserAssets();
           {/* Left Column (Cards + Assets) */}
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
-                      <CardCarousel totalUsd={totalUsd} />
-
-
+              <CardCarousel totalUsd={totalUsd} />
             </div>
-            
+
 
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
               <h2 className="text-lg font-semibold mb-3">Your Assets</h2>
