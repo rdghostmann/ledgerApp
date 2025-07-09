@@ -8,9 +8,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Users, CreditCard, AlertTriangle, DollarSign, Activity, UserPlus, List, Shield, BarChart3 } from "lucide-react"
 import { LogoutButton } from "@/components/Logout-button/logout-button";
 import Link from "next/link"
-import { Layout } from "@/components/DashboardLayout/DashboardLayout"
 import StatCard from "./components/StatsCard"
 import RecentActivityCard from "./components/RecentActivityCard"
+import { Layout } from "./components/DashboardLayout"
 
 const stats = [
   {

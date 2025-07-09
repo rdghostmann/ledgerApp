@@ -59,16 +59,16 @@ const NavHeader = ({ username }) => {
         </DropdownMenuTrigger>
 
         <DropdownMenuContent align="end" className="w-56 rounded-xl shadow-lg">
-          <DropdownMenuItem asChild>
+          {/* <DropdownMenuItem asChild>
             <Link href="/dashboard/transactions" className="flex items-center gap-3 w-full">
               <span className="inline-flex items-center justify-center w-7 h-7 rounded bg-gradient-to-r from-green-400 to-green-600 text-white">
                 <BarChart2 size={18} />
               </span>
               <span className="font-medium text-sm">Activity</span>
             </Link>
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           <DropdownMenuItem asChild>
-            <Link href="/dashboard/profile" className="flex items-center gap-3 w-full">
+            <Link href="/dashboard/#profile" className="flex items-center gap-3 w-full">
               <span className="inline-flex items-center justify-center w-7 h-7 rounded bg-gradient-to-r from-yellow-400 to-yellow-600 text-white">
                 <UserCircle size={18} />
               </span>

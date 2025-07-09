@@ -14,7 +14,6 @@ import { Switch } from "@/components/ui/switch"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { UserPlus, Upload, ArrowLeft, User, Mail, Phone, MapPin, CreditCard, Shield, Camera } from "lucide-react"
 import Link from "next/link"
-import { Layout } from "@/components/DashboardLayout/DashboardLayout"
 import { addCustomer } from "@/controllers/addCustomers"
 
 
