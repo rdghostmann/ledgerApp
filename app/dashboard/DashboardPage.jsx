@@ -4,13 +4,14 @@ import NavHeader from "./components/NavHeader/NavHeader";
 import CardCarousel from "./components/CardCarousel/CardCarousel";
 import AssetSection from "./components/AssestSection/AssetsSection";
 import getUserAssets from "@/controllers/getUserAssets";
+import UserAsset from "@/models/UserAsset"
 
 export default async function DashboardPage() {
 const { totalUsd, assets } = await getUserAssets();
 
-   const totalBalance = userAssets.reduce((acc, asset) => {
-    return acc + (asset.amount ?? 0) * (asset.price ?? 0);
-  }, 0);
+  //  const totalBalance = userAssets.reduce((acc, asset) => {
+  //   return acc + (asset.amount ?? 0) * (asset.price ?? 0);
+  // }, 0);
 
 
   return (

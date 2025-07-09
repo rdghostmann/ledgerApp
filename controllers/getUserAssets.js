@@ -1,5 +1,8 @@
 import axios from "axios";
-
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/auth";
+import UserAsset from "@/models/UserAsset"
+import { connectToDB } from "@/lib/connectDB";
 export default async function getUserAssets() {
   await connectToDB();
   const session = await getServerSession(authOptions);
