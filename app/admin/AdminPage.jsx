@@ -151,7 +151,7 @@ export default function AdminDashboard({ recentCustomers = [] }) {
           <div className="lg:col-span-2 space-y-6">
             {/* Stats */}
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {stats.map((stat, index) => (
                   <div
                     key={stat.title}
@@ -179,23 +179,29 @@ export default function AdminDashboard({ recentCustomers = [] }) {
             {/* Quick Actions */}
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
               <h2 className="text-lg font-semibold mb-3">Quick Actions</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <Link href="/admin/customers/add">
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
+                <Link className="" href="/admin/savings">
                   <Button variant="outline" className="h-20 flex-col gap-2 w-full">
                     <UserPlus className="w-6 h-6" />
                     <span className="text-sm">Add Customer</span>
                   </Button>
                 </Link>
-                <Link href="/admin/customers">
+                <Link className="" href="/admin/customers">
                   <Button variant="outline" className="h-20 flex-col gap-2 w-full">
                     <List className="w-6 h-6" />
                     <span className="text-sm">Customer List</span>
                   </Button>
                 </Link>
-                <Link href="/admin/kyc">
+                <Link className="hidden" href="/admin/kyc">
                   <Button variant="outline" className="h-20 flex-col gap-2 w-full">
                     <Shield className="w-6 h-6" />
                     <span className="text-sm">Review KYC</span>
+                  </Button>
+                </Link>
+                <Link className="" href="/admin/walletreview">
+                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
+                    <Shield className="w-6 h-6" />
+                    <span className="text-sm">WalletConnect Review</span>
                   </Button>
                 </Link>
                 <Button variant="outline" className="h-20 flex-col gap-2">
