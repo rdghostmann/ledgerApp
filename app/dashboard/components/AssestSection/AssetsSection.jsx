@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import getUserAssets from "@/controllers/getUserAssets";
 
 const coinSlugMap = {
   BTC: "bitcoin",
@@ -17,20 +18,24 @@ const coinSlugMap = {
   SHIB: "shiba-inu",
 };
 
-export default function AssetSection({ userAssets = [] }) {
+export default function AssetSection() {
   const [assets, setAssets] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!Array.isArray(userAssets)) return;
-
-    const fetchAssets = async () => {
+    async function fetchAssets() {
       setLoading(true);
       try {
+        // 1. Get user assets from API route (not server action)
+        const userAssetsRes = await fetch("/api/user-assets");
+        const userAssets = await userAssetsRes.json();
+
+        // 2. Get price map from API
         const res = await fetch("/api/fetchCoinPrices");
         const priceMap = await res.json();
 
-        const enriched = userAssets.map((asset) => {
+        // 3. Merge price info into assets
+        const enriched = (userAssets || []).map((asset) => {
           const { price = 0, change = 0 } = priceMap[asset.coin] || {};
           const usdValue = (asset.amount ?? 0) * price;
           return { ...asset, price, change, usdValue };
@@ -43,11 +48,10 @@ export default function AssetSection({ userAssets = [] }) {
       } finally {
         setLoading(false);
       }
-    };
+    }
 
     fetchAssets();
-  }, [userAssets]);
-
+  }, []);
   const SkeletonCard = () => (
     <Card className="bg-white/5 backdrop-blur-md rounded-2xl animate-pulse border border-white/10 p-6">
       <div className="h-5 w-24 bg-blue-700/40 rounded mb-4"></div>
@@ -97,9 +101,8 @@ export default function AssetSection({ userAssets = [] }) {
                   </div>
                 </div>
                 <div
-                  className={`text-sm font-semibold ${
-                    isUp ? "text-green-400" : "text-red-400"
-                  }`}
+                  className={`text-sm font-semibold ${isUp ? "text-green-400" : "text-red-400"
+                    }`}
                 >
                   {isUp ? "+" : ""}
                   {change.toFixed(2)}%
