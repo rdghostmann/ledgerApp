@@ -84,13 +84,7 @@ const NavHeader = ({ username }) => {
             </span>
             <span className="font-medium text-sm">Log Out</span>
           </DropdownMenuItem>
-          <DropdownMenuItem className="flex items-center gap-3 w-full">
-            <span className="inline-flex items-center justify-center w-7 h-7 rounded bg-gradient-to-r from-blue-400 to-blue-600 text-white">
-              <Sun size={18} />
-            </span>
-            <span className="font-medium text-sm flex-1">Dark Mode</span>
-            <Switch aria-label="Toggle dark mode" />
-          </DropdownMenuItem>
+          
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
