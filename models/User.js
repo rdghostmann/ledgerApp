@@ -83,11 +83,11 @@ const UserSchema = new mongoose.Schema(
       default: "active",
     },
     wallets: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Wallet'
-      }
-    ],
+  {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Wallet'
+  }
+],
     assets: [
       {
         type: mongoose.Schema.Types.ObjectId,

