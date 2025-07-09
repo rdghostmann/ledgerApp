@@ -8,8 +8,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Users, CreditCard, AlertTriangle, DollarSign, Activity, UserPlus, List, Shield, BarChart3 } from "lucide-react"
 import { LogoutButton } from "@/components/Logout-button/logout-button";
 import Link from "next/link"
-import StatCard from "./components/StatsCard"
-import RecentActivityCard from "./components/RecentActivityCard"
 
 const stats = [
   {
@@ -156,8 +154,14 @@ export default function AdminDashboard({ recentActivity: recentActivityProp, rec
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 * index }}
+            className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-start"
           >
-            <StatCard {...stat} Icon={stat.icon} />
+            <div className={`mb-2 ${stat.color}`}>{<stat.icon className="w-6 h-6" />}</div>
+            <div className="text-lg font-semibold">{stat.title}</div>
+            <div className="text-2xl font-bold">{stat.value}</div>
+            <div className={`text-xs mt-1 ${stat.change.startsWith("+") ? "text-green-500" : "text-red-500"}`}>
+              {stat.change}
+            </div>
           </motion.div>
         ))}
       </motion.div>
@@ -200,7 +204,47 @@ export default function AdminDashboard({ recentActivity: recentActivityProp, rec
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Activity */}
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
-          <RecentActivityCard recentActivity={recentActivityProp || recentActivity} />
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Activity className="w-5 h-5" />
+                Recent Activity
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {recentActivity.map((item) => (
+                <div key={item.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent">
+                  <Avatar>
+                    <AvatarImage src={item.avatar || "/placeholder.svg"} />
+                    <AvatarFallback>
+                      {item.user
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-sm">{item.user}</p>
+                    <p className="text-xs text-muted-foreground">{item.action}</p>
+                    <p className="text-xs text-muted-foreground">{item.time}</p>
+                  </div>
+                  <div className="text-right">
+                    <Badge variant={
+                      item.status === "success"
+                        ? "default"
+                        : item.status === "warning"
+                        ? "secondary"
+                        : item.status === "error"
+                        ? "destructive"
+                        : "outline"
+                    } className="text-xs capitalize">
+                      {item.status}
+                    </Badge>
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
         </motion.div>
 
         {/* Recent Customers */}
@@ -214,10 +258,8 @@ export default function AdminDashboard({ recentActivity: recentActivityProp, rec
             </CardHeader>
             <CardContent className="space-y-4">
               {recentCustomers.map((customer) => (
-                <motion.div
+                <div
                   key={customer._id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
                   className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent"
                 >
                   <Avatar>
@@ -225,9 +267,9 @@ export default function AdminDashboard({ recentActivity: recentActivityProp, rec
                     <AvatarFallback>
                       {customer.username
                         ? customer.username
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")
                         : "U"}
                     </AvatarFallback>
                   </Avatar>
@@ -242,7 +284,7 @@ export default function AdminDashboard({ recentActivity: recentActivityProp, rec
                     </Badge>
                     <p className="text-xs font-medium mt-1">{customer.balance}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
               <Link href="/admin/customers">
                 <Button variant="ghost" size="sm" className="w-full">
@@ -264,10 +306,8 @@ export default function AdminDashboard({ recentActivity: recentActivityProp, rec
             </CardHeader>
             <CardContent className="space-y-4">
               {kycQueue.map((item) => (
-                <motion.div
+                <div
                   key={item.id}
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
                   className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent"
                 >
                   <Avatar className="w-8 h-8">
@@ -287,11 +327,11 @@ export default function AdminDashboard({ recentActivity: recentActivityProp, rec
                     </p>
                   </div>
                   <div className="text-right">
-                    <Badge variant={item.type === "pending" ? "secondary" : "outline"} className="text-xs">
-                      {item.type}
+                    <Badge variant={item.status === "pending" ? "secondary" : "outline"} className="text-xs">
+                      {item.status}
                     </Badge>
                   </div>
-                </motion.div>
+                </div>
               ))}
               <Link href="/admin/kyc">
                 <Button variant="ghost" size="sm" className="w-full">
