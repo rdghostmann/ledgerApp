@@ -1,12 +1,18 @@
-const walletSchema = new Schema({
+const walletSchema = new mongoose.Schema({
   userId: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'User' 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User',
+    required: true
   },
-  walletAddress: String,
-  network: String
-});
-// Avoid model overwrite in development
-const Wallet = mongoose.models.Wallet || mongoose.model("Wallet", WalletSchema);
-export default Wallet;
+  walletAddress: {
+    type: String,
+    required: true
+  },
+  network: {
+    type: String,
+    default: "Unknown"
+  },
+}, { timestamps: true });
 
+const Wallet = mongoose.models.Wallet || mongoose.model("Wallet", walletSchema);
+export default Wallet;
