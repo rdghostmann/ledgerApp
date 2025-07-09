@@ -212,7 +212,7 @@ export default function AdminDashboard({ recentCustomers = [] }) {
             </div>
 
             {/* Recent Activity */}
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
+            <div className="hidden bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
               <h2 className="text-lg font-semibold mb-3">Recent Activity</h2>
               <div className="space-y-4">
                 {recentActivity.map((item) => (
@@ -257,7 +257,7 @@ export default function AdminDashboard({ recentCustomers = [] }) {
           </div>
 
           {/* Right Column (Recent Customers + KYC Queue) */}
-          <div className="space-y-6">
+          <div className="hidden space-y-6">
             {/* Recent Customers */}
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
               <h2 className="text-lg font-semibold mb-3">Recent Customers</h2>
