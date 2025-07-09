@@ -1,6 +1,6 @@
 import { getAllUsers } from "@/controllers/getAllUsers";
 import AllUsersList from "./UsersList";
-import { Layout } from "@/components/DashboardLayout/DashboardLayout";
+import { Layout } from "../components/DashboardLayout";
 
 export default async function UsersPage() {
   const users = await getAllUsers(); // Server Action: fetch users from DB
