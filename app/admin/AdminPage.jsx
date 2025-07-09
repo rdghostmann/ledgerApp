@@ -10,7 +10,6 @@ import { LogoutButton } from "@/components/Logout-button/logout-button";
 import Link from "next/link"
 import StatCard from "./components/StatsCard"
 import RecentActivityCard from "./components/RecentActivityCard"
-import { Layout } from "./components/DashboardLayout"
 
 const stats = [
   {
@@ -116,197 +115,193 @@ const kycQueue = [
   },
 ]
 
-
-export default function AdminDashboard({ recentActivity, recentCustomers }) {
+export default function AdminDashboard({ recentActivity: recentActivityProp, recentCustomers = [] }) {
   return (
-    <Layout >
-      <div className="space-y-6 p-4 md:p-6">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between"
-        >
-          <div>
-            <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-            <p className="text-muted-foreground">Monitor and manage your banking platform</p>
-            <LogoutButton />
-
-          </div>
-          <div className="flex gap-2">
-            <Link href="/admin/customers/add">
-              <Button>
-                <UserPlus className="w-4 h-4 mr-2" />
-                Add Customer
-              </Button>
-            </Link>
-            <Button variant="outline">
-              <Activity className="w-4 h-4 mr-2" />
-              Generate Report
+    <div className="space-y-6 p-4 md:p-6">
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex items-center justify-between"
+      >
+        <div>
+          <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+          <p className="text-muted-foreground">Monitor and manage your banking platform</p>
+          <LogoutButton />
+        </div>
+        <div className="flex gap-2">
+          <Link href="/admin/customers/add">
+            <Button>
+              <UserPlus className="w-4 h-4 mr-2" />
+              Add Customer
             </Button>
-          </div>
+          </Link>
+          <Button variant="outline">
+            <Activity className="w-4 h-4 mr-2" />
+            Generate Report
+          </Button>
+        </div>
+      </motion.div>
+
+      {/* Stats Grid */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+      >
+        {stats.map((stat, index) => (
+          <motion.div
+            key={stat.title}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 * index }}
+          >
+            <StatCard {...stat} Icon={stat.icon} />
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* Quick Actions */}
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+        <Card>
+          <CardHeader>
+            <CardTitle>Quick Actions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <Link href="/admin/customers/add">
+                <Button variant="outline" className="h-20 flex-col gap-2 w-full">
+                  <UserPlus className="w-6 h-6" />
+                  <span className="text-sm">Add Customer</span>
+                </Button>
+              </Link>
+              <Link href="/admin/customers">
+                <Button variant="outline" className="h-20 flex-col gap-2 w-full">
+                  <List className="w-6 h-6" />
+                  <span className="text-sm">Customer List</span>
+                </Button>
+              </Link>
+              <Link href="/admin/kyc">
+                <Button variant="outline" className="h-20 flex-col gap-2 w-full">
+                  <Shield className="w-6 h-6" />
+                  <span className="text-sm">Review KYC</span>
+                </Button>
+              </Link>
+              <Button variant="outline" className="h-20 flex-col gap-2">
+                <BarChart3 className="w-6 h-6" />
+                <span className="text-sm">Analytics</span>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Recent Activity */}
+        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
+          <RecentActivityCard recentActivity={recentActivityProp || recentActivity} />
         </motion.div>
 
-        {/* Stats Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
-        >
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * index }}
-            >
-              <StatCard {...stat} Icon={stat.icon} />
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Quick Actions */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+        {/* Recent Customers */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
           <Card>
             <CardHeader>
-              <CardTitle>Quick Actions</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="w-5 h-5" />
+                Recent Customers
+              </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <Link href="/admin/customers/add">
-                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
-                    <UserPlus className="w-6 h-6" />
-                    <span className="text-sm">Add Customer</span>
-                  </Button>
-                </Link>
-                <Link href="/admin/customers">
-                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
-                    <List className="w-6 h-6" />
-                    <span className="text-sm">Customer List</span>
-                  </Button>
-                </Link>
-                <Link href="/admin/kyc">
-                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
-                    <Shield className="w-6 h-6" />
-                    <span className="text-sm">Review KYC</span>
-                  </Button>
-                </Link>
-                <Button variant="outline" className="h-20 flex-col gap-2">
-                  <BarChart3 className="w-6 h-6" />
-                  <span className="text-sm">Analytics</span>
+            <CardContent className="space-y-4">
+              {recentCustomers.map((customer) => (
+                <motion.div
+                  key={customer._id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent"
+                >
+                  <Avatar>
+                    <AvatarImage src={customer.avatar || "/placeholder.svg"} />
+                    <AvatarFallback>
+                      {customer.username
+                        ? customer.username
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                        : "U"}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-sm">{customer.username}</p>
+                    <p className="text-xs text-muted-foreground">{customer.email}</p>
+                    <p className="text-xs text-muted-foreground">Joined {customer.joinDate}</p>
+                  </div>
+                  <div className="text-right">
+                    <Badge variant={customer.type === "active" ? "default" : "secondary"} className="text-xs">
+                      {customer.type}
+                    </Badge>
+                    <p className="text-xs font-medium mt-1">{customer.balance}</p>
+                  </div>
+                </motion.div>
+              ))}
+              <Link href="/admin/customers">
+                <Button variant="ghost" size="sm" className="w-full">
+                  View All Customers
                 </Button>
-              </div>
+              </Link>
             </CardContent>
           </Card>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Recent Activity */}
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
-            <RecentActivityCard recentActivity={recentActivity} />
-          </motion.div>
-
-          {/* Recent Customers */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Users className="w-5 h-5" />
-                  Recent Customers
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {recentCustomers.map((customer) => (
-                  <motion.div
-                    key={customer._id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent"
-                  >
-                    <Avatar>
-                      <AvatarImage src={customer.avatar || "/placeholder.svg"} />
-                      <AvatarFallback>
-                        {customer.username
-                          ? customer.username
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")
-                          : "U"}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-medium text-sm">{customer.username}</p>
-                      <p className="text-xs text-muted-foreground">{customer.email}</p>
-                      <p className="text-xs text-muted-foreground">Joined {customer.joinDate}</p>
-                    </div>
-                    <div className="text-right">
-                      <Badge variant={customer.type === "active" ? "default" : "secondary"} className="text-xs">
-                        {customer.type}
-                      </Badge>
-                      <p className="text-xs font-medium mt-1">{customer.balance}</p>
-                    </div>
-                  </motion.div>
-                ))}
-                <Link href="/admin/customers">
-                  <Button variant="ghost" size="sm" className="w-full">
-                    View All Customers
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* KYC Queue */}
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }}>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <AlertTriangle className="w-5 h-5" />
-                  KYC Review Queue
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {kycQueue.map((item) => (
-                  <motion.div
-                    key={item.id}
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent"
-                  >
-                    <Avatar className="w-8 h-8">
-                      <AvatarImage src={item.avatar || "/placeholder.svg"} />
-                      <AvatarFallback>
-                        {item.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-medium text-sm">{item.name}</p>
-                      <p className="text-xs text-muted-foreground">{item.email}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {item.documents} docs • {item.submitted}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <Badge variant={item.type === "pending" ? "secondary" : "outline"} className="text-xs">
-                        {item.type}
-                      </Badge>
-                    </div>
-                  </motion.div>
-                ))}
-                <Link href="/admin/kyc">
-                  <Button variant="ghost" size="sm" className="w-full">
-                    View All Pending
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
+        {/* KYC Queue */}
+        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }}>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <AlertTriangle className="w-5 h-5" />
+                KYC Review Queue
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {kycQueue.map((item) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent"
+                >
+                  <Avatar className="w-8 h-8">
+                    <AvatarImage src={item.avatar || "/placeholder.svg"} />
+                    <AvatarFallback>
+                      {item.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-sm">{item.name}</p>
+                    <p className="text-xs text-muted-foreground">{item.email}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {item.documents} docs • {item.submitted}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <Badge variant={item.type === "pending" ? "secondary" : "outline"} className="text-xs">
+                      {item.type}
+                    </Badge>
+                  </div>
+                </motion.div>
+              ))}
+              <Link href="/admin/kyc">
+                <Button variant="ghost" size="sm" className="w-full">
+                  View All Pending
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
-    </Layout>
+    </div>
   )
 }

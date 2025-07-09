@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import getUserAssets from "@/controllers/getUserAssets";
 
 const coinSlugMap = {
   BTC: "bitcoin",
@@ -26,22 +25,11 @@ export default function AssetSection() {
     async function fetchAssets() {
       setLoading(true);
       try {
-        // 1. Get user assets from API route (not server action)
-        const userAssetsRes = await fetch("/api/user-assets");
-        const userAssets = await userAssetsRes.json();
-
-        // 2. Get price map from API
-        const res = await fetch("/api/fetchCoinPrices");
-        const priceMap = await res.json();
-
-        // 3. Merge price info into assets
-        const enriched = (userAssets || []).map((asset) => {
-          const { price = 0, change = 0 } = priceMap[asset.coin] || {};
-          const usdValue = (asset.amount ?? 0) * price;
-          return { ...asset, price, change, usdValue };
-        });
-
-        setAssets(enriched);
+        // Fetch from API route, not server action
+        const res = await fetch("/api/user-assets");
+        const result = await res.json();
+        const userAssets = result?.assets || [];
+        setAssets(userAssets);
       } catch (error) {
         console.error("Error fetching assets:", error.message);
         setAssets([]);
@@ -52,6 +40,7 @@ export default function AssetSection() {
 
     fetchAssets();
   }, []);
+
   const SkeletonCard = () => (
     <Card className="bg-white/5 backdrop-blur-md rounded-2xl animate-pulse border border-white/10 p-6">
       <div className="h-5 w-24 bg-blue-700/40 rounded mb-4"></div>
@@ -68,8 +57,6 @@ export default function AssetSection() {
         assets.map((asset) => {
           const coin = asset.coin;
           const network = asset.network || "Mainnet";
-          const change = asset.change ?? 0;
-          const isUp = change >= 0;
           const baseSlug = coinSlugMap[coin];
 
           return (
@@ -99,13 +86,6 @@ export default function AssetSection() {
                       {asset.amount?.toFixed(4)} {coin}
                     </p>
                   </div>
-                </div>
-                <div
-                  className={`text-sm font-semibold ${isUp ? "text-green-400" : "text-red-400"
-                    }`}
-                >
-                  {isUp ? "+" : ""}
-                  {change.toFixed(2)}%
                 </div>
               </CardHeader>
               <CardContent className="p-0 mt-2">

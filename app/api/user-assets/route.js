@@ -3,8 +3,8 @@ import getUserAssets from "@/controllers/getUserAssets";
 
 export async function GET() {
   try {
-    const assets = await getUserAssets();
-    return NextResponse.json(assets);
+    const data = await getUserAssets();
+    return NextResponse.json({ assets: data.assets || [] });
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }

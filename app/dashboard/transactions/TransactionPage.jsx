@@ -14,7 +14,7 @@ const TransactionPage = () => {
 
       <NavHeader />
 
-      <Card>
+      <Card className="border-none bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 p-6">
         <CardHeader>
           <CardTitle>
             <span className="text-red-600">Transaction History</span>
@@ -54,14 +54,6 @@ const TransactionPage = () => {
           </Tabs>
         </CardContent>
       </Card>
-      <div className="mt-6 flex justify-end">
-        <Link
-          href="/dashboard"
-          className="text-blue-600 hover:underline text-sm"
-        >
-          Back to Dashboard
-        </Link>
-      </div>
     </div>
   );
 };
