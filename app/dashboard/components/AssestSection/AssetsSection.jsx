@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowDownCircle, ArrowUpCircle } from "lucide-react";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 // Basic map to get slug by coin name
 const coinSlugMap = {
@@ -94,14 +93,14 @@ export default function AssetSection({ userAssets }) {
                 <CardHeader className="flex items-center justify-between p-0 mb-3">
                   <div className="flex items-center gap-3">
                     <img
-  src={`/cryptocoin/${baseSlug}.svg`}
-  alt={coin}
-  onError={(e) => {
-    e.currentTarget.onerror = null;
-    e.currentTarget.src = `/cryptocoin/${baseSlug}.png`;
-  }}
-  className="w-10 h-10 object-contain rounded-full border border-white/10"
-/>
+                      src={`/cryptocoin/${baseSlug}.svg`}
+                      alt={coin}
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = `/cryptocoin/${baseSlug}.png`;
+                      }}
+                      className="w-10 h-10 object-contain rounded-full border border-white/10"
+                    />
 
                     <div>
                       <h4 className="text-sm font-semibold">
