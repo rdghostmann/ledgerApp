@@ -26,7 +26,7 @@ export default function CardCarousel({
         viewport={{ once: true }}
       >
         {/* Verified Badge */}
-        <div className="absolute top-3 right-3 flex items-center gap-1 text-[11px] sm:text-sm bg-green-600 px-2.5 py-1 rounded-full shadow-sm">
+        <div className="cursor-pointer absolute top-3 right-3 flex items-center gap-1 text-[11px] sm:text-sm bg-green-600 px-2.5 py-1 rounded-full shadow-sm">
           <BadgeCheck size={14} className="text-white" />
           Verified
         </div>
