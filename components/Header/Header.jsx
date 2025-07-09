@@ -6,88 +6,84 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <section className="relative bg-gradient-to-br from-gray-900 to-gray-800 pb-10">
-      {/* Sticky/absolute Navbar stacked on top */}
-      <div className="absolute top-0 left-0 w-full z-30">
+    <section className="relative bg-gradient-to-br from-gray-950 via-gray-900 to-black pb-10 overflow-hidden">
+      {/* Navbar */}
+      <div className="absolute top-0 left-0 w-full z-50">
         <div className="sticky top-0">
           <Navbar />
         </div>
       </div>
-      {/* Give space for navbar height */}
-      <div className="pt-20 w-11/12 mx-auto">
+
+      {/* Content */}
+      <div className="pt-24 px-4 md:px-8 max-w-7xl mx-auto">
         <Splide
           aria-label="Quantum Financial System"
           options={{
             type: "fade",
             rewind: true,
             autoplay: true,
-            interval: 5000,
+            interval: 6000,
             pauseOnHover: true,
             arrows: true,
             pagination: true,
-            speed: 800,
+            speed: 1000,
             classes: {
               arrows: "splide__arrows flex justify-between absolute top-1/2 w-full px-4 z-10",
-              arrow: "splide__arrow bg-gray-700/70 hover:bg-gray-900 text-white rounded-full p-2 transition",
-              pagination: "splide__pagination flex justify-center gap-2 mt-4",
-              page: "splide__pagination__page w-3 h-3 rounded-full bg-gray-400 hover:bg-gray-600 transition",
+              arrow: "splide__arrow bg-white/10 hover:bg-white/20 backdrop-blur-md text-white rounded-full p-3 transition",
+              pagination: "splide__pagination flex justify-center gap-2 mt-6",
+              page: "splide__pagination__page w-3 h-3 rounded-full bg-gray-600 hover:bg-white transition",
             },
           }}
         >
-          <SplideSlide>
-            <div className="flex flex-col items-center justify-center min-h-[350px] bg-gradient-to-r from-blue-900 to-blue-700 rounded-xl shadow-lg p-8 text-center">
-              <span className="text-xs text-blue-200 tracking-widest mb-2">QUANTUM FINANCIAL SYSTEM</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">QUANTUM FINANCIAL SYSTEM</h2>
-              <p className="text-gray-200 mb-6">
-                QUANTUM FINANCIAL SYSTEM gives immunity against cyber attacks and bad market fluctuations.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded shadow transition text-center"
-                  href="/login"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  REGISTER NOW
-                </Link>
-                <Link
-                  className="bg-gray-700 hover:bg-gray-800 text-white font-semibold px-6 py-2 rounded shadow transition text-center"
-                  href="/login"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  LOGIN NOW
-                </Link>
+          {[
+            {
+              title: "Quantum Financial System",
+              description:
+                "Quantum Financial System gives immunity against cyber attacks and bad market fluctuations.",
+              gradient: "from-blue-800 via-blue-700 to-indigo-800",
+            },
+            {
+              title: "Next-Gen Asset Security",
+              description:
+                "QFS gives your asset the protection it deserves. Never miss this opportunity.",
+              gradient: "from-purple-900 via-indigo-800 to-violet-800",
+            },
+          ].map((slide, idx) => (
+            <SplideSlide key={idx}>
+              <div
+                className={`flex flex-col items-center justify-center min-h-[420px] rounded-3xl bg-gradient-to-r ${slide.gradient} shadow-xl p-8 text-center text-white relative overflow-hidden`}
+              >
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-white/5 backdrop-blur-[2px] z-0 rounded-3xl"></div>
+
+                <div className="relative z-10 max-w-2xl">
+                  <span className="text-sm tracking-widest uppercase text-blue-200 mb-2 block">
+                    Quantum Financial System
+                  </span>
+                  <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-4 drop-shadow">
+                    {slide.title}
+                  </h1>
+                  <p className="text-gray-200 text-base md:text-lg mb-6 leading-relaxed">
+                    {slide.description}
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Link
+                      href="/register"
+                      className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold px-6 py-3 rounded-full shadow-lg transition text-sm"
+                    >
+                      Register Now
+                    </Link>
+                    <Link
+                      href="/login"
+                      className="border border-white/30 hover:border-white/50 text-white font-medium px-6 py-3 rounded-full backdrop-blur-sm transition text-sm"
+                    >
+                      Login Now
+                    </Link>
+                  </div>
+                </div>
               </div>
-            </div>
-          </SplideSlide>
-          <SplideSlide>
-            <div className="flex flex-col items-center justify-center min-h-[350px] bg-gradient-to-r from-purple-900 to-indigo-700 rounded-xl shadow-lg p-8 text-center">
-              <span className="text-xs text-purple-200 tracking-widest mb-2">QUANTUM FINANCIAL SYSTEM</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">QUANTUM FINANCIAL SYSTEM</h2>
-              <p className="text-gray-200 mb-6">
-                QUANTUM FINANCIAL SYSTEM(QFS) gives your asset the protection it deserves, never miss this opportunity.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded shadow transition text-center"
-                  href="/login"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  REGISTER NOW
-                </Link>
-                <Link
-                  className="bg-gray-700 hover:bg-gray-800 text-white font-semibold px-6 py-2 rounded shadow transition text-center"
-                  href="/login"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  LOGIN NOW
-                </Link>
-              </div>
-            </div>
-          </SplideSlide>
+            </SplideSlide>
+          ))}
         </Splide>
       </div>
     </section>

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowDownCircle, ArrowUpCircle, Plus } from "lucide-react";
 
-export default function AssetSection({userAssets}) {
+export default function AssetSection({ userAssets }) {
   const [assets, setAssets] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -36,9 +36,7 @@ export default function AssetSection({userAssets}) {
     async function fetchAssets() {
       setLoading(true);
       try {
-        const [ priceMap] = await Promise.all([
-          fetchCoinPrices(),
-        ]);
+        const priceMap = await fetchCoinPrices();
 
         const enriched = userAssets.map((asset) => {
           const { price, change } = priceMap[asset.coin] || {};
@@ -56,7 +54,7 @@ export default function AssetSection({userAssets}) {
     }
 
     fetchAssets();
-  }, []);
+  }, [userAssets]);
 
   const SkeletonCard = () => (
     <Card className="bg-black text-white animate-pulse rounded-2xl shadow-lg">
@@ -86,20 +84,25 @@ export default function AssetSection({userAssets}) {
             const coinName = asset.coin;
             const change = asset.change ?? 0;
             const isUp = change >= 0;
-            const logoUrl = `https://cryptologos.cc/logos/${coinSlug[coinName]}-${coinName.toLowerCase()}-logo.png?v=026`;
+            const baseSlug = coinSlug[coinName];
+            const initialIcon = `/cryptocoin/${baseSlug}.png`;
 
             return (
               <Card
                 key={asset._id}
-                className="bg-gradient-to-br from-black to-violet-700 text-white rounded-2xl shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-1"
+                className="bg-gradient-to-br from-black to-blue-900 text-white rounded-2xl shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-1"
               >
                 <CardHeader>
                   <CardTitle className="flex items-center justify-between text-base font-semibold">
                     <div className="flex items-center gap-3">
                       <img
-                        src={logoUrl}
+                        src={initialIcon}
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = `/cryptocoin/${baseSlug}.svg`;
+                        }}
                         alt={coinName}
-                        className="w-8 h-8 rounded-full"
+                        className="w-8 h-8 object-contain rounded-full"
                       />
                       <div className="flex flex-col">
                         <span className="font-medium">{coinName}</span>
@@ -109,9 +112,7 @@ export default function AssetSection({userAssets}) {
                       </div>
                     </div>
                     <div
-                      className={`text-sm ${
-                        isUp ? "text-green-400" : "text-red-400"
-                      }`}
+                      className={`text-sm ${isUp ? "text-green-400" : "text-red-400"}`}
                     >
                       {isUp ? "+" : ""}
                       {change.toFixed(2)}%
@@ -126,23 +127,6 @@ export default function AssetSection({userAssets}) {
                       maximumFractionDigits: 2,
                     })}
                   </p>
-                  <div className="flex gap-2 mt-3">
-                    <Link href={`/dashboard/send/${coinName}`}>
-                      <Button
-                        variant="outline"
-                        className="text-sm flex items-center gap-1 border-blue-400 text-blue-300 hover:bg-blue-800"
-                      >
-                        <ArrowUpCircle size={16} />
-                        Send
-                      </Button>
-                    </Link>
-                    <Link href={`/dashboard/receive/${coinName}`}>
-                      <Button className="text-sm flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white">
-                        <ArrowDownCircle size={16} />
-                        Receive
-                      </Button>
-                    </Link>
-                  </div>
                 </CardContent>
               </Card>
             );

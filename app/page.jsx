@@ -34,18 +34,20 @@ export default function Home() {
         />
       </Head>
 
-      <div className="flex flex-col items-center justify-center bg-white text-gray-900">
+      <div className="w-full overflow-x-hidden bg-white text-gray-900">
         <Header />
-        <AboutSection />
-        <QFSCard />
-        <FlareNetworkSection />
-        <VideoArea />
-        <HowItWorksSection />
-        {/* <FAQSection /> */}
-        {/* <CounterSection /> */}
-        {/* <TouchSection /> */}
-        {/* <TestimonialsSection /> */}
-        {/* <RecentNewsSection /> */}
+        <main className="max-w-[1440px] mx-auto w-full px-4 sm:px-6 md:px-8">
+          <AboutSection />
+          <QFSCard />
+          <FlareNetworkSection />
+          <VideoArea />
+          <HowItWorksSection />
+          {/* <FAQSection /> */}
+          {/* <CounterSection /> */}
+          {/* <TouchSection /> */}
+          {/* <TestimonialsSection /> */}
+          {/* <RecentNewsSection /> */}
+        </main>
         <Footer />
       </div>
     </>

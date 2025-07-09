@@ -76,7 +76,7 @@ const NavHeader = ({ username }) => {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => signOut({ callbackUrl: "/login" })} // 
+            onClick={() => signOut({ callbackUrl: "/login" })} // ✅ logout handler
             className="flex items-center gap-3 w-full cursor-pointer"
           >
             <span className="inline-flex items-center justify-center w-7 h-7 rounded bg-gradient-to-r from-red-400 to-red-600 text-white">

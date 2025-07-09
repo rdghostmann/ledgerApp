@@ -3,6 +3,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowDownToLine, Coins, Send, WalletCards, PiggyBank, Briefcase } from "lucide-react"; // Import the 401k icon
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 
 const actions = [
     { label: "Send", modal: "send", icon: <Send className="text-blue-600 text-lg" /> },
@@ -41,174 +48,118 @@ const modalVariants = {
 };
 
 function SendModal({ onClose }) {
-    return (
-        <motion.div
-            className="fixed inset-0 z-50 flex items-end md:items-center justify-center"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={overlayVariants}
-        >
-            {/* Overlay */}
-            <motion.div
-                className="absolute inset-0 bg-black bg-opacity-40"
-                onClick={onClose}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={overlayVariants}
-            />
-            {/* Modal */}
-            <motion.div
-                className="relative w-full max-w-md bg-white rounded-t-2xl md:rounded-2xl shadow-lg p-6 z-10"
-                variants={modalVariants}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                transition={{ type: "spring", duration: 0.5 }}
-            >
-                <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-bold">Send Funds</h2>
-                    <button onClick={onClose} className="text-red-500 text-2xl font-bold">&times;</button>
-                </div>
-                <form className="space-y-4">
-                    <div>
-                        <label className="block text-xs font-semibold text-blue-700 mb-1">Choose Crypto</label>
-                        <select className="w-full rounded border-gray-300 focus:ring-blue-500 focus:border-blue-500">
-                            {cryptoOptions.map(opt => (
-                                <option key={opt.value} value={opt.value}>{opt.label}</option>
-                            ))}
-                        </select>
-                    </div>
-                    <div>
-                        <label className="block text-xs font-semibold text-blue-700 mb-1">Wallet</label>
-                        <input type="text" className="w-full rounded border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="bc1***********" />
-                        <span className="text-xs text-gray-400">(Crypto wallet)</span>
-                    </div>
-                    <div>
-                        <label className="block text-xs font-semibold text-blue-700 mb-1">Amount</label>
-                        <input type="number" className="w-full rounded border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="150.00" />
-                        <span className="text-xs text-gray-400">(Currency: USD)</span>
-                    </div>
-                    <div className="flex items-center">
-                        <input type="checkbox" id="agree" className="mr-2" />
-                        <label htmlFor="agree" className="text-sm">I accept the Transfer</label>
-                    </div>
-                    <button type="submit" className="w-full bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold py-2 rounded shadow hover:from-green-500 hover:to-green-700 transition">
-                        Send Funds
-                    </button>
-                </form>
-            </motion.div>
-        </motion.div>
-    );
+  return (
+    <motion.div className="fixed inset-0 z-50 flex items-end md:items-center justify-center" initial="hidden" animate="visible" exit="hidden" variants={overlayVariants}>
+      <motion.div className="absolute inset-0 bg-black bg-opacity-40" onClick={onClose} variants={overlayVariants} />
+      <motion.div className="relative w-full max-w-md bg-white rounded-t-2xl md:rounded-2xl shadow-lg p-6 z-10" variants={modalVariants} transition={{ type: "spring", duration: 0.5 }}>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold">Send Funds</h2>
+          <button onClick={onClose} className="text-red-500 text-2xl font-bold">&times;</button>
+        </div>
+        <form className="space-y-4">
+          <div>
+            <label className="block text-xs font-semibold text-blue-700 mb-1">Choose Crypto</label>
+            <Select>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a coin" />
+              </SelectTrigger>
+              <SelectContent>
+                {cryptoOptions.map((opt) => (
+                  <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-blue-700 mb-1">Wallet</label>
+            <input type="text" className="w-full rounded border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="bc1***********" />
+            <span className="text-xs text-gray-400">(Crypto wallet)</span>
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-blue-700 mb-1">Amount</label>
+            <input type="number" className="w-full rounded border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="150.00" />
+            <span className="text-xs text-gray-400">(Currency: USD)</span>
+          </div>
+          <div className="flex items-center">
+            <input type="checkbox" id="agree" className="mr-2" />
+            <label htmlFor="agree" className="text-sm">I accept the Transfer</label>
+          </div>
+          <button type="submit" className="w-full bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold py-2 rounded shadow hover:from-green-500 hover:to-green-700 transition">Send Funds</button>
+        </form>
+      </motion.div>
+    </motion.div>
+  );
 }
 
+
 function ReceiveModal({ onClose }) {
-    return (
-        <motion.div
-            className="fixed inset-0 z-50 flex items-end md:items-center justify-center"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={overlayVariants}
-        >
-            {/* Overlay */}
-            <motion.div
-                className="absolute inset-0 bg-black bg-opacity-40"
-                onClick={onClose}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={overlayVariants}
-            />
-            {/* Modal */}
-            <motion.div
-                className="relative w-full max-w-md bg-white rounded-t-2xl md:rounded-2xl shadow-lg p-6 z-10"
-                variants={modalVariants}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                transition={{ type: "spring", duration: 0.5 }}
-            >
-                <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-bold">Receive Funds</h2>
-                    <button onClick={onClose} className="text-red-500 text-2xl font-bold">&times;</button>
-                </div>
-                <form className="space-y-4">
-                    <div>
-                        <label className="block text-xs font-semibold text-blue-700 mb-1">Choose Crypto</label>
-                        <select className="w-full rounded border-gray-300 focus:ring-blue-500 focus:border-blue-500">
-                            {cryptoOptions.map(opt => (
-                                <option key={opt.value} value={opt.value}>{opt.label}</option>
-                            ))}
-                        </select>
-                    </div>
-                    <div>
-                        <label className="block text-xs font-semibold text-blue-700 mb-1">Amount</label>
-                        <input type="number" className="w-full rounded border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="150.00" />
-                        <span className="text-xs text-gray-400">(Currency: USD)</span>
-                    </div>
-                    <button type="submit" className="w-full bg-gradient-to-r from-red-400 to-red-600 text-white font-semibold py-2 rounded shadow hover:from-red-500 hover:to-red-700 transition">
-                        Receive Funds
-                    </button>
-                </form>
-            </motion.div>
-        </motion.div>
-    );
+  return (
+    <motion.div className="fixed inset-0 z-50 flex items-end md:items-center justify-center" initial="hidden" animate="visible" exit="hidden" variants={overlayVariants}>
+      <motion.div className="absolute inset-0 bg-black bg-opacity-40" onClick={onClose} variants={overlayVariants} />
+      <motion.div className="relative w-full max-w-md bg-white rounded-t-2xl md:rounded-2xl shadow-lg p-6 z-10" variants={modalVariants} transition={{ type: "spring", duration: 0.5 }}>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold">Receive Funds</h2>
+          <button onClick={onClose} className="text-red-500 text-2xl font-bold">&times;</button>
+        </div>
+        <form className="space-y-4">
+          <div>
+            <label className="block text-xs font-semibold text-blue-700 mb-1">Choose Crypto</label>
+            <Select>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a coin" />
+              </SelectTrigger>
+              <SelectContent>
+                {cryptoOptions.map((opt) => (
+                  <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-blue-700 mb-1">Amount</label>
+            <input type="number" className="w-full rounded border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="150.00" />
+            <span className="text-xs text-gray-400">(Currency: USD)</span>
+          </div>
+          <button type="submit" className="w-full bg-gradient-to-r from-red-400 to-red-600 text-white font-semibold py-2 rounded shadow hover:from-red-500 hover:to-red-700 transition">Receive Funds</button>
+        </form>
+      </motion.div>
+    </motion.div>
+  );
 }
 
 function StakeModal({ onClose }) {
-    return (
-        <motion.div
-            className="fixed inset-0 z-50 flex items-end md:items-center justify-center"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={overlayVariants}
-        >
-            {/* Overlay */}
-            <motion.div
-                className="absolute inset-0 bg-black bg-opacity-40"
-                onClick={onClose}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={overlayVariants}
-            />
-            {/* Modal */}
-            <motion.div
-                className="relative w-full max-w-md bg-white rounded-t-2xl md:rounded-2xl shadow-lg p-6 z-10"
-                variants={modalVariants}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                transition={{ type: "spring", duration: 0.5 }}
-            >
-                <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-bold">Stake Coins</h2>
-                    <button onClick={onClose} className="text-red-500 text-2xl font-bold">&times;</button>
-                </div>
-                <form className="space-y-4">
-                    <div>
-                        <label className="block text-xs font-semibold text-blue-700 mb-1">Choose Crypto</label>
-                        <select className="w-full rounded border-gray-300 focus:ring-blue-500 focus:border-blue-500">
-                            {cryptoOptions.map(opt => (
-                                <option key={opt.value} value={opt.value}>{opt.label}</option>
-                            ))}
-                        </select>
-                    </div>
-                    <div>
-                        <label className="block text-xs font-semibold text-blue-700 mb-1">Amount</label>
-                        <input type="number" className="w-full rounded border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="150.00" />
-                        <span className="text-xs text-gray-400">(Currency: USD)</span>
-                    </div>
-                    <button type="submit" className="w-full bg-gradient-to-r from-blue-400 to-blue-600 text-white font-semibold py-2 rounded shadow hover:from-blue-500 hover:to-blue-700 transition">
-                        Stake Coins
-                    </button>
-                </form>
-            </motion.div>
-        </motion.div>
-    );
+  return (
+    <motion.div className="fixed inset-0 z-50 flex items-end md:items-center justify-center" initial="hidden" animate="visible" exit="hidden" variants={overlayVariants}>
+      <motion.div className="absolute inset-0 bg-black bg-opacity-40" onClick={onClose} variants={overlayVariants} />
+      <motion.div className="relative w-full max-w-md bg-white rounded-t-2xl md:rounded-2xl shadow-lg p-6 z-10" variants={modalVariants} transition={{ type: "spring", duration: 0.5 }}>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold">Stake Coins</h2>
+          <button onClick={onClose} className="text-red-500 text-2xl font-bold">&times;</button>
+        </div>
+        <form className="space-y-4">
+          <div>
+            <label className="block text-xs font-semibold text-blue-700 mb-1">Choose Crypto</label>
+            <Select>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a coin" />
+              </SelectTrigger>
+              <SelectContent>
+                {cryptoOptions.map((opt) => (
+                  <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-blue-700 mb-1">Amount</label>
+            <input type="number" className="w-full rounded border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="150.00" />
+            <span className="text-xs text-gray-400">(Currency: USD)</span>
+          </div>
+          <button type="submit" className="w-full bg-gradient-to-r from-blue-400 to-blue-600 text-white font-semibold py-2 rounded shadow hover:from-blue-500 hover:to-blue-700 transition">Stake Coins</button>
+        </form>
+      </motion.div>
+    </motion.div>
+  );
 }
 
 const ActionButtons = () => {
