@@ -34,10 +34,7 @@ export default function LoginPage() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center"
-      style={{
-        background: `radial-gradient(circle at top left, #1e3a8a, #000000)`,
-      }}
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-black"
     >
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <div className="text-center mb-6">

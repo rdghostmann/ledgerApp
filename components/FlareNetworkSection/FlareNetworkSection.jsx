@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Flame, ArrowRight } from "lucide-react";
 
 const videos = [
   {
@@ -9,12 +10,12 @@ const videos = [
     ytTitle: "$10,000 Ripple XRP End Game",
   },
   {
-    title: "New World Reserve Cryptocurrency Incoming! - Powered By Ripple (XRP)",
+    title: "Reserve Crypto Incoming",
     src: "https://www.youtube.com/embed/yLeji6EidI8",
-    ytTitle: "Carney: A new virtual currency could ease reliance on US dollar",
+    ytTitle: "New World Reserve Cryptocurrency Incoming!",
   },
   {
-    title: "Interview with Mark Philips",
+    title: "Mark Philips Interview",
     src: "https://www.youtube.com/embed/juUgJwBwgWk",
     ytTitle: "Ripple XRP   XRP Army News Welcomes Mark Phillips",
   },
@@ -22,58 +23,80 @@ const videos = [
 
 export default function FlareNetworkSection() {
   return (
-    <section className="w-full pt-16 pb-10 bg-white" id="tfn">
-      <div className="container mx-auto px-4">
-        <div className="mb-10 text-center">
-          <h2 className="text-2xl md:text-4xl font-bold text-gray-900">The Flare Network</h2>
-        </div>
-        <div className="flex flex-col sm:flex-row sm:flex-wrap gap-6 sm:gap-8 justify-center items-center">
+    <section
+      id="tfn"
+      className="w-full py-24 bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+            <span className="text-orange-500">Flare Network</span> Integration
+          </h2>
+          <p className="mt-4 max-w-2xl mx-auto text-gray-300 text-lg">
+            Empowering smart contract functionality for assets like BTC, XRP, and more — 
+            Flare unlocks a new era of DeFi possibilities for retirement, wealth, and trustless finance.
+          </p>
+        </motion.div>
+
+        {/* Video Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {videos.map((video, idx) => (
             <motion.div
               key={video.title}
-              className="flex flex-col items-center bg-gray-50 rounded-xl shadow-lg p-4 w-full max-w-xs sm:w-[320px]"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, type: "spring", delay: idx * 0.15 }}
+              className="bg-gray-900 rounded-2xl shadow-lg overflow-hidden border border-gray-800 hover:shadow-xl transition"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: idx * 0.2 }}
               viewport={{ once: true }}
             >
-              <h4 className="text-base md:text-lg font-semibold mb-3 text-center">{video.title}</h4>
-              <div className="w-full aspect-video mb-2">
+              <div className="aspect-video bg-black">
                 <iframe
                   src={video.src}
                   title={video.ytTitle}
                   frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
-                  className="rounded-lg w-full h-full min-h-[180px] max-h-[220px]"
-                  style={{ background: "#000" }}
+                  className="w-full h-full"
                 ></iframe>
+              </div>
+              <div className="p-4">
+                <h3 className="text-lg font-semibold text-white mb-1">
+                  {video.title}
+                </h3>
+                <p className="text-sm text-gray-400">{video.ytTitle}</p>
               </div>
             </motion.div>
           ))}
+
+          {/* CTA Card */}
           <motion.div
-            className="flex flex-col items-center bg-gray-50 rounded-xl shadow-lg p-4 w-full max-w-xs sm:w-[300px]"
-            initial={{ opacity: 0, scale: 0.8 }}
+            className="bg-gradient-to-tr from-orange-500 to-yellow-400 text-black rounded-2xl shadow-xl p-6 flex flex-col justify-between hover:scale-[1.02] transition"
+            initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, type: "spring", delay: videos.length * 0.15 }}
+            transition={{ duration: 0.8, delay: videos.length * 0.2 }}
             viewport={{ once: true }}
           >
+            <div className="flex flex-col items-start">
+              <Flame className="mb-4 w-10 h-10" />
+              <h4 className="text-2xl font-bold mb-2">Explore More on YouTube</h4>
+              <p className="text-sm mb-4">
+                Dive deeper into how the Flare Network and XRP ecosystem are shaping the future of decentralized finance.
+              </p>
+            </div>
             <Link
               href="https://www.youtube.com/channel/UCHACcQVpw_p0n03zZdSt4fg/videos"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center group"
+              className="inline-flex items-center gap-2 font-semibold hover:underline"
             >
-              <h4 className="text-base md:text-lg font-semibold mb-3 text-center">
-                Follow Us on YOUTUBE{" "}
-                <span className="text-orange-500">XRPQFSTeam1</span>
-              </h4>
-              <img
-                src="/assets/channel.png"
-                alt="YouTube Channel"
-                className="rounded-lg w-40 h-40 object-cover border-2 border-orange-400 group-hover:scale-105 transition"
-                loading="lazy"
-              />
+              Visit Channel <ArrowRight size={18} />
             </Link>
           </motion.div>
         </div>

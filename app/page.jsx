@@ -34,22 +34,20 @@ export default function Home() {
         />
       </Head>
 
-      <div className="w-full overflow-x-hidden bg-white text-gray-900">
+      <main className="w-full min-h-screen  text-white overflow-x-hidden">
         <Header />
-        <main className="max-w-[1440px] mx-auto w-full px-4 sm:px-6 md:px-8">
-          <AboutSection />
-          <QFSCard />
-          <FlareNetworkSection />
-          <VideoArea />
-          <HowItWorksSection />
-          {/* <FAQSection /> */}
-          {/* <CounterSection /> */}
-          {/* <TouchSection /> */}
-          {/* <TestimonialsSection /> */}
-          {/* <RecentNewsSection /> */}
-        </main>
+        <QFSCard />
+        <AboutSection />
+        <VideoArea />
+        <FlareNetworkSection />
+        <HowItWorksSection />
+        {/* <FAQSection /> */}
+        {/* <CounterSection /> */}
+        {/* <TouchSection /> */}
+        {/* <TestimonialsSection /> */}
+        {/* <RecentNewsSection /> */}
         <Footer />
-      </div>
+      </main>
     </>
   );
 }

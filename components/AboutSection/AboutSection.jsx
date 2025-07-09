@@ -4,10 +4,16 @@ import { BookOpen, Handshake, Lock } from "lucide-react";
 
 export default function AboutSection() {
   return (
-    <section className="w-full pt-24 pb-20 bg-white text-white" id="about">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="flex flex-col lg:flex-row items-center gap-14">
-          {/* Video Section */}
+    <section
+      id="about"
+      className="relative w-full py-28 bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white overflow-hidden"
+    >
+      {/* Optional radial gradient effect */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#2b2b2b40] via-transparent to-transparent opacity-10 pointer-events-none" />
+
+      <div className="relative w-full px-4 md:px-10 z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-16 w-full">
+          {/* Video Area */}
           <motion.div
             className="w-full lg:w-1/2 flex justify-center"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -16,8 +22,6 @@ export default function AboutSection() {
             viewport={{ once: true }}
           >
             <video
-              width="100%"
-              height="100%"
               poster="https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=032"
               controls
               className="rounded-2xl shadow-2xl border border-gray-700 max-w-2xl w-full"
@@ -35,43 +39,34 @@ export default function AboutSection() {
             transition={{ duration: 1.1, type: "spring" }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight text-white tracking-tight">
-              What is the Quantum Financial System (QFS)?
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight tracking-tight bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+              What is the Quantum Financial System?
             </h2>
             <p className="text-gray-300 mb-8 leading-relaxed text-sm md:text-base text-justify">
-              The Quantum Financial System is a revolutionary shift in global economics, built to replace the corrupt centralized debt system. It provides unparalleled protection against fraud, cyber threats, and market manipulation using advanced AI and extraterrestrial-level technology.
+              The Quantum Financial System is a revolutionary shift in global economics, designed to
+              replace the corrupt centralized debt system. It provides unparalleled protection against
+              fraud, cyber threats, and market manipulation using advanced AI and interdimensional-grade tech.
               <br /><br />
-              This secure, decentralized system is not just a financial upgrade — it’s a safeguard for wealth, retirement, and future financial freedom.
+              This secure, decentralized system is more than a financial upgrade — it's your gateway
+              to preserving wealth, 401k retirement, and financial sovereignty.
             </p>
 
             <div className="space-y-6 mb-10">
-              <div className="flex items-start gap-4">
-                <Lock className="text-blue-500 mt-1" size={28} />
-                <div>
-                  <h4 className="text-lg font-semibold text-white">Military-Grade Security</h4>
-                  <p className="text-gray-400 text-sm">
-                    QFS is resistant to cyberattacks and built for flawless trustless transactions.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <Handshake className="text-purple-500 mt-1" size={28} />
-                <div>
-                  <h4 className="text-lg font-semibold text-white">Transparent & Decentralized</h4>
-                  <p className="text-gray-400 text-sm">
-                    Every transaction is immutable, traceable, and auditable — ensuring fairness for all.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <BookOpen className="text-green-500 mt-1" size={28} />
-                <div>
-                  <h4 className="text-lg font-semibold text-white">Backed by Knowledge</h4>
-                  <p className="text-gray-400 text-sm">
-                    Learn how QFS can reshape your retirement and financial independence.
-                  </p>
-                </div>
-              </div>
+              <Feature
+                icon={<Lock className="text-blue-500" size={28} />}
+                title="Military-Grade Security"
+                description="Built for trustless and tamper-proof transactions, immune to cyber threats."
+              />
+              <Feature
+                icon={<Handshake className="text-purple-500" size={28} />}
+                title="Transparent & Decentralized"
+                description="All transactions are immutable, traceable, and fair across the board."
+              />
+              <Feature
+                icon={<BookOpen className="text-green-500" size={28} />}
+                title="Education-Backed Empowerment"
+                description="Knowledge is wealth — understand how QFS supports retirement growth."
+              />
             </div>
 
             <a
@@ -86,5 +81,17 @@ export default function AboutSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+function Feature({ icon, title, description }) {
+  return (
+    <div className="flex items-start gap-4">
+      <div className="p-2 bg-white/10 rounded-xl">{icon}</div>
+      <div>
+        <h4 className="text-lg font-semibold text-white">{title}</h4>
+        <p className="text-gray-400 text-sm">{description}</p>
+      </div>
+    </div>
   );
 }
