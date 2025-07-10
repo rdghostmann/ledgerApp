@@ -1,13 +1,23 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Users, CreditCard, AlertTriangle, DollarSign, Activity, UserPlus, List, Shield, BarChart3 } from "lucide-react"
+import { motion } from "framer-motion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Users,
+  CreditCard,
+  AlertTriangle,
+  DollarSign,
+  Activity,
+  UserPlus,
+  List,
+  Shield,
+  BarChart3,
+} from "lucide-react";
 import { LogoutButton } from "@/components/Logout-button/logout-button";
-import Link from "next/link"
+import Link from "next/link";
 
 const stats = [
   {
@@ -38,7 +48,7 @@ const stats = [
     icon: AlertTriangle,
     color: "text-orange-600",
   },
-]
+];
 
 const recentActivity = [
   {
@@ -81,7 +91,7 @@ const recentActivity = [
     status: "info",
     avatar: "/placeholder.svg?height=32&width=32",
   },
-]
+];
 
 const kycQueue = [
   {
@@ -111,237 +121,228 @@ const kycQueue = [
     documents: 3,
     avatar: "/placeholder.svg?height=40&width=40",
   },
-]
+];
 
-export default function AdminDashboard({ recentActivity: recentActivityProp, recentCustomers = [] }) {
+export default function AdminDashboard({ recentCustomers = [] }) {
   return (
-    <div className="space-y-6 p-4 md:p-6">
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between"
-      >
-        <div>
-          <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-          <p className="text-muted-foreground">Monitor and manage your banking platform</p>
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white">
+      <div className="absolute inset-0 opacity-5 pointer-events-none z-0" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 relative z-10">
+        {/* Top Navigation */}
+        <div className="w-full px-4 py-4 flex items-center justify-between mb-5">
+          <div>
+            <p className="text-blue-600 text-xs mb-1">Admin Panel</p>
+            <h1 className="text-2xl font-bold">Welcome, Admin!</h1>
+          </div>
           <LogoutButton />
         </div>
-        <div className="flex gap-2">
-          <Link href="/admin/customers/add">
-            <Button>
-              <UserPlus className="w-4 h-4 mr-2" />
-              Add Customer
-            </Button>
-          </Link>
-          <Button variant="outline">
-            <Activity className="w-4 h-4 mr-2" />
-            Generate Report
-          </Button>
+
+        {/* Welcome */}
+        <div className="mb-8 mt-4">
+          <p className="text-gray-400 text-sm mt-1">
+            Manage users, monitor activity, and review KYC for your platform.
+          </p>
         </div>
-      </motion.div>
 
-      {/* Stats Grid */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
-      >
-        {stats.map((stat, index) => (
-          <motion.div
-            key={stat.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 * index }}
-            className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-start"
-          >
-            <div className={`mb-2 ${stat.color}`}>{<stat.icon className="w-6 h-6" />}</div>
-            <div className="text-lg font-semibold">{stat.title}</div>
-            <div className="text-2xl font-bold">{stat.value}</div>
-            <div className={`text-xs mt-1 ${stat.change.startsWith("+") ? "text-green-500" : "text-red-500"}`}>
-              {stat.change}
+        {/* Main Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Left Column (Stats + Actions) */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Stats */}
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {stats.map((stat, index) => (
+                  <div
+                    key={stat.title}
+                    className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-start"
+                  >
+                    <div className={`mb-2 ${stat.color}`}>
+                      <stat.icon className="w-6 h-6" />
+                    </div>
+                    <div className="text-lg font-semibold">{stat.title}</div>
+                    <div className="text-2xl font-bold">{stat.value}</div>
+                    <div
+                      className={`text-xs mt-1 ${
+                        stat.change.startsWith("+")
+                          ? "text-green-500"
+                          : "text-red-500"
+                      }`}
+                    >
+                      {stat.change}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </motion.div>
-        ))}
-      </motion.div>
 
-      {/* Quick Actions */}
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Link href="/admin/customers/add">
-                <Button variant="outline" className="h-20 flex-col gap-2 w-full">
-                  <UserPlus className="w-6 h-6" />
-                  <span className="text-sm">Add Customer</span>
+            {/* Quick Actions */}
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
+              <h2 className="text-lg font-semibold mb-3">Quick Actions</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <Link href="/admin/customers/add">
+                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
+                    <UserPlus className="w-6 h-6" />
+                    <span className="text-sm">Add Customer</span>
+                  </Button>
+                </Link>
+                <Link href="/admin/customers">
+                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
+                    <List className="w-6 h-6" />
+                    <span className="text-sm">Customer List</span>
+                  </Button>
+                </Link>
+                <Link href="/admin/kyc">
+                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
+                    <Shield className="w-6 h-6" />
+                    <span className="text-sm">Review KYC</span>
+                  </Button>
+                </Link>
+                <Button variant="outline" className="h-20 flex-col gap-2">
+                  <BarChart3 className="w-6 h-6" />
+                  <span className="text-sm">Analytics</span>
                 </Button>
-              </Link>
-              <Link href="/admin/customers">
-                <Button variant="outline" className="h-20 flex-col gap-2 w-full">
-                  <List className="w-6 h-6" />
-                  <span className="text-sm">Customer List</span>
-                </Button>
-              </Link>
-              <Link href="/admin/kyc">
-                <Button variant="outline" className="h-20 flex-col gap-2 w-full">
-                  <Shield className="w-6 h-6" />
-                  <span className="text-sm">Review KYC</span>
-                </Button>
-              </Link>
-              <Button variant="outline" className="h-20 flex-col gap-2">
-                <BarChart3 className="w-6 h-6" />
-                <span className="text-sm">Analytics</span>
-              </Button>
+              </div>
             </div>
-          </CardContent>
-        </Card>
-      </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Recent Activity */}
-        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Activity className="w-5 h-5" />
-                Recent Activity
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {recentActivity.map((item) => (
-                <div key={item.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent">
-                  <Avatar>
-                    <AvatarImage src={item.avatar || "/placeholder.svg"} />
-                    <AvatarFallback>
-                      {item.user
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm">{item.user}</p>
-                    <p className="text-xs text-muted-foreground">{item.action}</p>
-                    <p className="text-xs text-muted-foreground">{item.time}</p>
+            {/* Recent Activity */}
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
+              <h2 className="text-lg font-semibold mb-3">Recent Activity</h2>
+              <div className="space-y-4">
+                {recentActivity.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent"
+                  >
+                    <Avatar>
+                      <AvatarImage src={item.avatar || "/placeholder.svg"} />
+                      <AvatarFallback>
+                        {item.user
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-sm">{item.user}</p>
+                      <p className="text-xs text-muted-foreground">{item.action}</p>
+                      <p className="text-xs text-muted-foreground">{item.time}</p>
+                    </div>
+                    <div className="text-right">
+                      <Badge
+                        variant={
+                          item.status === "success"
+                            ? "default"
+                            : item.status === "warning"
+                            ? "secondary"
+                            : item.status === "error"
+                            ? "destructive"
+                            : "outline"
+                        }
+                        className="text-xs capitalize"
+                      >
+                        {item.status}
+                      </Badge>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <Badge variant={
-                      item.status === "success"
-                        ? "default"
-                        : item.status === "warning"
-                        ? "secondary"
-                        : item.status === "error"
-                        ? "destructive"
-                        : "outline"
-                    } className="text-xs capitalize">
-                      {item.status}
-                    </Badge>
-                  </div>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-        </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
 
-        {/* Recent Customers */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Users className="w-5 h-5" />
-                Recent Customers
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {recentCustomers.map((customer) => (
-                <div
-                  key={customer._id}
-                  className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent"
-                >
-                  <Avatar>
-                    <AvatarImage src={customer.avatar || "/placeholder.svg"} />
-                    <AvatarFallback>
-                      {customer.username
-                        ? customer.username
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")
-                        : "U"}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm">{customer.username}</p>
-                    <p className="text-xs text-muted-foreground">{customer.email}</p>
-                    <p className="text-xs text-muted-foreground">Joined {customer.joinDate}</p>
+          {/* Right Column (Recent Customers + KYC Queue) */}
+          <div className="space-y-6">
+            {/* Recent Customers */}
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
+              <h2 className="text-lg font-semibold mb-3">Recent Customers</h2>
+              <div className="space-y-4">
+                {recentCustomers.map((customer) => (
+                  <div
+                    key={customer._id}
+                    className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent"
+                  >
+                    <Avatar>
+                      <AvatarImage src={customer.avatar || "/placeholder.svg"} />
+                      <AvatarFallback>
+                        {customer.username
+                          ? customer.username
+                              .split(" ")
+                              .map((n) => n[0])
+                              .join("")
+                          : "U"}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-sm">{customer.username}</p>
+                      <p className="text-xs text-muted-foreground">{customer.email}</p>
+                      <p className="text-xs text-muted-foreground">
+                        Joined {customer.joinDate}
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <Badge
+                        variant={customer.type === "active" ? "default" : "secondary"}
+                        className="text-xs"
+                      >
+                        {customer.type}
+                      </Badge>
+                      <p className="text-xs font-medium mt-1">{customer.balance}</p>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <Badge variant={customer.type === "active" ? "default" : "secondary"} className="text-xs">
-                      {customer.type}
-                    </Badge>
-                    <p className="text-xs font-medium mt-1">{customer.balance}</p>
-                  </div>
-                </div>
-              ))}
-              <Link href="/admin/customers">
-                <Button variant="ghost" size="sm" className="w-full">
-                  View All Customers
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-        </motion.div>
+                ))}
+                <Link href="/admin/customers">
+                  <Button variant="ghost" size="sm" className="w-full">
+                    View All Customers
+                  </Button>
+                </Link>
+              </div>
+            </div>
 
-        {/* KYC Queue */}
-        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }}>
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5" />
-                KYC Review Queue
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {kycQueue.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent"
-                >
-                  <Avatar className="w-8 h-8">
-                    <AvatarImage src={item.avatar || "/placeholder.svg"} />
-                    <AvatarFallback>
-                      {item.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm">{item.name}</p>
-                    <p className="text-xs text-muted-foreground">{item.email}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {item.documents} docs • {item.submitted}
-                    </p>
+            {/* KYC Queue */}
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
+              <h2 className="text-lg font-semibold mb-3">KYC Review Queue</h2>
+              <div className="space-y-4">
+                {kycQueue.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent"
+                  >
+                    <Avatar className="w-8 h-8">
+                      <AvatarImage src={item.avatar || "/placeholder.svg"} />
+                      <AvatarFallback>
+                        {item.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-sm">{item.name}</p>
+                      <p className="text-xs text-muted-foreground">{item.email}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {item.documents} docs • {item.submitted}
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <Badge
+                        variant={item.status === "pending" ? "secondary" : "outline"}
+                        className="text-xs"
+                      >
+                        {item.status}
+                      </Badge>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <Badge variant={item.status === "pending" ? "secondary" : "outline"} className="text-xs">
-                      {item.status}
-                    </Badge>
-                  </div>
-                </div>
-              ))}
-              <Link href="/admin/kyc">
-                <Button variant="ghost" size="sm" className="w-full">
-                  View All Pending
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-        </motion.div>
+                ))}
+                <Link href="/admin/kyc">
+                  <Button variant="ghost" size="sm" className="w-full">
+                    View All Pending
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  )
+  );
 }
