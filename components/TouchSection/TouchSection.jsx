@@ -1,11 +1,11 @@
 "use client";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import Image from "next/image";
+
 
 export default function TouchSection() {
   return (
     <section className="w-full py-0">
+      <h4 className="text-center text-2xl font-bold mb-6">Contact Us</h4>
       <div className="container mx-auto flex flex-col lg:flex-row items-stretch min-h-screen">
         {/* Left Panel - Form & Background Image */}
         <motion.div
@@ -19,7 +19,7 @@ export default function TouchSection() {
           <motion.img
             src="/assets/contact-banner.png"
             alt="Team Background"
-            className="absolute inset-0 w-full h-full object-cover opacity-10 z-0"
+            className="absolute inset-0 w-full h-full object-cover z-0"
             animate={{ opacity: [0.05, 0.15, 0.05] }}
             transition={{ duration: 3, repeat: Infinity }}
           />

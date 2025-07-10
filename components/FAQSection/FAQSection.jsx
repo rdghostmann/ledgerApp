@@ -46,7 +46,7 @@ export default function FaqSection() {
 
   return (
     <section className="w-full py-16 bg-white">
-      <div className="container mx-auto px-4">
+      <div className="container max-w-4xl mx-auto px-4">
         {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
