@@ -6,12 +6,9 @@ import Image from "next/image";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "About us", href: "/about" },
-  { label: "FAQ", href: "/faq" },
-  { label: "The Flare Network", href: "/flare-network" },
-  { label: "How It Works", href: "/how-it-works" },
-  { label: "Recent News", href: "/news" },
-  { label: "Testimonials", href: "/testimonials" },
+  { label: "About us", href: "/#about" },
+  { label: "Contact us", href: "/#contact" },
+  { label: "Testimonials", href: "/#testimonials" },
 ];
 
 export default function Navbar() {
@@ -22,7 +19,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between text-white">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/logo.svg" alt="Logo" width={32} height={32} />
+          <Image src="/logo.svg" className="hidden" alt="Logo" width={32} height={32} />
           <span className="text-xl font-bold tracking-tight">LedgerApp</span>
         </Link>
 
