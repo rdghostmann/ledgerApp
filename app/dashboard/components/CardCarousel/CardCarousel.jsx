@@ -5,6 +5,7 @@ import { BadgeCheck } from "lucide-react";
 import { connectToDB } from "@/lib/connectDB";
 import User from "@/models/User";
 import UserAsset from "@/models/UserAsset";
+import BalanceDisplay from "./BalanceDisplay";
 
 async function totalUserAssetBalance(userIdOrEmail) {
   await connectToDB();
@@ -57,12 +58,8 @@ export default async function CardCarousel({ userIdOrEmail, walletId = "0xABC123
         </div>
 
         {/* Balance Display */}
-        <div className="my-4 text-center sm:text-left">
-          <p className="text-sm text-blue-200">Total Balance</p>
-          <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-wide">
-            ${formattedBalance}
-          </h3>
-        </div>
+        <BalanceDisplay formattedBalance={formattedBalance} />
+
 
         {/* CTA */}
         <div className="flex justify-center sm:justify-end mt-6">
