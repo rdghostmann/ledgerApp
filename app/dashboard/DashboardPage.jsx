@@ -3,8 +3,14 @@ import CoinGeckoWidget from "./components/CoinGeckoWidget/CoinGeckoWidget";
 import NavHeader from "./components/NavHeader/NavHeader";
 import CardCarousel from "./components/CardCarousel/CardCarousel";
 import AssetSection from "./components/AssestSection/AssetsSection";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/auth";
 
 export default async function DashboardPage() {
+  // Get current user session
+  const session = await getServerSession(authOptions);
+  const userEmail = session?.user?.email;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white">
       <div className="absolute inset-0 opacity-5 pointer-events-none z-0" />
@@ -23,7 +29,8 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
-              <CardCarousel />
+              {/* Pass userEmail as prop */}
+              <CardCarousel userIdOrEmail={userEmail} />
             </div>
 
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
