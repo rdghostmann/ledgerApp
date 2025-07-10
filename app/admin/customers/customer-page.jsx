@@ -144,11 +144,11 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
               Manage and monitor all customer accounts
             </p>
           </div>
-          <div className=" gap-2 text-gray-900">
+          <div className="cursor-pointer gap-2 text-gray-900">
             <Link href="/admin">
               <Button>
                 <ArrowBigLeft className="w-4 h-4 mr-2" />
-                Back
+                Back to AdminDashboard
               </Button>
             </Link>
           </div>
@@ -274,8 +274,8 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                       <th className="p-4 font-medium">Balance</th>
                       <th className="p-4 font-medium">Account Type</th>
                       <th className="p-4 font-medium">Last Login</th>
-                      <th className="p-4 font-medium">Wallets</th>
-                      <th className="p-4 font-medium">Assets</th>
+                      <th className="hidden p-4 font-medium">Wallets</th>
+                      <th className="hidden p-4 font-medium">Assets</th>
                       <th className="p-4 font-medium">Status Switch</th>
                       <th className="p-4 font-medium">Actions</th>
                     </tr>
@@ -344,7 +344,7 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                         <td className="p-4">
                           <p className="text-sm">{customer.lastLogin}</p>
                         </td>
-                        <td className="p-4">
+                        <td className="hidden p-4">
                           <div className="space-y-1 text-xs">
                             {customer.wallets && customer.wallets.length > 0 ? (
                               customer.wallets.map((wallet) => (
@@ -358,7 +358,7 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                             )}
                           </div>
                         </td>
-                        <td className="p-4">
+                        <td className="hidden p-4">
                           <div className="space-y-1 text-xs">
                             {customer.assets && customer.assets.length > 0 ? (
                               customer.assets.map((asset) => (
