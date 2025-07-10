@@ -12,7 +12,7 @@ export default async function DashboardPage() {
   const userEmail = session?.user?.email;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white">
+    <div className="min-h-screen pb-6 bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white">
       <div className="absolute inset-0 opacity-5 pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 relative z-10">
