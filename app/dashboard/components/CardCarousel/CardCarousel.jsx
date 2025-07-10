@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { BadgeCheck } from "lucide-react";
-import totalUserAssetBalance from "@/controllers/totalUserAssetBalance";
+import totalUserAssetBalance from "../../../../controllers/totalUserAssetBalance";
 
 export default async function CardCarousel({ userIdOrEmail, walletId = "0xABC123...DEF456" }) {
   // Get total balance from server action
