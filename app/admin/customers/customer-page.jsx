@@ -285,7 +285,7 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                       <tr key={customer.id} className="border-b border-gray-800 hover:bg-gray-800/50">
                         <td className="p-4">
                           <div className="flex items-center gap-3">
-                            <Avatar className="hidden">
+                            {/* <Avatar className="hidden">
                               <AvatarImage src={customer.avatar || "/placeholder.svg"} />
                               <AvatarFallback>
                                 {(customer.username || "NA")
@@ -293,12 +293,12 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                                   .map((n) => n[0])
                                   .join("")}
                               </AvatarFallback>
-                            </Avatar>
+                            </Avatar> */}
                             <div>
                               <p className="font-medium">{customer.username || "No Name"}</p>
-                              <p className="hidden text-sm text-gray-400">
+                              {/* <p className="hidden text-sm text-gray-400">
                                 ID: {customer.id}
-                              </p>
+                              </p> */}
                             </div>
                           </div>
                         </td>
