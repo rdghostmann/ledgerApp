@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <section className="relative bg-gradient-to-br from-gray-950 via-gray-900 to-black pb-10 overflow-hidden">
+    <section className="relative pb-10 overflow-hidden bg-gradient-to-br from-gray-950 via-gray-900 to-black">
       {/* Navbar */}
       <div className="absolute top-0 left-0 w-full z-50">
         <div className="sticky top-0">
@@ -40,21 +40,24 @@ export default function Header() {
               title: "Quantum Financial System",
               description:
                 "Quantum Financial System gives immunity against cyber attacks and bad market fluctuations.",
-              gradient: "from-blue-800 via-blue-700 to-indigo-800",
+              image: "/quantumhero.jpg", // replace with your image path
             },
             {
               title: "Next-Gen Asset Security",
               description:
                 "QFS gives your asset the protection it deserves. Never miss this opportunity.",
-              gradient: "from-purple-900 via-indigo-800 to-violet-800",
+              image: "/hero2.jpg", // replace with your image path
             },
           ].map((slide, idx) => (
             <SplideSlide key={idx}>
               <div
-                className={`flex flex-col items-center justify-center min-h-[420px] rounded-3xl bg-gradient-to-r ${slide.gradient} shadow-xl p-8 text-center text-white relative overflow-hidden`}
+                className="flex flex-col items-center justify-center min-h-[420px] rounded-3xl shadow-xl p-8 text-center text-white relative overflow-hidden bg-cover bg-center"
+                style={{
+                  backgroundImage: `url(${slide.image})`,
+                }}
               >
-                {/* Glow effect */}
-                <div className="absolute inset-0 bg-white/5 backdrop-blur-[2px] z-0 rounded-3xl"></div>
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/10 z-0 rounded-3xl backdrop-blur-sm"></div>
 
                 <div className="relative z-10 max-w-2xl">
                   <span className="text-sm tracking-widest uppercase text-blue-200 mb-2 block">

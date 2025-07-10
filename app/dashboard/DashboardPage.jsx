@@ -7,8 +7,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
 import User from "@/models/User";
 import { connectToDB } from "@/lib/connectDB";
+import getUserAssets from "@/controllers/getUserAssets";
 
 export default async function DashboardPage() {
+  const totalUsd= await getUserAssets();
+  console.log("Total USD:", totalUsd);
   // Get user session
   const session = await getServerSession(authOptions);
   let username = "User";
@@ -43,7 +46,7 @@ export default async function DashboardPage() {
           {/* Left Column (Cards + Assets) */}
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
-              <CardCarousel />
+              <CardCarousel total={totalUsd} />
             </div>
 
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
