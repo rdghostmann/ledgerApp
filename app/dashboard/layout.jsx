@@ -1,27 +1,25 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import MobileTabs from "./components/MobileTabs/MobileTabs";
+import { Geist, Geist_Mono } from "next/font/google";
+import SessionProviderWrapper from "./SessionProviderWrapper";
+import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata = {
-  title: "Ledger App",
-  description: "ledger app",
+  title: "Dashboard | Ledger App",
+  description: "Secure asset dashboard",
 };
 
-export default function DashboardRootLayout({ children }) {
+export default function DashboardLayout({ children }) {
   return (
-    <>
-      {children}
-      <MobileTabs />
-    </>
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} cz-shortcut-listen="true" >
+        <SessionProviderWrapper>
+          {children}
+          <MobileTabs />
+        </SessionProviderWrapper>
+      </body>
+    </html>
   );
 }

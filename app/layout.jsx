@@ -20,10 +20,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        cz-shortcut-listen="true"
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}  cz-shortcut-listen="true">
         {children}
         <Toaster richColors position="top-center" /> {/* ✅ Sonner Toaster here */}
       </body>

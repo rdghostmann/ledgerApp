@@ -22,23 +22,41 @@ export default function AssetSection() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchAssets() {
+    async function fetchAssetsAndPrices() {
       setLoading(true);
       try {
-        // Fetch from API route, not server action
-        const res = await fetch("/api/user-assets");
-        const result = await res.json();
-        const userAssets = result?.assets || [];
-        setAssets(userAssets);
+        // 1. Fetch user assets from your API route
+        const assetsRes = await fetch("/api/user-assets");
+        const assetsData = await assetsRes.json();
+        const userAssets = assetsData.assets || [];
+
+        // 2. Get all unique coins to fetch prices for
+        const coins = [...new Set(userAssets.map(a => a.coin))];
+        const ids = coins.map(c => coinSlugMap[c]).filter(Boolean).join(",");
+
+        // 3. Fetch live prices from CoinGecko
+        const priceRes = await fetch(
+          `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd`
+        );
+        const priceData = await priceRes.json();
+
+        // 4. Merge price info into assets
+        const enriched = userAssets.map(asset => {
+          const slug = coinSlugMap[asset.coin];
+          const price = priceData[slug]?.usd ?? 0;
+          const usdValue = (asset.amount ?? 0) * price;
+          return { ...asset, price, usdValue };
+        });
+
+        setAssets(enriched);
       } catch (error) {
-        console.error("Error fetching assets:", error.message);
         setAssets([]);
       } finally {
         setLoading(false);
       }
     }
 
-    fetchAssets();
+    fetchAssetsAndPrices();
   }, []);
 
   const SkeletonCard = () => (
@@ -89,9 +107,11 @@ export default function AssetSection() {
                 </div>
               </CardHeader>
               <CardContent className="p-0 mt-2">
+                <p className="text-xs text-blue-300 mb-1">
+                  1 {coin} = ${asset.price?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </p>
                 <p className="text-xl font-bold text-blue-100">
-                  ≈ $
-                  {asset.usdValue?.toLocaleString(undefined, {
+                  ≈ ${asset.usdValue?.toLocaleString(undefined, {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })}

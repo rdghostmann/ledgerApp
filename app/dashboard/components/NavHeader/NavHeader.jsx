@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,9 +10,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Switch } from "@/components/ui/switch";
-import { BarChart2, UserCircle, Power, Sun } from "lucide-react";
-import { signOut } from "next-auth/react"; // ✅ import logout handler
+import { UserCircle, Power } from "lucide-react";
 
 function getOrdinal(n) {
   if (n > 3 && n < 21) return "th";
@@ -22,8 +21,12 @@ function getOrdinal(n) {
     default: return "th";
   }
 }
- 
-const NavHeader = ({ username }) => {
+
+const NavHeader = () => {
+  const { data: session } = useSession();
+  // This will show username if present, else name, else "User"
+  const username = session?.user?.username || session?.user?.name || "User";
+
   const today = new Date();
   const dayNames = [
     "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
@@ -38,7 +41,7 @@ const NavHeader = ({ username }) => {
     <div className="w-full px-4 py-4 flex items-center justify-between mb-5">
       <div>
         <p className="text-blue-600 text-xs mb-1">{formattedDate}</p>
-        <h1 className="text-2xl font-bold">Welcome, {username || "User"}!</h1>
+        <h1 className="text-2xl font-bold">Welcome, {username}!</h1>
       </div>
 
       <DropdownMenu>
@@ -59,14 +62,6 @@ const NavHeader = ({ username }) => {
         </DropdownMenuTrigger>
 
         <DropdownMenuContent align="end" className="w-56 rounded-xl shadow-lg">
-          {/* <DropdownMenuItem asChild>
-            <Link href="/dashboard/transactions" className="flex items-center gap-3 w-full">
-              <span className="inline-flex items-center justify-center w-7 h-7 rounded bg-gradient-to-r from-green-400 to-green-600 text-white">
-                <BarChart2 size={18} />
-              </span>
-              <span className="font-medium text-sm">Activity</span>
-            </Link>
-          </DropdownMenuItem> */}
           <DropdownMenuItem asChild>
             <Link href="/dashboard/#profile" className="flex items-center gap-3 w-full">
               <span className="inline-flex items-center justify-center w-7 h-7 rounded bg-gradient-to-r from-yellow-400 to-yellow-600 text-white">
@@ -75,8 +70,9 @@ const NavHeader = ({ username }) => {
               <span className="font-medium text-sm">Account</span>
             </Link>
           </DropdownMenuItem>
+
           <DropdownMenuItem
-            onClick={() => signOut({ callbackUrl: "/login" })} // ✅ logout handler
+            onClick={() => signOut({ callbackUrl: "/login" })}
             className="flex items-center gap-3 w-full cursor-pointer"
           >
             <span className="inline-flex items-center justify-center w-7 h-7 rounded bg-gradient-to-r from-red-400 to-red-600 text-white">
@@ -84,7 +80,6 @@ const NavHeader = ({ username }) => {
             </span>
             <span className="font-medium text-sm">Log Out</span>
           </DropdownMenuItem>
-          
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
