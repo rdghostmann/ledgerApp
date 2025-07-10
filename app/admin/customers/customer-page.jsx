@@ -28,6 +28,7 @@ import {
   CreditCard,
   Shield,
   Loader2,
+  ArrowBigLeft,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -142,6 +143,14 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
             <p className=" text-gray-400">
               Manage and monitor all customer accounts
             </p>
+          </div>
+          <div className=" gap-2 text-gray-900">
+            <Link href="/admin">
+              <Button>
+                <ArrowBigLeft className="w-4 h-4 mr-2" />
+                Back
+              </Button>
+            </Link>
           </div>
           <div className="hidden gap-2 text-gray-900">
             <Button variant="outline">
@@ -276,7 +285,7 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                       <tr key={customer.id} className="border-b border-gray-800 hover:bg-gray-800/50">
                         <td className="p-4">
                           <div className="flex items-center gap-3">
-                            <Avatar>
+                            <Avatar className="hidden">
                               <AvatarImage src={customer.avatar || "/placeholder.svg"} />
                               <AvatarFallback>
                                 {(customer.username || "NA")
@@ -287,7 +296,7 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                             </Avatar>
                             <div>
                               <p className="font-medium">{customer.username || "No Name"}</p>
-                              <p className="text-sm text-gray-400">
+                              <p className="hidden text-sm text-gray-400">
                                 ID: {customer.id}
                               </p>
                             </div>
