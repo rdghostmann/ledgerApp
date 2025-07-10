@@ -2,33 +2,46 @@
 
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowDownCircle, ArrowUpCircle, Plus } from "lucide-react";
+import { ArrowDownCircle, ArrowUpCircle } from "lucide-react";
+
+// Basic map to get slug by coin name
+const coinSlugMap = {
+  BTC: "bitcoin",
+  ETH: "ethereum",
+  USDT: "tether",
+  BNB: "binancecoin",
+  SOL: "solana",
+  ADA: "cardano",
+  XRP: "ripple",
+  DOGE: "dogecoin",
+  TRX: "tron",
+  DOT: "polkadot",
+  SHIB: "shiba-inu",
+};
+
+const fetchCoinPrices = async () => {
+  const ids = Object.values(coinSlugMap).join(",");
+  const res = await fetch(
+    `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`
+  );
+  const data = await res.json();
+
+  const priceMap = {};
+  for (const [coin, slug] of Object.entries(coinSlugMap)) {
+    const info = data[slug];
+    if (info) {
+      priceMap[coin] = {
+        price: info.usd,
+        change: info.usd_24h_change,
+      };
+    }
+  }
+  return priceMap;
+};
 
 export default function AssetSection({ userAssets }) {
   const [assets, setAssets] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const coinSlug = {
-    BTC: "bitcoin",
-    ETH: "ethereum",
-    USDT: "tether",
-    BNB: "binance-coin",
-    SOL: "solana",
-  };
-
-  const fetchCoinPrices = async () => {
-    const res = await fetch(
-      "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin,solana&vs_currencies=usd&include_24hr_change=true"
-    );
-    const data = await res.json();
-    return {
-      BTC: { price: data.bitcoin.usd, change: data.bitcoin.usd_24h_change },
-      ETH: { price: data.ethereum.usd, change: data.ethereum.usd_24h_change },
-      USDT: { price: data.tether.usd, change: data.tether.usd_24h_change },
-      BNB: { price: data.binancecoin.usd, change: data.binancecoin.usd_24h_change },
-      SOL: { price: data.solana.usd, change: data.solana.usd_24h_change },
-    };
-  };
 
   useEffect(() => {
     async function fetchAssets() {
@@ -36,7 +49,7 @@ export default function AssetSection({ userAssets }) {
       try {
         const priceMap = await fetchCoinPrices();
         const enriched = userAssets.map((asset) => {
-          const { price, change } = priceMap[asset.coin] || {};
+          const { price = 0, change = 0 } = priceMap[asset.coin] || {};
           const usdValue = (asset.amount ?? 0) * price;
           return { ...asset, price, change, usdValue };
         });
@@ -66,10 +79,11 @@ export default function AssetSection({ userAssets }) {
       ) : (
         <>
           {assets.map((asset) => {
-            const coinName = asset.coin;
+            const coin = asset.coin;
+            const network = asset.network || "Mainnet";
             const change = asset.change ?? 0;
             const isUp = change >= 0;
-            const baseSlug = coinSlug[coinName];
+            const baseSlug = coinSlugMap[coin];
             const icon = `/cryptocoin/${baseSlug}.png`;
 
             return (
@@ -80,18 +94,21 @@ export default function AssetSection({ userAssets }) {
                 <CardHeader className="flex items-center justify-between p-0 mb-3">
                   <div className="flex items-center gap-3">
                     <img
-                      src={icon}
-                      alt={coinName}
-                      onError={(e) => {
-                        e.currentTarget.onerror = null;
-                        e.currentTarget.src = `/cryptocoin/${baseSlug}.svg`;
-                      }}
-                      className="w-10 h-10 object-contain rounded-full border border-white/10"
-                    />
+  src={`/cryptocoin/${baseSlug}.svg`}
+  alt={coin}
+  onError={(e) => {
+    e.currentTarget.onerror = null;
+    e.currentTarget.src = `/cryptocoin/${baseSlug}.png`;
+  }}
+  className="w-10 h-10 object-contain rounded-full border border-white/10"
+/>
+
                     <div>
-                      <h4 className="text-sm font-semibold">{coinName}</h4>
+                      <h4 className="text-sm font-semibold">
+                        {coin} <span className="text-[10px] text-blue-300">({network})</span>
+                      </h4>
                       <p className="text-xs text-blue-300">
-                        {asset.amount?.toFixed(4)} {coinName}
+                        {asset.amount?.toFixed(4)} {coin}
                       </p>
                     </div>
                   </div>
@@ -102,7 +119,8 @@ export default function AssetSection({ userAssets }) {
                 </CardHeader>
                 <CardContent className="p-0 mt-2">
                   <p className="text-xl font-bold text-blue-100">
-                    ≈ ${asset.usdValue?.toLocaleString(undefined, {
+                    ≈ $
+                    {asset.usdValue?.toLocaleString(undefined, {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}
@@ -111,8 +129,7 @@ export default function AssetSection({ userAssets }) {
               </Card>
             );
           })}
-
-                  </>
+        </>
       )}
     </div>
   );

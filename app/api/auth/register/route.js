@@ -21,7 +21,6 @@ export async function POST(req) {
       accountType,
     } = await req.json();
 
-    // Validate required fields
     if (!username || !phone || !email || !password || !accountType) {
       return NextResponse.json(
         { message: "All required fields must be filled" },
@@ -29,7 +28,6 @@ export async function POST(req) {
       );
     }
 
-    // Check if user already exists
     const existing = await User.findOne({ email });
     if (existing) {
       return NextResponse.json(
@@ -38,10 +36,8 @@ export async function POST(req) {
       );
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
     const newUser = await User.create({
       userID: Date.now().toString(),
       username,
@@ -57,13 +53,30 @@ export async function POST(req) {
       joinDate: new Date(),
     });
 
-    // Create default user assets (BTC, ETH, USDT)
-    const defaultAssets = ["BTC", "ETH", "USDT", "BNB", "SOL"];
-    const userAssets = defaultAssets.map((coin) => ({
-      userId: newUser._id, // <-- important!
-      coin,
+    // ✅ Expanded asset list with network info
+    const defaultAssets = [
+      { coin: "BTC", network: "Bitcoin" },
+      { coin: "ETH", network: "Ethereum" },
+      { coin: "USDT", network: "Ethereum (ERC20)" },
+      { coin: "USDT", network: "Tron (TRC20)" },
+      { coin: "USDT", network: "Tron (BEP20)" },
+      { coin: "BNB", network: "BNB Smart Chain (BEP20)" },
+      { coin: "SOL", network: "Solana" },
+      { coin: "ADA", network: "Cardano" },
+      { coin: "XRP", network: "Ripple" },
+      { coin: "DOGE", network: "Dogecoin" },
+      { coin: "TRX", network: "Tron" },
+      { coin: "DOT", network: "Polkadot" },
+      { coin: "SHIB", network: "Ethereum" },
+    ];
+
+    const userAssets = defaultAssets.map((asset) => ({
+      userId: newUser._id,
+      coin: asset.coin,
+      network: asset.network,
       amount: 0,
     }));
+
     await UserAsset.insertMany(userAssets);
 
     return NextResponse.json(
@@ -72,7 +85,9 @@ export async function POST(req) {
     );
   } catch (err) {
     console.error("Registration error:", err);
-    // More detailed error message for debugging (remove in production)
-    return NextResponse.json({ message: "Registration failed", error: err.message }, { status: 500 });
+    return NextResponse.json(
+      { message: "Registration failed", error: err.message },
+      { status: 500 }
+    );
   }
 }

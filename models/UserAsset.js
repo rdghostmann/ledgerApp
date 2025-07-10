@@ -8,6 +8,7 @@ const UserAssetSchema = new mongoose.Schema(
       required: true,
     },
     coin: { type: String, required: true },
+    network: { type: String, required: true },
     amount: { type: Number, default: 0 },
   },
   { timestamps: true }
