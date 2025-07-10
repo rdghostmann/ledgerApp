@@ -143,7 +143,7 @@ export default function SecureLedgerOnboarding() {
             {/* Step 1: Account Setup */}
             {step === 1 && (
               <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="username" className="flex items-center gap-2">
                       <User className="h-4 w-4" />
@@ -239,7 +239,7 @@ export default function SecureLedgerOnboarding() {
             {/* Step 2: Personal Info */}
             {step === 2 && (
               <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name</Label>
                     <Input
@@ -331,7 +331,7 @@ export default function SecureLedgerOnboarding() {
             {/* Step 3: Security */}
             {step === 3 && (
               <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="password" className="flex items-center gap-2">
                       <Lock className="h-4 w-4" />
@@ -425,7 +425,7 @@ export default function SecureLedgerOnboarding() {
         </Card>
 
         {/* Footer */}
-        <div className="text-center mt-8">
+        <div className="text-xs text-center mt-8">
           <p className="text-blue-200 mb-2">
             Already have an account?{" "}
             <a href="/login" className="text-white hover:underline font-medium">
