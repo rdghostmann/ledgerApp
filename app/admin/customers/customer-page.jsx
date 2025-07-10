@@ -143,7 +143,7 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
               Manage and monitor all customer accounts
             </p>
           </div>
-          <div className="flex gap-2 text-gray-900">
+          <div className="hidden gap-2 text-gray-900">
             <Button variant="outline">
               <Download className="w-4 h-4 mr-2" />
               Export
@@ -162,7 +162,8 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-4 gap-4"
+          // className="grid grid-cols-1 md:grid-cols-4 gap-4"
+          className="hidden"
         >
           {stats.map((stat) => (
             <Card key={stat.label} className="bg-gray-900 border-gray-800">
@@ -190,7 +191,7 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
               className="pl-10 bg-gray-800 border-gray-700 text-white"
             />
           </div>
-          <div className="flex gap-2 text-gray-900">
+          <div className="hidden gap-2 text-gray-900">
             {/* Status filter */}
             <DropdownMenu className="">
               <DropdownMenuTrigger asChild>
