@@ -24,7 +24,7 @@ export default function Header() {
             autoplay: true,
             interval: 6000,
             pauseOnHover: true,
-            arrows: true,
+            arrows: false,
             pagination: true,
             speed: 1000,
             classes: {
@@ -40,13 +40,13 @@ export default function Header() {
               title: "Quantum Financial System",
               description:
                 "Quantum Financial System gives immunity against cyber attacks and bad market fluctuations.",
-              image: "/quantumhero.jpg", // replace with your image path
+              image: "/trump1.jpg", // replace with your image path
             },
             {
               title: "Next-Gen Asset Security",
               description:
                 "QFS gives your asset the protection it deserves. Never miss this opportunity.",
-              image: "/hero2.jpg", // replace with your image path
+              image: "/trump2.jpg", // replace with your image path
             },
           ].map((slide, idx) => (
             <SplideSlide key={idx}>
