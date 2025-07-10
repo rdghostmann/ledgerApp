@@ -15,7 +15,8 @@ export default function Header() {
       </div>
 
       {/* Content */}
-      <div className="pt-24 px-4 md:px-8 max-w-7xl mx-auto">
+      {/* <div className="pt-24 px-4 md:px-8 max-w-7xl mx-auto"> */}
+      <div className="w-full">
         <Splide
           aria-label="Quantum Financial System"
           options={{
