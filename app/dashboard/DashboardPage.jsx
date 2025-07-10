@@ -20,24 +20,24 @@ export default async function DashboardPage() {
           </p>
         </div>
 
-
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
-              <CardCarousel total={totalUsd} />
+              <CardCarousel  />
             </div>
 
-        <div className="bg-white/5 backdrop-blur-md border border-white/10 my-3 p-5 rounded-2xl shadow-lg">
-          <h2 className="text-lg font-semibold mb-3">Quick Actions</h2>
-          <ActionButtons />
-        </div>
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
-              <h2 className="text-lg font-semibold mb-3">My Assets</h2>
+              <h2 className="text-lg font-semibold mb-3">Your Assets</h2>
               <AssetSection />
             </div>
           </div>
 
-          <div className="space-y-6 pb-6">
+          <div className="space-y-6">
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
+              <h2 className="text-lg font-semibold mb-3">Quick Actions</h2>
+              <ActionButtons />
+            </div>
+
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
               <h2 className="text-lg font-semibold mb-3">Market Overview</h2>
               <CoinGeckoWidget />

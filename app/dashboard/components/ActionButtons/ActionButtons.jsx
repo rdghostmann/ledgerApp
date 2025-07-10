@@ -22,7 +22,7 @@ const actions = [
   { label: "Send", modal: "send", icon: <Send size={20} /> },
   { label: "Receive", modal: "receive", icon: <ArrowDownToLine size={20} /> },
   { label: "Buy", modal: null, icon: <WalletCards size={20} /> },
-  { label: "Savings", modal: null, icon: <Briefcase size={20} /> },
+  { label: "401k", modal: null, icon: <Briefcase size={20} /> },
   { label: "Stake", modal: "stake", icon: <Coins size={20} /> },
 ];
 
