@@ -1,30 +1,10 @@
+"use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { FaUserPlus, FaWallet, FaRobot } from "react-icons/fa";
-
-const steps = [
-  {
-    icon: FaUserPlus,
-    title: "Create Your Account",
-    desc: "Get started with a free account — your gateway to protected digital finance.",
-  },
-  {
-    icon: FaWallet,
-    title: "Link Your Wallet",
-    desc: "Securely connect your wallet to store, track, and protect your assets 24/7.",
-  },
-  {
-    icon: FaRobot,
-    title: "Access QFS Loans",
-    desc: "Unlock AI-analyzed mortgage and loan solutions tailored to your digital profile.",
-  },
-];
-
-const bounceTransition = {
-  type: "spring",
-  stiffness: 500,
-  damping: 20,
-};
+// Import relevant icons from react-icons
+import { FaUserPlus } from "react-icons/fa";
+import { FaWallet } from "react-icons/fa";
+import { FaRobot } from "react-icons/fa";
 
 export default function HowItWorksSection() {
   return (
@@ -50,25 +30,33 @@ export default function HowItWorksSection() {
             </p>
 
             <div className="space-y-6 mb-10">
-              {steps.map((step, idx) => (
-                <div className="flex items-start gap-4" key={step.title}>
-                  <motion.div
-                    whileHover={{ rotateY: 180 }}
-                    initial={{ y: 40, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{
-                      ...bounceTransition,
-                      delay: idx * 0.3,
-                    }}
-                  >
-                    <step.icon className="text-blue-600 mt-1" size={24} />
-                  </motion.div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900">{step.title}</h4>
-                    <p className="text-gray-600 text-sm">{step.desc}</p>
-                  </div>
+              <div className="flex items-start gap-4">
+                <FaUserPlus className="text-blue-600 mt-1" size={24} />
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900">Create Your Account</h4>
+                  <p className="text-gray-600 text-sm">
+                    Get started with a free account — your gateway to protected digital finance.
+                  </p>
                 </div>
-              ))}
+              </div>
+              <div className="flex items-start gap-4">
+                <FaWallet className="text-blue-600 mt-1" size={24} />
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900">Link Your Wallet</h4>
+                  <p className="text-gray-600 text-sm">
+                    Securely connect your wallet to store, track, and protect your assets 24/7.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <FaRobot className="text-blue-600 mt-1" size={24} />
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900">Access QFS Loans</h4>
+                  <p className="text-gray-600 text-sm">
+                    Unlock AI-analyzed mortgage and loan solutions tailored to your digital profile.
+                  </p>
+                </div>
+              </div>
             </div>
 
             <Link
