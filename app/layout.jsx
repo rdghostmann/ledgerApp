@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}  cz-shortcut-listen="true">
         {children}
         <Toaster richColors position="top-center" /> {/* ✅ Sonner Toaster here */}
-                <Tawk />
+              <Tawk />
 
       </body>
     </html>

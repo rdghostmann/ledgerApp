@@ -1,8 +1,53 @@
+import { useState } from "react";
 import NavHeader from "../components/NavHeader/NavHeader";
+import { toast, Toaster } from "sonner";
+
+// Example coins, replace with user's actual assets from backend
+const coins = [
+  { value: "btc", label: "Bitcoin" },
+  { value: "eth", label: "Ethereum" },
+  { value: "usdt", label: "USDT" },
+  { value: "bnb", label: "BNB" },
+  { value: "sol", label: "Solana" },
+  { value: "ada", label: "Cardano" },
+  { value: "xrp", label: "Ripple" },
+  { value: "doge", label: "Dogecoin" },
+  { value: "trx", label: "TRX" },
+  { value: "dot", label: "Polkadot" },
+  { value: "shib", label: "SHIB" },
+];
 
 export default function FourZeroOnePage() {
+  const [contribution, setContribution] = useState("");
+  const [selectedCoin, setSelectedCoin] = useState(coins[0].value);
+  const [loading, setLoading] = useState(false);
+
+  async function handleContribution(e) {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch("/api/401kContribution", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: Number(contribution), coin: selectedCoin }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success("Contribution successful!");
+        setContribution("");
+      } else {
+        toast.error(data.error || "Contribution failed");
+      }
+    } catch {
+      toast.error("Network error");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white px-4 pb-12">
+      <Toaster richColors position="top-center" />
       <NavHeader />
 
       <div className="max-w-5xl mx-auto mt-8 bg-slate-900 border border-slate-800 rounded-2xl shadow-lg p-6">
@@ -11,6 +56,38 @@ export default function FourZeroOnePage() {
           Your 401(k) is a retirement savings plan sponsored by your employer. It lets you save and invest a portion of
           your paycheck before taxes are taken out. Taxes aren't paid until the money is withdrawn from the account.
         </p>
+
+        {/* Contribution Form */}
+        <form onSubmit={handleContribution} className="mb-8 flex gap-2 items-center flex-wrap">
+          <select
+            value={selectedCoin}
+            onChange={e => setSelectedCoin(e.target.value)}
+            className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
+            disabled={loading}
+          >
+            {coins.map(coin => (
+              <option key={coin.value} value={coin.value}>{coin.label}</option>
+            ))}
+          </select>
+          <input
+            type="number"
+            min="0.0001"
+            step="any"
+            value={contribution}
+            onChange={e => setContribution(e.target.value)}
+            placeholder="Amount"
+            className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white w-32"
+            required
+            disabled={loading}
+          />
+          <button
+            type="submit"
+            className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-5 py-2 rounded-lg shadow hover:from-blue-500 hover:to-blue-700 transition"
+            disabled={loading}
+          >
+            {loading ? "Processing..." : "Contribute"}
+          </button>
+        </form>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Account Summary */}
