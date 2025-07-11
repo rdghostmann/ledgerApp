@@ -26,7 +26,7 @@ export default function Header() {
       >
         <div className="w-full h-full">
           <Splide
-            aria-label="Quantum Financial System"
+            aria-label="Quantum Financial Systems"
             options={{
               type: "fade",
               rewind: true,
