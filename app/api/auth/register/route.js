@@ -70,8 +70,9 @@ export async function POST(req) {
       { coin: "SHIB", network: "Ethereum" },
     ];
 
+    // FIX: Use 'user' not 'userId' for UserAsset model
     const userAssets = defaultAssets.map((asset) => ({
-      userId: newUser._id,
+      user: newUser._id, // <-- FIXED FIELD NAME
       coin: asset.coin,
       network: asset.network,
       amount: 0,

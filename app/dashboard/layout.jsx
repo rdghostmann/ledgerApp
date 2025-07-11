@@ -13,13 +13,11 @@ export const metadata = {
 
 export default function DashboardLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} cz-shortcut-listen="true" >
-        <SessionProviderWrapper>
-          {children}
-          <MobileTabs />
-        </SessionProviderWrapper>
-      </body>
-    </html>
+    <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} cz-shortcut-listen="true">
+      <SessionProviderWrapper>
+        {children}
+        <MobileTabs />
+      </SessionProviderWrapper>
+    </body>
   );
 }

@@ -61,7 +61,7 @@ export default function Header() {
             ].map((slide, idx) => (
               <SplideSlide key={idx}>
                 <div
-                  className="flex flex-col items-center justify-center min-h-full shadow-xl p-8 text-center text-white relative overflow-hidden bg-cover bg-center h-full w-full"
+                  className="flex flex-col items-center justify-center shadow-xl p-8 text-center text-white relative overflow-hidden bg-cover bg-center h-full w-full"
                   style={{
                     backgroundImage: `url(${slide.image})`,
                     backgroundSize: "cover",

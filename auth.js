@@ -25,7 +25,7 @@ export const authOptions = {
 
         const isValid = await bcrypt.compare(password, user.password);
         if (!isValid) throw new Error("Invalid credentials");
-        console.log("✅ Fetched user from DB:", user);
+        // console.log("✅ Fetched user from DB:", user);
 
 
         return {
