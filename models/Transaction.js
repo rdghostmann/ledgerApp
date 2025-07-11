@@ -10,8 +10,9 @@ const transactionSchema = new mongoose.Schema({
   toNetwork: String,   // added for swap
   toAmount: Number,    // amount received in toCoin (for swap)
   txHash: String, // blockchain reference
-  status: { type: String, enum: ['pending', 'confirmed', 'failed'], default: 'pending' },
+  status: { type: String, enum: ['pending', 'confirmed', 'failed'], default: 'confirmed' },
   createdAt: { type: Date, default: Date.now }
 });
+
 
 export default mongoose.models.Transaction || mongoose.model('Transaction', transactionSchema);
