@@ -51,31 +51,31 @@ const CardPage = ({ firstName = "", lastName = "", email = "", phone = "" }) => 
           <h2 className="text-xl font-bold">Deposit</h2>
           <Link
             href="/dashboard/buy"
-            className="p-1 rounded bg-gradient-to-r from-blue-600 to-violet-600 text-white"
+            className="animate-bounce p-1 rounded bg-gradient-to-r from-blue-600 to-violet-600 text-white"
           >
             Buy coin
           </Link>
         </div>
 
-      {/* Select Deposit Asset */}
-<div className="flex items-center justify-between bg-white rounded-lg shadow p-4 mb-6">
-  <span className="font-medium text-black">Select Deposit Asset</span>
-  <div className="flex items-center gap-2">
-    <Select value={selectedCoin} onValueChange={setSelectedCoin}>
-      <SelectTrigger className=" bg-blue-600 text-white rounded text-xs font-bold border-none flex items-center justify-between">
-        <SelectValue placeholder="Select coin" />
-        <ArrowDown className=" text-white" />
-      </SelectTrigger>
-      <SelectContent>
-        {coinOptions.map((coin) => (
-          <SelectItem key={coin.value} value={coin.value}>
-            {coin.label}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-  </div>
-</div>
+        {/* Select Deposit Asset */}
+        <div className="flex items-center justify-between bg-white rounded-lg shadow p-4 mb-6">
+          <span className="font-medium text-black">Select Deposit Asset</span>
+          <div className="flex items-center gap-2">
+            <Select value={selectedCoin} onValueChange={setSelectedCoin}>
+              <SelectTrigger className=" bg-blue-600 text-white rounded text-xs font-bold border-none flex items-center justify-between">
+                <SelectValue placeholder="Select coin" />
+                <ArrowDown className=" text-white" />
+              </SelectTrigger>
+              <SelectContent>
+                {coinOptions.map((coin) => (
+                  <SelectItem key={coin.value} value={coin.value}>
+                    {coin.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
 
         {/* Card */}
         <div className="w-full flex justify-center mb-6">
