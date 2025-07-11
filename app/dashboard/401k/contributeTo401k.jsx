@@ -118,16 +118,16 @@ export default function FourZeroOnePage({ contributeTo401k }) {
               </form>
             </DialogContent>
           </Dialog>
-          <Button className="bg-gradient-to-r from-green-600 to-green-800 text-white px-5 py-2 rounded-lg shadow hover:from-green-500 hover:to-green-700 transition">
+          <Button className="hidden bg-gradient-to-r from-green-600 to-green-800 text-white px-5 py-2 rounded-lg shadow hover:from-green-500 hover:to-green-700 transition">
             Adjust Investments
           </Button>
-          <Button className="bg-slate-700 text-slate-300 px-5 py-2 rounded-lg hover:bg-slate-600 transition">
+          <Button className="hidden bg-slate-700 text-slate-300 px-5 py-2 rounded-lg hover:bg-slate-600 transition">
             View Statements
           </Button>
         </div>
 
         {/* Investment Allocation */}
-        <div className="mt-10">
+        <div className="hidden my-10">
           <h2 className="text-lg font-semibold text-blue-300 mb-3">Investment Allocation</h2>
           <div className="w-full bg-slate-700 rounded overflow-hidden h-6 flex">
             <div className="bg-blue-500 h-6" style={{ width: "50%" }} title="US Stocks" />
@@ -144,7 +144,7 @@ export default function FourZeroOnePage({ contributeTo401k }) {
         </div>
 
         {/* Account Summary Table */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="my-5 grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-slate-800 rounded-xl p-5 shadow-sm border border-slate-700">
             <h2 className="text-lg font-semibold text-blue-300 mb-3">Statistics Summary</h2>
             <Table>
