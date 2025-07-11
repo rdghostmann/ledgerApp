@@ -82,13 +82,18 @@ const CardPage = ({ firstName = "", lastName = "", email = "", phone = "" }) => 
       {/* Info */}
       <div className="flex items-center gap-3 mb-4">
         <img
-          src="https://img.icons8.com/?size=96&id=5tH5sHqq0t2q&format=png"
+          src="/caution.png"
           width={40}
           alt="Warning"
         />
-        <p className="text-red-600 text-sm">
-          Fund your Card via a crypto transfer to start using the full suite of services. You need a minimum of $10,000.
+       <div>
+         <p className="text-red-600 text-sm">
+          Fund your Card via a crypto transfer to start using the full suite of services. 
         </p>
+        <p className="text-red-600 text-sm">
+          You need a minimum of $10,000.
+        </p>
+       </div>
       </div>
 
       {/* Deposit Address */}
