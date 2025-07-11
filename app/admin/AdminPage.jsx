@@ -176,33 +176,44 @@ export default function AdminDashboard({ recentCustomers = [] }) {
             </div>
 
             {/* Quick Actions */}
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
-              <h2 className="text-lg font-semibold mb-3">Quick Actions</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <Link href="/admin/customers/add">
-                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
-                    <UserPlus className="w-6 h-6" />
-                    <span className="text-sm">Add Customer</span>
-                  </Button>
-                </Link>
-                <Link href="/admin/customers">
-                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
-                    <List className="w-6 h-6" />
-                    <span className="text-sm">Customer List</span>
-                  </Button>
-                </Link>
-                <Link href="/admin/kyc">
-                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
-                    <Shield className="w-6 h-6" />
-                    <span className="text-sm">Review KYC</span>
-                  </Button>
-                </Link>
-                <Button variant="outline" className="h-20 flex-col gap-2">
-                  <BarChart3 className="w-6 h-6" />
-                  <span className="text-sm">Analytics</span>
-                </Button>
-              </div>
-            </div>
+            {/* Quick Actions */}
+<div className="bg-white/5 border border-white/10 rounded-2xl p-5 shadow-lg backdrop-blur-md">
+  <h2 className="text-lg font-semibold mb-3 text-white">Quick Actions</h2>
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    {/* Show/hide with boolean flags */}
+    {false && (
+      <Link href="/admin/customers/add">
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center flex flex-col items-center justify-center hover:bg-white/10 transition text-white cursor-pointer">
+          <UserPlus className="w-6 h-6 mb-2" />
+          <span className="text-sm font-medium">Add Customer</span>
+        </div>
+      </Link>
+    )}
+    {true && (
+      <Link href="/admin/customers">
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center flex flex-col items-center justify-center hover:bg-white/10 transition text-white cursor-pointer">
+          <List className="w-6 h-6 mb-2" />
+          <span className="text-sm font-medium">Customer List</span>
+        </div>
+      </Link>
+    )}
+    {false && (
+      <Link href="/admin/kyc">
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center flex flex-col items-center justify-center hover:bg-white/10 transition text-white cursor-pointer">
+          <Shield className="w-6 h-6 mb-2" />
+          <span className="text-sm font-medium">Review KYC</span>
+        </div>
+      </Link>
+    )}
+    {false && (
+      <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center flex flex-col items-center justify-center hover:bg-white/10 transition text-white cursor-pointer">
+        <BarChart3 className="w-6 h-6 mb-2" />
+        <span className="text-sm font-medium">Analytics</span>
+      </div>
+    )}
+  </div>
+</div>
+
 
 
 
