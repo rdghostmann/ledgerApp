@@ -10,4 +10,5 @@ const kycSchema = new mongoose.Schema({
   reviewedAt: { type: Date }
 });
 
-export default mongoose.models.KYC || mongoose.model('KYC', kycSchema);
+const Kyc = mongoose.models.Kyc || mongoose.model('Kyc', kycSchema);
+export default Kyc;

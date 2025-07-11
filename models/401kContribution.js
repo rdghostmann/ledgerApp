@@ -9,5 +9,5 @@ const contributionSchema = new mongoose.Schema({
   status: { type: String, enum: ["pending", "confirmed", "failed"], default: "confirmed" },
 });
 
-// ✅ Ensure consistent model name
-export default mongoose.models["401kContribution"] || mongoose.model("401kContribution", contributionSchema);
+const Contribution = mongoose.models.Contribution || mongoose.model("Contribution", contributionSchema);
+export default Contribution;

@@ -14,5 +14,5 @@ const UserAssetSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-
-export default mongoose.models.UserAsset || mongoose.model("UserAsset", UserAssetSchema);
+const UserAsset = mongoose.models.UserAsset || mongoose.model("UserAsset", UserAssetSchema);
+export default UserAsset;
