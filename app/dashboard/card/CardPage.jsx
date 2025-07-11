@@ -149,6 +149,7 @@ const CardPage = ({ firstName = "", lastName = "", email = "", phone = "" }) => 
                 placeholder="$1000"
                 className="text-green-600"
                 required
+                disabled
               />
             </div>
 
@@ -160,6 +161,7 @@ const CardPage = ({ firstName = "", lastName = "", email = "", phone = "" }) => 
                 name="fieldFormName"
                 value={fullName}
                 required
+                disabled
                 readOnly
               />
             </div>
@@ -170,6 +172,7 @@ const CardPage = ({ firstName = "", lastName = "", email = "", phone = "" }) => 
                 name="fieldFormEmail"
                 value={email}
                 required
+                disabled
                 readOnly
               />
             </div>
@@ -180,6 +183,7 @@ const CardPage = ({ firstName = "", lastName = "", email = "", phone = "" }) => 
                 name="fieldFormPhone"
                 value={phone}
                 required
+                disabled
                 readOnly
               />
             </div>
