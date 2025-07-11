@@ -28,6 +28,7 @@ import {
   CreditCard,
   Shield,
   Loader2,
+  ArrowBigLeft,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -143,7 +144,15 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
               Manage and monitor all customer accounts
             </p>
           </div>
-          <div className="flex gap-2 text-gray-900">
+          <div className="cursor-pointer gap-2 text-gray-900">
+            <Link href="/admin">
+              <Button>
+                <ArrowBigLeft className="w-4 h-4 mr-2" />
+                Back to AdminDashboard
+              </Button>
+            </Link>
+          </div>
+          <div className="hidden gap-2 text-gray-900">
             <Button variant="outline">
               <Download className="w-4 h-4 mr-2" />
               Export
@@ -162,7 +171,8 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-4 gap-4"
+          // className="grid grid-cols-1 md:grid-cols-4 gap-4"
+          className="hidden"
         >
           {stats.map((stat) => (
             <Card key={stat.label} className="bg-gray-900 border-gray-800">
@@ -190,7 +200,7 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
               className="pl-10 bg-gray-800 border-gray-700 text-white"
             />
           </div>
-          <div className="flex gap-2 text-gray-900">
+          <div className="hidden gap-2 text-gray-900">
             {/* Status filter */}
             <DropdownMenu className="">
               <DropdownMenuTrigger asChild>
@@ -264,8 +274,8 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                       <th className="p-4 font-medium">Balance</th>
                       <th className="p-4 font-medium">Account Type</th>
                       <th className="p-4 font-medium">Last Login</th>
-                      <th className="p-4 font-medium">Wallets</th>
-                      <th className="p-4 font-medium">Assets</th>
+                      <th className="hidden p-4 font-medium">Wallets</th>
+                      <th className="hidden p-4 font-medium">Assets</th>
                       <th className="p-4 font-medium">Status Switch</th>
                       <th className="p-4 font-medium">Actions</th>
                     </tr>
@@ -275,7 +285,7 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                       <tr key={customer.id} className="border-b border-gray-800 hover:bg-gray-800/50">
                         <td className="p-4">
                           <div className="flex items-center gap-3">
-                            <Avatar>
+                            {/* <Avatar className="hidden">
                               <AvatarImage src={customer.avatar || "/placeholder.svg"} />
                               <AvatarFallback>
                                 {(customer.username || "NA")
@@ -283,12 +293,12 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                                   .map((n) => n[0])
                                   .join("")}
                               </AvatarFallback>
-                            </Avatar>
+                            </Avatar> */}
                             <div>
                               <p className="font-medium">{customer.username || "No Name"}</p>
-                              <p className="text-sm text-gray-400">
+                              {/* <p className="hidden text-sm text-gray-400">
                                 ID: {customer.id}
-                              </p>
+                              </p> */}
                             </div>
                           </div>
                         </td>
@@ -334,7 +344,7 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                         <td className="p-4">
                           <p className="text-sm">{customer.lastLogin}</p>
                         </td>
-                        <td className="p-4">
+                        <td className="hidden p-4">
                           <div className="space-y-1 text-xs">
                             {customer.wallets && customer.wallets.length > 0 ? (
                               customer.wallets.map((wallet) => (
@@ -348,7 +358,7 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                             )}
                           </div>
                         </td>
-                        <td className="p-4">
+                        <td className="hidden p-4">
                           <div className="space-y-1 text-xs">
                             {customer.assets && customer.assets.length > 0 ? (
                               customer.assets.map((asset) => (

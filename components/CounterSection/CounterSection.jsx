@@ -2,27 +2,28 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import Image from "next/image";
+// Lucide icons
+import { ShieldCheck, Users, Award, UserPlus } from "lucide-react";
 
-// Counter data
+// Counter data with lucide icons
 const counters = [
   {
-    icon: "/assets/img/counter-shape3.png",
+    icon: <ShieldCheck size={48} className="text-indigo-600 mb-4" />,
     value: 869895,
     label: "Secured Assets",
   },
   {
-    icon: "/assets/img/counter-shape4.png",
+    icon: <Users size={48} className="text-blue-600 mb-4" />,
     value: 87762,
     label: "Satisfied Users",
   },
   {
-    icon: "/assets/img/counter-shape3.png",
+    icon: <Award size={48} className="text-yellow-500 mb-4" />,
     value: 170294,
     label: "Global Awards",
   },
   {
-    icon: "/assets/img/counter-shape4.png",
+    icon: <UserPlus size={48} className="text-green-600 mb-4" />,
     value: 887616,
     label: "Registered Users",
   },
@@ -67,14 +68,9 @@ export default function CounterSection() {
 
   return (
     <section ref={ref} className="w-full py-24 relative overflow-hidden">
-      {/* ✅ ONE decorative shape centered behind content */}
+      {/* Decorative shape centered behind content */}
       <div className="absolute inset-0 flex justify-center items-center pointer-events-none z-0 opacity-20">
-        <Image
-          src="/assets/counter-shape4.png"
-          alt="Decorative Background"
-          width={700}
-          height={200}
-        />
+        {/* You can keep or remove this background image as needed */}
       </div>
 
       {/* Content container */}
@@ -90,17 +86,11 @@ export default function CounterSection() {
                 animate={controls}
                 transition={{ duration: 0.8, delay: idx * 0.2 }}
               >
-                <Image
-                  src={counter.icon}
-                  alt={counter.label}
-                  width={48}
-                  height={48}
-                  className="mb-4"
-                />
+                {counter.icon}
                 <h3 className="text-2xl font-extrabold text-indigo-700 mb-1 select-none">
                   {count}
                 </h3>
-                <p className="text-sm  text-gray-600 font-medium text-center">{counter.label}</p>
+                <p className="text-sm text-gray-600 font-medium text-center">{counter.label}</p>
               </motion.div>
             );
           })}

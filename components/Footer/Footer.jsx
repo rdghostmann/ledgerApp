@@ -16,8 +16,22 @@ export default function Footer() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, ease: "easeOut" }}
         >
-          {/* Brand Info */}
+          {/* QFS LEDGER */}
+          {/* <div>
+            <h3 className="text-xl font-bold mb-4 text-white">QFS LEDGER</h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              The QUANTUM FINANCIAL SYSTEM – QFS has no comparison to anything that has ever been introduced to the world before. It has no peer; it has no equivalent in advanced technology of any other system before it.
+              It is brand new. It reigns supreme in the technology it applies, in order to accomplish the one hundred percent financial security and transparency all currency account holders require.
+            </p>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              With the QFS, the monetary system of the world can easily be changed to encompass gold-backed currencies that completely eliminate the use of the old Cabal central banking system.
+              Regrettably, to fully comprehend the advanced QFS-structure, there doesn’t exist an equivalent technology to serve as an example.
+            </p>
+          </div> */}
           <div>
+            <h3 className="text-xl font-bold mb-4 text-white">QFS LEDGER</h3>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              The Quantum Financial System (QFS) delivers unmatched security and transparency for all currency holders. With advanced technology and gold-backed currencies, QFS sets a new standard in global finance.
             <h3 className="text-xl font-bold mb-4 text-gray-900">QFS Ledger</h3>
             <p className="text-gray-600 text-sm leading-relaxed">
               The Quantum Financial System is designed for a new era of currency — gold-backed,
