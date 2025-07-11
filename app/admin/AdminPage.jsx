@@ -214,8 +214,6 @@ export default function AdminDashboard({ recentCustomers = [] }) {
             </div>
 
 
-
-
             {/* Recent Activity */}
             <div className="hidden bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
               <h2 className="text-lg font-semibold mb-3">Recent Activity</h2>
