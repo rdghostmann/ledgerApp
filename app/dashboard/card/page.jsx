@@ -10,14 +10,18 @@ export default async function Page() {
 
   let firstName = "";
   let lastName = "";
+  let email = "";
+  let phone = "";
 
   if (session?.user?.email) {
     const user = await User.findOne({ email: session.user.email });
     if (user) {
       firstName = user.firstName || "";
       lastName = user.lastName || "";
+      email = user.email || "";
+      phone = user.phone || "";
     }
   }
 
-  return <CardPage firstName={firstName} lastName={lastName} />;
+  return <CardPage firstName={firstName} lastName={lastName} email={email} phone={phone} />;
 }

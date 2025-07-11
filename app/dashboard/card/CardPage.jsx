@@ -9,7 +9,7 @@ import Link from "next/link";
 
 const depositAddress = "GBG5K7D5A2Q5WBNEZMFZISKXQJLZGDMECI3YEMVQCRSVTH6U6H5537HW";
 
-const CardPage = ({ firstName = "", lastName = "" }) => {
+const CardPage = ({ firstName = "", lastName = "", email = "", phone = "" }) => {
   const [copied, setCopied] = useState(false);
 
   const fullName = `${firstName} ${lastName}`.trim() || "Mike";
@@ -120,7 +120,7 @@ const CardPage = ({ firstName = "", lastName = "" }) => {
       {/* Pre-order Form */}
       <Card className="mt-6">
         <CardHeader>
-          <CardTitle>Pre-Order QFS Card</CardTitle>
+          <CardTitle>Make Deposit</CardTitle>
         </CardHeader>
         <CardContent>
           <form
@@ -139,7 +139,7 @@ const CardPage = ({ firstName = "", lastName = "" }) => {
             <input type="hidden" name="add_deposit" value="1" required />
 
             <div>
-              <Label htmlFor="amount" className="font-semibold">
+              <Label htmlFor="amount" className="hidden font-semibold">
                 XLM Amount
               </Label>
               <Input
@@ -152,13 +152,15 @@ const CardPage = ({ firstName = "", lastName = "" }) => {
               />
             </div>
 
-            <h3 className="text-blue-700 font-bold mt-4">Shipping Details</h3>
+            <h3 className="hidden text-blue-700 font-bold mt-4">Shipping Details</h3>
             <div>
               <Input
                 type="text"
                 placeholder="Full Name"
                 name="fieldFormName"
+                value={fullName}
                 required
+                readOnly
               />
             </div>
             <div>
@@ -166,7 +168,9 @@ const CardPage = ({ firstName = "", lastName = "" }) => {
                 type="email"
                 placeholder="Email"
                 name="fieldFormEmail"
+                value={email}
                 required
+                readOnly
               />
             </div>
             <div>
@@ -174,15 +178,9 @@ const CardPage = ({ firstName = "", lastName = "" }) => {
                 type="text"
                 placeholder="Phone Number"
                 name="fieldFormPhone"
+                value={phone}
                 required
-              />
-            </div>
-            <div>
-              <Input
-                type="text"
-                placeholder="Full Address"
-                name="fieldFormAddress"
-                required
+                readOnly
               />
             </div>
             <div>
@@ -214,7 +212,7 @@ const CardPage = ({ firstName = "", lastName = "" }) => {
               type="submit"
               className="w-full bg-gradient-to-r from-blue-600 to-violet-600 text-white font-semibold py-2 rounded-lg shadow hover:from-blue-700 hover:to-violet-700 transition"
             >
-              Pre-Order
+              I have paid
             </Button>
           </form>
         </CardContent>
