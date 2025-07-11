@@ -151,7 +151,7 @@ export default function AdminDashboard({ recentCustomers = [] }) {
           <div className="lg:col-span-2 space-y-6">
             {/* Stats */}
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {stats.map((stat, index) => (
                   <div
                     key={stat.title}
@@ -179,28 +179,28 @@ export default function AdminDashboard({ recentCustomers = [] }) {
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
               <h2 className="text-lg font-semibold mb-3">Quick Actions</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {/* <Link href="/admin/customers/add">
-                  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-white/10 transition">
-                    <UserPlus className="w-6 h-6 text-blue-500" />
-                    <span className="text-sm font-medium">Add Customer</span>
-                  </div>
-                </Link> */}
+                <Link href="/admin/customers/add">
+                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
+                    <UserPlus className="w-6 h-6" />
+                    <span className="text-sm">Add Customer</span>
+                  </Button>
+                </Link>
                 <Link href="/admin/customers">
-                  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-white/10 transition">
-                    <List className="w-6 h-6 text-purple-500" />
-                    <span className="text-sm font-medium">Customer List</span>
-                  </div>
+                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
+                    <List className="w-6 h-6" />
+                    <span className="text-sm">Customer List</span>
+                  </Button>
                 </Link>
                 <Link href="/admin/kyc">
-                  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-white/10 transition">
-                    <Shield className="w-6 h-6 text-yellow-500" />
-                    <span className="text-sm font-medium">Review KYC</span>
-                  </div>
+                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
+                    <Shield className="w-6 h-6" />
+                    <span className="text-sm">Review KYC</span>
+                  </Button>
                 </Link>
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-white/10 transition">
-                  <BarChart3 className="w-6 h-6 text-teal-500" />
-                  <span className="text-sm font-medium">Analytics</span>
-                </div>
+                <Button variant="outline" className="h-20 flex-col gap-2">
+                  <BarChart3 className="w-6 h-6" />
+                  <span className="text-sm">Analytics</span>
+                </Button>
               </div>
             </div>
 

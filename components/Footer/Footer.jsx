@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full pt-24 pb-16 bg-black text-gray-200">
+    <footer className="w-full pt-24 pb-16 bg-gradient-to-br from-gray-950 via-gray-900 to-black text-gray-200">
       <div className="container mx-auto px-4">
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10"
