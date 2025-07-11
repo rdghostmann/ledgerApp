@@ -1,6 +1,34 @@
 import Link from "next/link";
 import { BadgeCheck } from "lucide-react";
-import totalUserAssetBalance from "@/controllers/totalUserAssetBalance";
+
+// Server Action: Calculate total user asset balance and update user balance
+import { connectToDB } from "@/lib/connectDB";
+import User from "@/models/User";
+import UserAsset from "@/models/UserAsset";
+import BalanceDisplay from "./BalanceDisplay";
+
+async function totalUserAssetBalance(userIdOrEmail) {
+  await connectToDB();
+
+  // Find user by _id or email
+  let user;
+  if (typeof userIdOrEmail === "string" && userIdOrEmail.includes("@")) {
+    user = await User.findOne({ email: userIdOrEmail });
+  } else {
+    user = await User.findById(userIdOrEmail);
+  }
+  if (!user) return 0;
+
+  // Get all assets for user
+  const assets = await UserAsset.find({ userId: user._id });
+  const total = assets.reduce((sum, asset) => sum + (asset.amount || 0), 0);
+
+  // Optionally update the user's balance field
+  user.balance = total;
+  await user.save();
+
+  return total;
+}
 
 export default async function CardCarousel({ userIdOrEmail, walletId = "0xABC123...DEF456" }) {
   // Get total balance from server action
@@ -30,12 +58,8 @@ export default async function CardCarousel({ userIdOrEmail, walletId = "0xABC123
         </div>
 
         {/* Balance Display */}
-        <div className="my-4 text-center sm:text-left">
-          <p className="text-sm text-blue-200">Total Balance</p>
-          <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-wide">
-            ${formattedBalance}
-          </h3>
-        </div>
+        <BalanceDisplay formattedBalance={formattedBalance} />
+
 
         {/* CTA */}
         <div className="flex justify-center sm:justify-end mt-6">
