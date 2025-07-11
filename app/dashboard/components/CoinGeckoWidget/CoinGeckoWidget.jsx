@@ -24,7 +24,7 @@ const CoinGeckoWidget = () => {
 
   return (
     <div className="bg-white rounded-lg shadow p-1">
-      <h2 className="text-lg font-semibold mb-4">Live Crypto Prices</h2>
+      <h2 className="text-lg text-gray-500 font-semibold mb-4">Live Crypto Prices</h2>
       {loading ? (
         <div>
           <table className="w-full">
