@@ -1,5 +1,6 @@
 "use client";
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { Flame, ArrowRight } from "lucide-react";
 
@@ -22,8 +23,12 @@ const videos = [
 ];
 
 export default function FlareNetworkSection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -120px 0px" });
+
   return (
     <section
+      ref={ref}
       id="tfn"
       className="w-full py-24 bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white"
     >
@@ -32,9 +37,8 @@ export default function FlareNetworkSection() {
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1 }}
-          viewport={{ once: true }}
         >
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
             <span className="text-orange-500">Flare Network</span> Integration
@@ -46,15 +50,19 @@ export default function FlareNetworkSection() {
         </motion.div>
 
         {/* Video Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 1.1, delay: 0.2 }}
+        >
           {videos.map((video, idx) => (
             <motion.div
               key={video.title}
               className="bg-gray-900 rounded-2xl shadow-lg overflow-hidden border border-gray-800 hover:shadow-xl transition"
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: idx * 0.2 }}
-              viewport={{ once: true }}
             >
               <div className="aspect-video bg-black">
                 <iframe
@@ -79,9 +87,8 @@ export default function FlareNetworkSection() {
           <motion.div
             className="bg-gradient-to-tr from-orange-500 to-yellow-400 text-black rounded-2xl shadow-xl p-6 flex flex-col justify-between hover:scale-[1.02] transition"
             initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: videos.length * 0.2 }}
-            viewport={{ once: true }}
           >
             <div className="flex flex-col items-start">
               <Flame className="mb-4 w-10 h-10" />
@@ -99,7 +106,7 @@ export default function FlareNetworkSection() {
               Visit Channel <ArrowRight size={18} />
             </Link>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

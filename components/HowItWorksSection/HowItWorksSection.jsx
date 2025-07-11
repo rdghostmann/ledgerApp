@@ -1,14 +1,15 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { FaCheckCircle } from "react-icons/fa";
+import { UserPlus, Link2, Landmark } from "lucide-react"; // Lucide icons
+import Image from "next/image";
 
 export default function HowItWorksSection() {
   return (
     <section className="w-full pt-24 pb-20 bg-gray-50" id="hiw">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-16">
-          {/* Content */}
+          {/* Text Content */}
           <motion.div
             className="w-full lg:w-1/2"
             initial={{ opacity: 0, x: -60 }}
@@ -16,40 +17,58 @@ export default function HowItWorksSection() {
             transition={{ duration: 1.1, type: "spring" }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
               How It Works
             </h2>
-            <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-8 text-justify">
-              The Quantum Financial System (QFS) operates with cutting-edge quantum computing and real-time digital monitoring. Designed to replace the corrupt debt-based banking structure, QFS ensures transparency, accountability, and military-grade asset protection.
-              <br /><br />
-              By integrating your digital wallet, the QFS can trace and secure every transaction — blocking fraud attempts and enabling instant trustless payments. With every transfer recorded immutably, the era of stolen funds and financial manipulation comes to an end.
+
+            <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-8">
+              The Quantum Financial System (QFS) merges quantum tech with digital finance to
+              revolutionize trust, speed, and safety. Built to dismantle legacy corruption, it ensures
+              real-time verification, asset protection, and total transparency.
             </p>
 
             <div className="space-y-6 mb-10">
+              {/* Step 1 */}
               <div className="flex items-start gap-4">
-                <FaCheckCircle className="text-blue-600 mt-1" size={20} />
+                <div className="bg-blue-100 text-blue-600 p-3 rounded-full">
+                  <UserPlus className="w-5 h-5" />
+                </div>
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900">Create Your Account</h4>
-                  <p className="text-gray-600 text-sm">
-                    Get started with a free account — your gateway to protected digital finance.
+                  <h4 className="text-lg font-semibold text-gray-900">
+                    Create Your Account
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    Begin with a secure profile – your personal key to the quantum-powered economy.
                   </p>
                 </div>
               </div>
+
+              {/* Step 2 */}
               <div className="flex items-start gap-4">
-                <FaCheckCircle className="text-blue-600 mt-1" size={20} />
+                <div className="bg-green-100 text-green-600 p-3 rounded-full">
+                  <Link2 className="w-5 h-5" />
+                </div>
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900">Link Your Wallet</h4>
-                  <p className="text-gray-600 text-sm">
-                    Securely connect your wallet to store, track, and protect your assets 24/7.
+                  <h4 className="text-lg font-semibold text-gray-900">
+                    Link Your Wallet
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    Integrate your crypto wallet for 24/7 digital monitoring and instant authentication.
                   </p>
                 </div>
               </div>
+
+              {/* Step 3 */}
               <div className="flex items-start gap-4">
-                <FaCheckCircle className="text-blue-600 mt-1" size={20} />
+                <div className="bg-yellow-100 text-yellow-600 p-3 rounded-full">
+                  <Landmark className="w-5 h-5" />
+                </div>
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900">Access QFS Loans</h4>
-                  <p className="text-gray-600 text-sm">
-                    Unlock AI-analyzed mortgage and loan solutions tailored to your digital profile.
+                  <h4 className="text-lg font-semibold text-gray-900">
+                    Access QFS Loans
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    Receive optimized lending decisions with real-time AI-based risk analysis.
                   </p>
                 </div>
               </div>
@@ -57,9 +76,7 @@ export default function HowItWorksSection() {
 
             <Link
               href="/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center bg-blue-700 hover:bg-blue-800 text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 shadow-lg"
+              className="inline-block bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white px-8 py-3 rounded-xl font-semibold shadow-md transition duration-300"
             >
               Learn More
             </Link>
@@ -73,12 +90,16 @@ export default function HowItWorksSection() {
             transition={{ duration: 1.1, type: "spring" }}
             viewport={{ once: true }}
           >
-            <div className="w-full max-w-xs sm:max-w-md lg:max-w-lg">
-              <img
+            <div className="w-full max-w-xs sm:max-w-md lg:max-w-lg relative aspect-[3/2]">
+              <Image
                 src="/xrp-banner.png"
                 alt="How It Works"
-                className="rounded-2xl shadow-2xl border border-gray-200"
-                loading="lazy"
+                className="rounded-3xl shadow-xl border border-gray-200 object-cover"
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
+                placeholder="blur"
+                blurDataURL="/xrp-banner.png"
+                priority
               />
             </div>
           </motion.div>

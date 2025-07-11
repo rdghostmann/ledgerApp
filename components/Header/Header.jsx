@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <section className="relative pb-10 overflow-hidden bg-gradient-to-br from-gray-950 via-gray-900 to-black">
+    <section className="relative pb-10 overflow-hidden bg-gradient-to-br from-gray-950 via-gray-900 to-black h-50">
       {/* Navbar */}
       <div className="absolute top-0 left-0 w-full z-50">
         <div className="sticky top-0">

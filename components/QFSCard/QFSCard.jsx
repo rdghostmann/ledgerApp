@@ -1,21 +1,23 @@
 "use client";
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function QFSCard() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -120px 0px" });
+
   return (
-    <section className="w-full pt-24 pb-20 bg-white">
+    <section className="w-full pt-24 pb-20 bg-white" id="about" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-14">
           {/* Content Section */}
           <motion.div
             className="w-full lg:w-1/2"
             initial={{ opacity: 0, x: 80 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 1.2, type: "spring" }}
-            viewport={{ once: true }}
-            id="about"
           >
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6 leading-tight">
               Get Your QFS Card & Shop in Over 118 Countries
@@ -68,9 +70,8 @@ export default function QFSCard() {
           <motion.div
             className="w-full lg:w-1/2 flex justify-center"
             initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 1.2, type: "spring" }}
-            viewport={{ once: true }}
           >
             <Image
               src="/assets/QFSCard.png"
