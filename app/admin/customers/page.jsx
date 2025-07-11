@@ -1,4 +1,5 @@
 // app/admin/customers/page.jsx
+
 import CustomersPage from "./customer-page";
 
 import { getAllcustomer } from "@/controllers/getAllcustomer";

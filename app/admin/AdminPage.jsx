@@ -176,45 +176,42 @@ export default function AdminDashboard({ recentCustomers = [] }) {
             </div>
 
             {/* Quick Actions */}
-            {/* Quick Actions */}
-<div className="bg-white/5 border border-white/10 rounded-2xl p-5 shadow-lg backdrop-blur-md">
-  <h2 className="text-lg font-semibold mb-3 text-white">Quick Actions</h2>
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-    {/* Show/hide with boolean flags */}
-    {false && (
-      <Link href="/admin/customers/add">
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center flex flex-col items-center justify-center hover:bg-white/10 transition text-white cursor-pointer">
-          <UserPlus className="w-6 h-6 mb-2" />
-          <span className="text-sm font-medium">Add Customer</span>
-        </div>
-      </Link>
-    )}
-    {true && (
-      <Link href="/admin/customers">
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center flex flex-col items-center justify-center hover:bg-white/10 transition text-white cursor-pointer">
-          <List className="w-6 h-6 mb-2" />
-          <span className="text-sm font-medium">Customer List</span>
-        </div>
-      </Link>
-    )}
-    {false && (
-      <Link href="/admin/kyc">
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center flex flex-col items-center justify-center hover:bg-white/10 transition text-white cursor-pointer">
-          <Shield className="w-6 h-6 mb-2" />
-          <span className="text-sm font-medium">Review KYC</span>
-        </div>
-      </Link>
-    )}
-    {false && (
-      <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center flex flex-col items-center justify-center hover:bg-white/10 transition text-white cursor-pointer">
-        <BarChart3 className="w-6 h-6 mb-2" />
-        <span className="text-sm font-medium">Analytics</span>
-      </div>
-    )}
-  </div>
-</div>
-
-
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-5 shadow-lg backdrop-blur-md">
+              <h2 className="text-lg font-semibold mb-3 text-white">Quick Actions</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {/* Show/hide with boolean flags */}
+                {false && (
+                  <Link href="/admin/customers/add">
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center flex flex-col items-center justify-center hover:bg-white/10 transition text-white cursor-pointer">
+                      <UserPlus className="w-6 h-6 mb-2" />
+                      <span className="text-sm font-medium">Add Customer</span>
+                    </div>
+                  </Link>
+                )}
+                {true && (
+                  <Link href="/admin/customers">
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center flex flex-col items-center justify-center hover:bg-white/10 transition text-white cursor-pointer">
+                      <List className="w-6 h-6 mb-2" />
+                      <span className="text-sm font-medium">Customer List</span>
+                    </div>
+                  </Link>
+                )}
+                {false && (
+                  <Link href="/admin/kyc">
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center flex flex-col items-center justify-center hover:bg-white/10 transition text-white cursor-pointer">
+                      <Shield className="w-6 h-6 mb-2" />
+                      <span className="text-sm font-medium">Review KYC</span>
+                    </div>
+                  </Link>
+                )}
+                {false && (
+                  <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center flex flex-col items-center justify-center hover:bg-white/10 transition text-white cursor-pointer">
+                    <BarChart3 className="w-6 h-6 mb-2" />
+                    <span className="text-sm font-medium">Analytics</span>
+                  </div>
+                )}
+              </div>
+            </div>
 
 
             {/* Recent Activity */}
