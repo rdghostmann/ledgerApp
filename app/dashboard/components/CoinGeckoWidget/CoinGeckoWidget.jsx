@@ -23,8 +23,8 @@ const CoinGeckoWidget = () => {
   }, []);
 
   return (
-    <div className="bg-white rounded-lg shadow p-4">
-      <h2 className="text-lg font-semibold mb-4">Live Crypto Prices</h2>
+    <div className="bg-white rounded-lg shadow p-1">
+      <h2 className="text-lg text-gray-500 font-semibold mb-4">Live Crypto Prices</h2>
       {loading ? (
         <div>
           <table className="w-full">
@@ -52,7 +52,7 @@ const CoinGeckoWidget = () => {
             initial-currency="usd"
             style={{ width: '100%' }}
           ></gecko-coin-list-widget>
-          <div className="text-xs text-gray-400 mt-2">
+          <div className="hidden text-xs text-gray-400 mt-2">
             Powered by <a href="https://www.coingecko.com/" target="_blank" rel="noopener noreferrer" className="underline">CoinGecko</a>
           </div>
         </>

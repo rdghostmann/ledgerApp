@@ -148,7 +148,7 @@ export default function AdminDashboard({ recentCustomers = [] }) {
         {/* Main Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left Column (Stats + Actions) */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="hidden lg:col-span-2 space-y-6">
             {/* Stats */}
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
               <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">

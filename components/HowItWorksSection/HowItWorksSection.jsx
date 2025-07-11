@@ -1,7 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { FaCheckCircle } from "react-icons/fa";
+// Import relevant icons from react-icons
+import { FaUserPlus } from "react-icons/fa";
+import { FaWallet } from "react-icons/fa";
+import { FaRobot } from "react-icons/fa";
 
 export default function HowItWorksSection() {
   return (
@@ -21,13 +24,14 @@ export default function HowItWorksSection() {
             </h2>
             <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-8 text-justify">
               The Quantum Financial System (QFS) operates with cutting-edge quantum computing and real-time digital monitoring. Designed to replace the corrupt debt-based banking structure, QFS ensures transparency, accountability, and military-grade asset protection.
-              <br /><br />
+            </p>
+            <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-8 text-justify">
               By integrating your digital wallet, the QFS can trace and secure every transaction — blocking fraud attempts and enabling instant trustless payments. With every transfer recorded immutably, the era of stolen funds and financial manipulation comes to an end.
             </p>
 
             <div className="space-y-6 mb-10">
               <div className="flex items-start gap-4">
-                <FaCheckCircle className="text-blue-600 mt-1" size={20} />
+                <FaUserPlus className="text-blue-600 mt-1" size={24} />
                 <div>
                   <h4 className="text-lg font-semibold text-gray-900">Create Your Account</h4>
                   <p className="text-gray-600 text-sm">
@@ -36,7 +40,7 @@ export default function HowItWorksSection() {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <FaCheckCircle className="text-blue-600 mt-1" size={20} />
+                <FaWallet className="text-blue-600 mt-1" size={24} />
                 <div>
                   <h4 className="text-lg font-semibold text-gray-900">Link Your Wallet</h4>
                   <p className="text-gray-600 text-sm">
@@ -45,7 +49,7 @@ export default function HowItWorksSection() {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <FaCheckCircle className="text-blue-600 mt-1" size={20} />
+                <FaRobot className="text-blue-600 mt-1" size={24} />
                 <div>
                   <h4 className="text-lg font-semibold text-gray-900">Access QFS Loans</h4>
                   <p className="text-gray-600 text-sm">
@@ -56,7 +60,7 @@ export default function HowItWorksSection() {
             </div>
 
             <Link
-              href="/"
+              href="#"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center bg-blue-700 hover:bg-blue-800 text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 shadow-lg"

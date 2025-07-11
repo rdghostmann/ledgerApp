@@ -1,14 +1,39 @@
-"use client";
-
-import React from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { BadgeCheck } from "lucide-react";
 
-export default function CardCarousel({
-  totalUsd = 0,
-  walletId = "0xABC123...DEF456",
-}) {
+// Server Action: Calculate total user asset balance and update user balance
+import { connectToDB } from "@/lib/connectDB";
+import User from "@/models/User";
+import UserAsset from "@/models/UserAsset";
+import BalanceDisplay from "./BalanceDisplay";
+
+async function totalUserAssetBalance(userIdOrEmail) {
+  await connectToDB();
+
+  // Find user by _id or email
+  let user;
+  if (typeof userIdOrEmail === "string" && userIdOrEmail.includes("@")) {
+    user = await User.findOne({ email: userIdOrEmail });
+  } else {
+    user = await User.findById(userIdOrEmail);
+  }
+  if (!user) return 0;
+
+  // Get all assets for user
+  const assets = await UserAsset.find({ userId: user._id });
+  const total = assets.reduce((sum, asset) => sum + (asset.amount || 0), 0);
+
+  // Optionally update the user's balance field
+  user.balance = total;
+  await user.save();
+
+  return total;
+}
+
+export default async function CardCarousel({ userIdOrEmail, walletId = "0xABC123...DEF456" }) {
+  // Get total balance from server action
+  const totalUsd = await totalUserAssetBalance(userIdOrEmail);
+
   const formattedBalance = Number(totalUsd).toLocaleString(undefined, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -18,13 +43,7 @@ export default function CardCarousel({
 
   return (
     <div className="w-full max-w-2xl mx-auto px-4 mb-8">
-      <motion.div
-        className="bg-gradient-to-br from-blue-800 via-violet-800 to-indigo-900 text-white rounded-2xl shadow-2xl p-5 sm:p-6 relative overflow-hidden border border-blue-600"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, type: "spring" }}
-        viewport={{ once: true }}
-      >
+      <div className="bg-gradient-to-br from-blue-800 via-violet-800 to-indigo-900 text-white rounded-2xl shadow-2xl p-5 sm:p-6 relative overflow-hidden border border-blue-600">
         {/* Verified Badge */}
         <div className="cursor-pointer absolute top-3 right-3 flex items-center gap-1 text-[11px] sm:text-sm bg-green-600 px-2.5 py-1 rounded-full shadow-sm">
           <BadgeCheck size={14} className="text-white" />
@@ -39,12 +58,8 @@ export default function CardCarousel({
         </div>
 
         {/* Balance Display */}
-        <div className="my-4 text-center sm:text-left">
-          <p className="text-sm text-blue-200">Total Balance</p>
-          <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-wide">
-            ${formattedBalance}
-          </h3>
-        </div>
+        <BalanceDisplay formattedBalance={formattedBalance} />
+
 
         {/* CTA */}
         <div className="flex justify-center sm:justify-end mt-6">
@@ -55,7 +70,7 @@ export default function CardCarousel({
             View Transactions
           </Link>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
