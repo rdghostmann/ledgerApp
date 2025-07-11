@@ -6,10 +6,8 @@ export default function Page() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white px-4 pb-16">
       <NavHeader />
-
       <div className="mt-8 max-w-3xl mx-auto">
         <h1 className="text-2xl font-bold text-center mb-6">Buy & Deposit Crypto</h1>
-
         <div className="grid grid-cols-2 sm:grid-cols-2 gap-6">
           {/* Ramp */}
           <Link
