@@ -3,6 +3,11 @@
 import { useState, useTransition } from "react";
 import NavHeader from "../components/NavHeader/NavHeader";
 import { toast, Toaster } from "sonner";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
 
 const coins = [
   { value: "btc", label: "Bitcoin" },
@@ -53,58 +58,106 @@ export default function FourZeroOnePage({ contributeTo401k }) {
         </p>
 
         {/* Contribution Form */}
-        <form onSubmit={handleContribution} className="mb-8 flex gap-2 items-center flex-wrap">
-          <select
-            value={selectedCoin}
-            onChange={e => setSelectedCoin(e.target.value)}
-            className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white"
-            disabled={pending}
-          >
-            {coins.map(coin => (
-              <option key={coin.value} value={coin.value}>{coin.label}</option>
-            ))}
-          </select>
-          <input
-            type="number"
-            min="0.0001"
-            step="any"
-            value={contribution}
-            onChange={e => setContribution(e.target.value)}
-            placeholder="Amount"
-            className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white w-32"
-            required
-            disabled={pending}
-          />
-          <button
+        <form onSubmit={handleContribution} className="mb-8 flex gap-4 items-end flex-wrap">
+          <div>
+            <Label htmlFor="coin" className="text-blue-300 mb-1 block">Select Coin</Label>
+            <Select value={selectedCoin} onValueChange={setSelectedCoin} disabled={pending}>
+              <SelectTrigger className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white w-40">
+                <SelectValue placeholder="Select coin" />
+              </SelectTrigger>
+              <SelectContent>
+                {coins.map(coin => (
+                  <SelectItem key={coin.value} value={coin.value}>
+                    {coin.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label htmlFor="contribution" className="text-blue-300 mb-1 block">Amount</Label>
+            <Input
+              id="contribution"
+              type="number"
+              min="0.0001"
+              step="any"
+              value={contribution}
+              onChange={e => setContribution(e.target.value)}
+              placeholder="Amount"
+              className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white w-32"
+              required
+              disabled={pending}
+            />
+          </div>
+          <Button
             type="submit"
             className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-5 py-2 rounded-lg shadow hover:from-blue-500 hover:to-blue-700 transition"
             disabled={pending}
           >
             {pending ? "Processing..." : "Contribute"}
-          </button>
+          </Button>
         </form>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Account Summary */}
+          {/* Account Summary Table */}
           <div className="bg-slate-800 rounded-xl p-5 shadow-sm border border-slate-700">
-            <h2 className="text-lg font-semibold text-blue-300 mb-3">Account Summary</h2>
-            <ul className="space-y-2 text-slate-300 text-sm">
-              <li><span className="font-medium text-white">Current Balance:</span> $24,500.00</li>
-              <li><span className="font-medium text-white">Year-to-Date Contributions:</span> $3,000.00</li>
-              <li><span className="font-medium text-white">Employer Match:</span> $1,500.00</li>
-              <li><span className="font-medium text-white">Vesting:</span> 80%</li>
-            </ul>
+            <h2 className="text-lg font-semibold text-blue-300 mb-3">Statistics Summary</h2>
+            <Table>
+              <TableBody>
+                <TableRow>
+                  <TableCell className="font-medium text-white">Current Balance</TableCell>
+                  <TableCell className="text-slate-300">$24,500.00</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="font-medium text-white">Year-to-Date Contributions</TableCell>
+                  <TableCell className="text-slate-300">$3,000.00</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="font-medium text-white">Employer Match</TableCell>
+                  <TableCell className="text-slate-300">$1,500.00</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="font-medium text-white">Vesting</TableCell>
+                  <TableCell className="text-slate-300">80%</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           </div>
 
-          {/* Recent Activity */}
+          {/* Recent Activity Table */}
           <div className="bg-slate-800 rounded-xl p-5 shadow-sm border border-slate-700">
-            <h2 className="text-lg font-semibold text-blue-300 mb-3">Recent Activity</h2>
-            <ul className="space-y-2 text-slate-300 text-sm">
-              <li>06/28/2025 - Contribution: +$250.00</li>
-              <li>06/14/2025 - Employer Match: +$125.00</li>
-              <li>05/31/2025 - Contribution: +$250.00</li>
-              <li>05/15/2025 - Investment Gain: +$320.00</li>
-            </ul>
+            <h2 className="text-lg font-semibold text-blue-300 mb-3">Recent Employees Activity</h2>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-slate-300">Date</TableHead>
+                  <TableHead className="text-slate-300">Activity</TableHead>
+                  <TableHead className="text-slate-300">Amount</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>06/28/2025</TableCell>
+                  <TableCell>Contribution</TableCell>
+                  <TableCell className="text-green-400">+$250.00</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>06/14/2025</TableCell>
+                  <TableCell>Employer Match</TableCell>
+                  <TableCell className="text-green-400">+$125.00</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>05/31/2025</TableCell>
+                  <TableCell>Contribution</TableCell>
+                  <TableCell className="text-green-400">+$250.00</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>05/15/2025</TableCell>
+                  <TableCell>Investment Gain</TableCell>
+                  <TableCell className="text-green-400">+$320.00</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           </div>
         </div>
 
@@ -127,15 +180,15 @@ export default function FourZeroOnePage({ contributeTo401k }) {
 
         {/* Action Buttons */}
         <div className="mt-10 flex flex-wrap gap-4">
-          <button className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-5 py-2 rounded-lg shadow hover:from-blue-500 hover:to-blue-700 transition">
+          <Button className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-5 py-2 rounded-lg shadow hover:from-blue-500 hover:to-blue-700 transition">
             Make a Contribution
-          </button>
-          <button className="bg-gradient-to-r from-green-600 to-green-800 text-white px-5 py-2 rounded-lg shadow hover:from-green-500 hover:to-green-700 transition">
+          </Button>
+          <Button className="bg-gradient-to-r from-green-600 to-green-800 text-white px-5 py-2 rounded-lg shadow hover:from-green-500 hover:to-green-700 transition">
             Adjust Investments
-          </button>
-          <button className="bg-slate-700 text-slate-300 px-5 py-2 rounded-lg hover:bg-slate-600 transition">
+          </Button>
+          <Button className="bg-slate-700 text-slate-300 px-5 py-2 rounded-lg hover:bg-slate-600 transition">
             View Statements
-          </button>
+          </Button>
         </div>
       </div>
     </div>
