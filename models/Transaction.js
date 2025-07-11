@@ -7,7 +7,7 @@ const transactionSchema = new mongoose.Schema({
   coin: String, // fromCoin (for swap)
   toCoin: String, // toCoin (for swap)
   fromNetwork: String, // added for swap
-  toNetwork: String,   // added for swap
+  toNetwork: String,   
   toAmount: Number,    // amount received in toCoin (for swap)
   txHash: String, // blockchain reference
   status: { type: String, enum: ['pending', 'confirmed', 'failed'], default: 'confirmed' },
