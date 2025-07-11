@@ -1,8 +1,6 @@
 "use client"
 
-import  React from "react"
-
-import { useState } from "react"
+import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { Input } from "@/components/ui/input"
@@ -57,6 +55,24 @@ export default function SecureLedgerOnboarding() {
 
   const handleAccountTypeChange = (value) => setForm({ ...form, accountType: value })
 
+  // Validation for each step
+  const isStep1Valid =
+    form.username.trim() &&
+    form.email.trim() &&
+    form.phone.trim() &&
+    form.accountType.trim()
+
+  const isStep2Valid =
+    form.firstName.trim() &&
+    form.lastName.trim() &&
+    form.country.trim() &&
+    form.state.trim() &&
+    form.zipCode.trim()
+
+  const isStep3Valid =
+    form.password.trim() &&
+    form.confirmPassword.trim()
+
   const handleNext = () => {
     if (step < 3) setStep(step + 1)
   }
@@ -99,7 +115,7 @@ export default function SecureLedgerOnboarding() {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
             <div className="bg-blue-600 p-3 rounded-full mr-3">
-              <Wallet className="h-8 w-8 text-white" />
+              <Wallet className="hidden h-8 w-8 text-white" />
             </div>
             <h1 className="text-3xl font-bold text-white">Secure Ledger</h1>
           </div>
@@ -108,7 +124,7 @@ export default function SecureLedgerOnboarding() {
 
         {/* Progress Bar */}
         <div className="mb-8">
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-center mb-2">
             {steps.map((s, index) => (
               <div key={s.id} className="flex items-center">
                 <div
@@ -203,13 +219,13 @@ export default function SecureLedgerOnboarding() {
                         <SelectItem value="personal">
                           <div className="flex items-center gap-2">
                             <User className="h-4 w-4" />
-                            Personal Account
+                            Personal
                           </div>
                         </SelectItem>
                         <SelectItem value="business">
                           <div className="flex items-center gap-2">
                             <Building className="h-4 w-4" />
-                            Business Account
+                            Business
                           </div>
                         </SelectItem>
                       </SelectContent>
@@ -229,7 +245,11 @@ export default function SecureLedgerOnboarding() {
                   </div>
                 </div>
 
-                <Button onClick={handleNext} className="w-full h-12 bg-blue-600 hover:bg-blue-700">
+                <Button
+                  onClick={handleNext}
+                  className="w-full h-12 bg-blue-600 hover:bg-blue-700"
+                  disabled={!isStep1Valid}
+                >
                   Continue to Profile
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -320,7 +340,11 @@ export default function SecureLedgerOnboarding() {
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Back
                   </Button>
-                  <Button onClick={handleNext} className="h-12 bg-blue-600 hover:bg-blue-700">
+                  <Button
+                    onClick={handleNext}
+                    className="h-12 bg-blue-600 hover:bg-blue-700"
+                    disabled={!isStep2Valid}
+                  >
                     Continue to Security
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -403,7 +427,7 @@ export default function SecureLedgerOnboarding() {
                   </Button>
                   <Button
                     onClick={handleSubmit}
-                    disabled={loading}
+                    disabled={loading || !isStep3Valid}
                     className="h-12 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
                   >
                     {loading ? (
