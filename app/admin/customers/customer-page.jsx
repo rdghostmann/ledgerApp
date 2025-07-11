@@ -47,16 +47,13 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
 
   const handleToggle = async (userId) => {
     setLoadingUserId(userId)
-
     try {
       const res = await fetch("/api/admin/toggle-user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId }),
       })
-
       const data = await res.json()
-
       if (data.success) {
         setCustomers((prev) =>
           prev.map((user) =>
@@ -78,14 +75,24 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
   }
 
   const filteredCustomers = customers.filter((customer) => {
-    const name = customer.name || ""
+    const username = customer.username || ""
     const email = customer.email || ""
     const phone = customer.phone || ""
+    const firstName = customer.firstName || ""
+    const lastName = customer.lastName || ""
+    const country = customer.country || ""
+    const state = customer.state || ""
+    const zipCode = customer.zipCode || ""
 
     const matchesSearch =
-      name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      username.toLowerCase().includes(searchTerm.toLowerCase()) ||
       email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      phone.includes(searchTerm)
+      phone.includes(searchTerm) ||
+      firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      country.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      state.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      zipCode.includes(searchTerm)
 
     const matchesStatus =
       statusFilter === "all" || customer.status === statusFilter
@@ -248,13 +255,17 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                 <table className="w-full">
                   <thead className="border-b border-gray-800">
                     <tr className="text-left">
-                      <th className="p-4 font-medium ">Customer</th>
+                      <th className="p-4 font-medium">Username</th>
+                      <th className="p-4 font-medium">Name</th>
                       <th className="p-4 font-medium">Contact</th>
+                      <th className="p-4 font-medium">Country</th>
                       <th className="p-4 font-medium">Status</th>
                       <th className="p-4 font-medium">KYC</th>
                       <th className="p-4 font-medium">Balance</th>
                       <th className="p-4 font-medium">Account Type</th>
                       <th className="p-4 font-medium">Last Login</th>
+                      <th className="p-4 font-medium">Wallets</th>
+                      <th className="p-4 font-medium">Assets</th>
                       <th className="p-4 font-medium">Status Switch</th>
                       <th className="p-4 font-medium">Actions</th>
                     </tr>
@@ -264,10 +275,10 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                       <tr key={customer.id} className="border-b border-gray-800 hover:bg-gray-800/50">
                         <td className="p-4">
                           <div className="flex items-center gap-3">
-                            <Avatar className={"hidden"}>
+                            <Avatar>
                               <AvatarImage src={customer.avatar || "/placeholder.svg"} />
                               <AvatarFallback>
-                                {(customer.name || "NA")
+                                {(customer.username || "NA")
                                   .split(" ")
                                   .map((n) => n[0])
                                   .join("")}
@@ -275,10 +286,15 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                             </Avatar>
                             <div>
                               <p className="font-medium">{customer.username || "No Name"}</p>
-                              <p className=" hidden text-sm text-gray-400">
+                              <p className="text-sm text-gray-400">
                                 ID: {customer.id}
                               </p>
                             </div>
+                          </div>
+                        </td>
+                        <td className="p-4">
+                          <div>
+                            <span>{customer.firstName} {customer.lastName}</span>
                           </div>
                         </td>
                         <td className="p-4">
@@ -292,6 +308,9 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                               {customer.phone}
                             </div>
                           </div>
+                        </td>
+                        <td className="p-4">
+                          <span>{customer.country}</span>
                         </td>
                         <td className="p-4">
                           <Badge className={getStatusColor(customer.status)}>
@@ -314,6 +333,35 @@ export default function CustomersPage({ customers: initialCustomers = [] }) {
                         </td>
                         <td className="p-4">
                           <p className="text-sm">{customer.lastLogin}</p>
+                        </td>
+                        <td className="p-4">
+                          <div className="space-y-1 text-xs">
+                            {customer.wallets && customer.wallets.length > 0 ? (
+                              customer.wallets.map((wallet) => (
+                                <div key={wallet.id}>
+                                  <span className="font-mono">{wallet.walletAddress}</span>
+                                  <span className="ml-2 text-gray-400">{wallet.network}</span>
+                                </div>
+                              ))
+                            ) : (
+                              <span className="text-gray-400">No Wallets</span>
+                            )}
+                          </div>
+                        </td>
+                        <td className="p-4">
+                          <div className="space-y-1 text-xs">
+                            {customer.assets && customer.assets.length > 0 ? (
+                              customer.assets.map((asset) => (
+                                <div key={asset.id}>
+                                  <span>{asset.coin}</span>
+                                  <span className="ml-2 text-gray-400">{asset.network}</span>
+                                  <span className="ml-2">{asset.amount}</span>
+                                </div>
+                              ))
+                            ) : (
+                              <span className="text-gray-400">No Assets</span>
+                            )}
+                          </div>
                         </td>
                         <td className="p-4">
                           {loadingUserId === customer.id ? (
