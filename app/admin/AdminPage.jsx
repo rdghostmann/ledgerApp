@@ -163,11 +163,10 @@ export default function AdminDashboard({ recentCustomers = [] }) {
                     <div className="text-lg font-semibold">{stat.title}</div>
                     <div className="text-2xl font-bold">{stat.value}</div>
                     <div
-                      className={`text-xs mt-1 ${
-                        stat.change.startsWith("+")
-                          ? "text-green-500"
-                          : "text-red-500"
-                      }`}
+                      className={`text-xs mt-1 ${stat.change.startsWith("+")
+                        ? "text-green-500"
+                        : "text-red-500"
+                        }`}
                     >
                       {stat.change}
                     </div>
@@ -180,33 +179,35 @@ export default function AdminDashboard({ recentCustomers = [] }) {
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
               <h2 className="text-lg font-semibold mb-3">Quick Actions</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <Link href="/admin/customers/add">
-                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
-                    <UserPlus className="w-6 h-6" />
-                    <span className="text-sm">Add Customer</span>
-                  </Button>
-                </Link>
+                {/* <Link href="/admin/customers/add">
+                  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-white/10 transition">
+                    <UserPlus className="w-6 h-6 text-blue-500" />
+                    <span className="text-sm font-medium">Add Customer</span>
+                  </div>
+                </Link> */}
                 <Link href="/admin/customers">
-                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
-                    <List className="w-6 h-6" />
-                    <span className="text-sm">Customer List</span>
-                  </Button>
+                  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-white/10 transition">
+                    <List className="w-6 h-6 text-purple-500" />
+                    <span className="text-sm font-medium">Customer List</span>
+                  </div>
                 </Link>
                 <Link href="/admin/kyc">
-                  <Button variant="outline" className="h-20 flex-col gap-2 w-full">
-                    <Shield className="w-6 h-6" />
-                    <span className="text-sm">Review KYC</span>
-                  </Button>
+                  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-white/10 transition">
+                    <Shield className="w-6 h-6 text-yellow-500" />
+                    <span className="text-sm font-medium">Review KYC</span>
+                  </div>
                 </Link>
-                <Button variant="outline" className="h-20 flex-col gap-2">
-                  <BarChart3 className="w-6 h-6" />
-                  <span className="text-sm">Analytics</span>
-                </Button>
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-white/10 transition">
+                  <BarChart3 className="w-6 h-6 text-teal-500" />
+                  <span className="text-sm font-medium">Analytics</span>
+                </div>
               </div>
             </div>
 
+
+
             {/* Recent Activity */}
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
+            <div className="hidden bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
               <h2 className="text-lg font-semibold mb-3">Recent Activity</h2>
               <div className="space-y-4">
                 {recentActivity.map((item) => (
@@ -234,10 +235,10 @@ export default function AdminDashboard({ recentCustomers = [] }) {
                           item.status === "success"
                             ? "default"
                             : item.status === "warning"
-                            ? "secondary"
-                            : item.status === "error"
-                            ? "destructive"
-                            : "outline"
+                              ? "secondary"
+                              : item.status === "error"
+                                ? "destructive"
+                                : "outline"
                         }
                         className="text-xs capitalize"
                       >
@@ -251,7 +252,7 @@ export default function AdminDashboard({ recentCustomers = [] }) {
           </div>
 
           {/* Right Column (Recent Customers + KYC Queue) */}
-          <div className="space-y-6">
+          <div className="hidden space-y-6">
             {/* Recent Customers */}
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-lg">
               <h2 className="text-lg font-semibold mb-3">Recent Customers</h2>
@@ -266,9 +267,9 @@ export default function AdminDashboard({ recentCustomers = [] }) {
                       <AvatarFallback>
                         {customer.username
                           ? customer.username
-                              .split(" ")
-                              .map((n) => n[0])
-                              .join("")
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")
                           : "U"}
                       </AvatarFallback>
                     </Avatar>
