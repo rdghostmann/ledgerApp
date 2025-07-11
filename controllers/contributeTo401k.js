@@ -2,12 +2,12 @@
 
 import User from "@/models/User";
 import UserAsset from "@/models/UserAsset";
-import _401kContribution from "@/models/401kContribution";
+import Contribution from "@/models/401kContribution"; // <-- Fix import name
 import { connectToDB } from "@/lib/connectDB";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
 
-export async function contributeTo401k({ amount, coin }) { 
+export async function contributeTo401k({ amount, coin }) {
   await connectToDB();
   const session = await getServerSession(authOptions);
 
@@ -35,7 +35,7 @@ export async function contributeTo401k({ amount, coin }) {
   user._401kBalance = (user._401kBalance || 0) + amount;
   await user.save();
 
-  await _401kContribution.create({
+  await Contribution.create({
     userId: user._id,
     amount,
     coin: coin.toUpperCase(),
