@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "SSecure Ledger App",
+  title: "Secure Ledger App",
   description: "Ledger App authorised by Flare Network",
 };
 

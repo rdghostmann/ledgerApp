@@ -1,16 +1,18 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Copy, ChevronLeft, X } from "lucide-react";
+import { Copy, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
 const depositAddress = "GBG5K7D5A2Q5WBNEZMFZISKXQJLZGDMECI3YEMVQCRSVTH6U6H5537HW";
 
-const CardPage = () => {
+const CardPage = ({ firstName = "", lastName = "" }) => {
   const [copied, setCopied] = useState(false);
+
+  const fullName = `${firstName} ${lastName}`.trim() || "Mike";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(depositAddress);
@@ -19,33 +21,28 @@ const CardPage = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto py-8 px-2 bg-black text-white">
+   <div className="bg-black">
+     <div className="max-w-2xl mx-auto py-8 px-2 bg-black text-white">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <Link
-          href="/dashboard"
-          className="flex items-center gap-2 "
-        >
-          <Button
-            variant="none"
-            className="cursor-pointer flex items-center gap-2"
-          >
+        <Link href="/dashboard" className="flex items-center gap-2 ">
+          <Button variant="none" className="cursor-pointer flex items-center gap-2">
             <ChevronLeft className="w-5 h-5" />
             Back
           </Button>
         </Link>
         <h2 className="text-xl font-bold">Deposit</h2>
-        <Button
-          size="sm"
-          className="bg-gradient-to-r from-blue-600 to-violet-600 text-white"
+        <Link
+          href="/dashboard/buy"
+          className="p-1 rounded bg-gradient-to-r from-blue-600 to-violet-600 text-white"
         >
           Buy coin
-        </Button>
+        </Link>
       </div>
 
       {/* Mode */}
       <div className="flex items-center justify-between bg-white rounded-lg shadow p-4 mb-6">
-        <span className="font-medium">Mode</span>
+        <span className="font-medium text-black">Mode</span>
         <div className="flex items-center gap-2">
           <span className="inline-flex items-center px-2 py-1 rounded-full bg-blue-600 text-white text-xs font-bold">
             XLM
@@ -74,7 +71,7 @@ const CardPage = () => {
             <span>XXXX</span>
           </div>
           <div className="flex items-center justify-between z-10">
-            <span>Mike</span>
+            <span>{fullName}</span>
             <span className="text-xs">
               Exp: <span className="text-base text-zinc-100">12/26</span>
             </span>
@@ -104,15 +101,15 @@ const CardPage = () => {
             id="deposit-address"
             value={depositAddress}
             readOnly
-            className="rounded-l-lg"
+            className="rounded-l-sm border-r-0 bg-slate-800 text-white"
           />
           <Button
             type="button"
             variant="outline"
-            className="rounded-r-lg border-l-0"
+            className="rounded-r-sm border-l-0"
             onClick={handleCopy}
           >
-            <Copy className="w-4 h-4" />
+            <Copy className="text-black w-4 h-4" />
           </Button>
         </div>
         {copied && (
@@ -223,6 +220,7 @@ const CardPage = () => {
         </CardContent>
       </Card>
     </div>
+   </div>
   );
 };
 
