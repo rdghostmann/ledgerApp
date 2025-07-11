@@ -24,7 +24,6 @@ function getOrdinal(n) {
 
 const NavHeader = () => {
   const { data: session } = useSession();
-  // This will show username if present, else name, else "User"
   const username = session?.user?.username || session?.user?.name || "User";
 
   const today = new Date();
@@ -41,7 +40,7 @@ const NavHeader = () => {
     <div className="w-full px-4 py-4 flex items-center justify-between mb-5">
       <div>
         <p className="text-blue-600 text-xs mb-1">{formattedDate}</p>
-        <h1 className="text-2xl font-bold">Welcome, {username}!</h1>
+        <h1 className="text-2xl font-bold text-white">Welcome, {username}!</h1>
       </div>
 
       <DropdownMenu>
