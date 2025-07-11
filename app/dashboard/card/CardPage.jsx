@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Copy, ChevronLeft } from "lucide-react";
+import { Copy, ChevronLeft, ArrowDown } from "lucide-react";
 import Link from "next/link";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 
@@ -57,24 +57,25 @@ const CardPage = ({ firstName = "", lastName = "", email = "", phone = "" }) => 
           </Link>
         </div>
 
-        {/* Mode */}
-        <div className="flex items-center justify-between bg-white rounded-lg shadow p-4 mb-6">
-          <span className="font-medium text-black">Mode</span>
-          <div className="flex items-center gap-2">
-            <Select value={selectedCoin} onValueChange={setSelectedCoin}>
-              <SelectTrigger className="w-32 bg-blue-600 text-white rounded-full px-2 py-1 text-xs font-bold border-none">
-                <SelectValue placeholder="Select coin" />
-              </SelectTrigger>
-              <SelectContent>
-                {coinOptions.map((coin) => (
-                  <SelectItem key={coin.value} value={coin.value}>
-                    {coin.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
+      {/* Select Deposit Asset */}
+<div className="flex items-center justify-between bg-white rounded-lg shadow p-4 mb-6">
+  <span className="font-medium text-black">Select Deposit Asset</span>
+  <div className="flex items-center gap-2">
+    <Select value={selectedCoin} onValueChange={setSelectedCoin}>
+      <SelectTrigger className=" bg-blue-600 text-white rounded text-xs font-bold border-none flex items-center justify-between">
+        <SelectValue placeholder="Select coin" />
+        <ArrowDown className=" text-white" />
+      </SelectTrigger>
+      <SelectContent>
+        {coinOptions.map((coin) => (
+          <SelectItem key={coin.value} value={coin.value}>
+            {coin.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  </div>
+</div>
 
         {/* Card */}
         <div className="w-full flex justify-center mb-6">
@@ -86,7 +87,7 @@ const CardPage = ({ firstName = "", lastName = "", email = "", phone = "" }) => 
                 src="https://authorizedqfsledger.com/assets/img/logo.png"
                 width={70}
                 alt="QFS Logo"
-                className="rounded"
+                className="hidden rounded"
               />
               <span className="font-bold text-lg">QFS Card</span>
             </div>
