@@ -31,7 +31,8 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4 text-white">QFS LEDGER</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              The Quantum Financial System (QFS) delivers unmatched security and transparency for all currency holders. With advanced technology and gold-backed currencies, QFS sets a new standard in global finance.
+              The Quantum Financial System (QFS) delivers unmatched security and transparency for all currency holders. With advanced technology and 
+              gold-backed currencies, QFS sets a new standard in global finance.</p>
             <h3 className="text-xl font-bold mb-4 text-gray-900">QFS Ledger</h3>
             <p className="text-gray-600 text-sm leading-relaxed">
               The Quantum Financial System is designed for a new era of currency — gold-backed,
