@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const UserAssetSchema = new mongoose.Schema(
   {
-    userId: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
@@ -13,5 +13,6 @@ const UserAssetSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
 
 export default mongoose.models.UserAsset || mongoose.model("UserAsset", UserAssetSchema);

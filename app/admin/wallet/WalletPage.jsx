@@ -10,7 +10,6 @@ import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Search, Edit, Plus, Wallet, TrendingUp, Users } from "lucide-react"
 
-// Asset configuration
 const ASSETS = {
   BTC: { name: "Bitcoin", symbol: "BTC", color: "bg-orange-500" },
   ETH: { name: "Ethereum", symbol: "ETH", color: "bg-blue-500" },
@@ -25,114 +24,15 @@ const ASSETS = {
   SHIB: { name: "Shiba Inu", symbol: "SHIB", color: "bg-orange-600" },
 }
 
-// Mock user data
-const initialUsers = [
-  {
-    id: 1,
-    name: "John Doe",
-    email: "john.doe@example.com",
-    avatar: "/placeholder.svg?height=40&width=40",
-    assets: {
-      BTC: 0.5,
-      ETH: 2.3,
-      USDT: 1500,
-      BNB: 10,
-      SOL: 25,
-    },
-    totalValue: 45250.75,
-    lastActive: "2024-01-15",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    avatar: "/placeholder.svg?height=40&width=40",
-    assets: {
-      BTC: 1.2,
-      ETH: 5.7,
-      USDT: 3200,
-      ADA: 1000,
-      XRP: 500,
-    },
-    totalValue: 89750.25,
-    lastActive: "2024-01-14",
-  },
-  {
-    id: 3,
-    name: "Mike Johnson",
-    email: "mike.johnson@example.com",
-    avatar: "/placeholder.svg?height=40&width=40",
-    assets: {
-      DOGE: 10000,
-      TRX: 5000,
-      DOT: 100,
-      SHIB: 1000000,
-    },
-    totalValue: 12450.5,
-    lastActive: "2024-01-13",
-  },
-  {
-    id: 4,
-    name: "Sarah Wilson",
-    email: "sarah.wilson@example.com",
-    avatar: "/placeholder.svg?height=40&width=40",
-    assets: {
-      BTC: 0.8,
-      ETH: 3.2,
-      SOL: 50,
-      BNB: 25,
-      USDT: 2000,
-    },
-    totalValue: 67890.3,
-    lastActive: "2024-01-12",
-  },
-]
-
-export default function WalletPage() {
+export default function WalletPage({ users: initialUsers }) {
   const [users, setUsers] = useState(initialUsers)
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedUser, setSelectedUser] = useState(null)
   const [editingAssets, setEditingAssets] = useState({})
+  const [loading, setLoading] = useState(false)
 
-  // Filter users based on search term
-  const filteredUsers = useMemo(() => {
-    return users.filter(
-      (user) =>
-        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchTerm.toLowerCase()),
-    )
-  }, [users, searchTerm])
-
-  // Calculate total statistics
-  const totalUsers = users.length
-  const totalValue = users.reduce((sum, user) => sum + user.totalValue, 0)
-  const totalAssets = users.reduce((sum, user) => sum + Object.keys(user.assets).length, 0)
-
-  const handleEditUser = (user) => {
-    setSelectedUser(user)
-    setEditingAssets({ ...user.assets })
-  }
-
-  const handleSaveAssets = () => {
-    if (!selectedUser) return
-
-    const updatedUsers = users.map((user) =>
-      user.id === selectedUser.id
-        ? {
-            ...user,
-            assets: { ...editingAssets },
-            totalValue: calculateTotalValue(editingAssets),
-          }
-        : user,
-    )
-
-    setUsers(updatedUsers)
-    setSelectedUser(null)
-    setEditingAssets({})
-  }
 
   const calculateTotalValue = (assets) => {
-    // Mock calculation - in real app, you'd fetch current prices
     const mockPrices = {
       BTC: 45000,
       ETH: 2800,
@@ -146,10 +46,59 @@ export default function WalletPage() {
       DOT: 7,
       SHIB: 0.00001,
     }
-
     return Object.entries(assets).reduce((total, [symbol, amount]) => {
       return total + amount * (mockPrices[symbol] || 0)
     }, 0)
+  }
+
+  // Client-side search/filter
+  const filteredUsers = useMemo(() => {
+    if (!searchTerm) return users
+    return users.filter(
+      user =>
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  }, [users, searchTerm])
+
+  const totalUsers = filteredUsers.length
+  const totalValue = filteredUsers.reduce((sum, user) => sum + calculateTotalValue(user.assets), 0)
+  const totalAssets = filteredUsers.reduce((sum, user) => sum + Object.keys(user.assets).length, 0)
+
+  const handleEditUser = (user) => {
+    setSelectedUser(user)
+    setEditingAssets({ ...user.assets })
+  }
+
+  const handleSaveAssets = async () => {
+    if (!selectedUser) return
+    setLoading(true)
+
+    // Call API route to update assets in DB
+    const res = await fetch("/api/admin/update-assets", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: selectedUser.id,
+        assets: editingAssets,
+      }),
+    })
+
+    const result = await res.json()
+    if (result.success) {
+      // Update local state for instant UI feedback
+      setUsers(prev =>
+        prev.map(u =>
+          u.id === selectedUser.id ? { ...u, assets: { ...editingAssets } } : u
+        )
+      )
+    } else {
+      alert("Failed to update assets: " + (result.error || "Unknown error"))
+    }
+
+    setSelectedUser(null)
+    setEditingAssets({})
+    setLoading(false)
   }
 
   const updateAssetAmount = (symbol, value) => {
@@ -250,7 +199,7 @@ export default function WalletPage() {
                       <p className="text-sm text-gray-400">{user.email}</p>
                     </div>
                   </div>
-                  <Dialog>
+                  <Dialog open={selectedUser?.id === user.id} onOpenChange={(open) => !open && setSelectedUser(null)}>
                     <DialogTrigger asChild>
                       <Button
                         variant="ghost"
@@ -318,8 +267,8 @@ export default function WalletPage() {
                           <Button variant="outline" onClick={() => setSelectedUser(null)}>
                             Cancel
                           </Button>
-                          <Button onClick={handleSaveAssets} className="bg-blue-600 hover:bg-blue-700">
-                            Save Changes
+                          <Button onClick={handleSaveAssets} className="bg-blue-600 hover:bg-blue-700" disabled={loading}>
+                            {loading ? "Saving..." : "Save Changes"}
                           </Button>
                         </div>
                       </div>
@@ -332,7 +281,7 @@ export default function WalletPage() {
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-400">Total Value</span>
-                    <span className="text-lg font-bold text-green-400">${user.totalValue.toLocaleString()}</span>
+                    <span className="text-lg font-bold text-green-400">${calculateTotalValue(user.assets).toLocaleString()}</span>
                   </div>
 
                   <div className="flex justify-between items-center">
