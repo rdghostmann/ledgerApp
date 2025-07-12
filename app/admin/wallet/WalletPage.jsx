@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -30,28 +30,39 @@ export default function WalletPage({ users: initialUsers }) {
   const [selectedUser, setSelectedUser] = useState(null)
   const [editingAssets, setEditingAssets] = useState({})
   const [loading, setLoading] = useState(false)
+  const [livePrices, setLivePrices] = useState({})
 
+  useEffect(() => {
+    async function fetchPrices() {
+      try {
+        const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin,solana,cardano,ripple,dogecoin,tron,polkadot,shiba-inu&vs_currencies=usd")
+        const data = await res.json()
+        setLivePrices({
+          BTC: data.bitcoin.usd,
+          ETH: data.ethereum.usd,
+          USDT: data.tether.usd,
+          BNB: data.binancecoin.usd,
+          SOL: data.solana.usd,
+          ADA: data.cardano.usd,
+          XRP: data.ripple.usd,
+          DOGE: data.dogecoin.usd,
+          TRX: data.tron.usd,
+          DOT: data.polkadot.usd,
+          SHIB: data["shiba-inu"].usd,
+        })
+      } catch (error) {
+        console.error("Failed to fetch live prices:", error)
+      }
+    }
+    fetchPrices()
+  }, [])
 
   const calculateTotalValue = (assets) => {
-    const mockPrices = {
-      BTC: 45000,
-      ETH: 2800,
-      USDT: 1,
-      BNB: 300,
-      SOL: 100,
-      ADA: 0.5,
-      XRP: 0.6,
-      DOGE: 0.08,
-      TRX: 0.1,
-      DOT: 7,
-      SHIB: 0.00001,
-    }
     return Object.entries(assets).reduce((total, [symbol, amount]) => {
-      return total + amount * (mockPrices[symbol] || 0)
+      return total + amount * (livePrices[symbol] || 0)
     }, 0)
   }
 
-  // Client-side search/filter
   const filteredUsers = useMemo(() => {
     if (!searchTerm) return users
     return users.filter(
@@ -73,8 +84,6 @@ export default function WalletPage({ users: initialUsers }) {
   const handleSaveAssets = async () => {
     if (!selectedUser) return
     setLoading(true)
-
-    // Call API route to update assets in DB
     const res = await fetch("/api/admin/update-assets", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -83,10 +92,8 @@ export default function WalletPage({ users: initialUsers }) {
         assets: editingAssets,
       }),
     })
-
     const result = await res.json()
     if (result.success) {
-      // Update local state for instant UI feedback
       setUsers(prev =>
         prev.map(u =>
           u.id === selectedUser.id ? { ...u, assets: { ...editingAssets } } : u
@@ -95,7 +102,6 @@ export default function WalletPage({ users: initialUsers }) {
     } else {
       alert("Failed to update assets: " + (result.error || "Unknown error"))
     }
-
     setSelectedUser(null)
     setEditingAssets({})
     setLoading(false)

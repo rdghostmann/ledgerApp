@@ -33,8 +33,7 @@ export async function getUsersWithAssets(search = "") {
 export async function updateUserAssets(userId, assets) {
   await connectToDB()
 
-  console.log("Received userId:", userId)
-  console.log("Received assets:", assets)
+
 
   if (!assets || typeof assets !== "object") {
     throw new Error("Invalid assets data")
@@ -44,7 +43,6 @@ export async function updateUserAssets(userId, assets) {
   if (!user) throw new Error("User not found")
 
   for (const [coin, amount] of Object.entries(assets)) {
-    console.log("Processing:", coin, amount)
 
     let asset = user.assets.find(a => a.coin === coin)
     if (asset) {
